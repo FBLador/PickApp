@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/bottom_navigation_graph"
+    app:startDestination="@id/home">
+
+    <fragment
+        android:id="@+id/home"
+        android:name="it.unimib.pickapp.ui.HomeFragment"
+        android:label="@string/home"
+        tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/location"
+        android:name="it.unimib.pickapp.ui.LocationFragment"
+        android:label="@string/location"
+        tools:layout="@layout/fragment_location" />
+    <fragment
+        android:id="@+id/calendar"
+        android:name="it.unimib.pickapp.ui.CalendarFragment"
+        android:label="@string/calendar"
+        tools:layout="@layout/fragment_calendar" />
+    <fragment
+        android:id="@+id/account"
+        android:name="it.unimib.pickapp.ui.AccountFragment"
+        android:label="@string/account"
+        tools:layout="@layout/fragment_account" />
+</navigation>
