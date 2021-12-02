@@ -4,6 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
+import it.unimib.pickapp.R;
+/**
+ * It shows the login page.
+ */
 public class LoginActivity extends AppCompatActivity {
 
     @Override
