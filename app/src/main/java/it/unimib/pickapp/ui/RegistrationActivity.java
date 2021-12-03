@@ -2,6 +2,7 @@ package it.unimib.pickapp.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -13,22 +14,28 @@ import it.unimib.pickapp.R;
  */
 public class RegistrationActivity extends AppCompatActivity {
 
-    private Button mButtonSingUpNext;
     private static final String TAG = "RegistrationActivity";
+    private Button mButtonSingUpNext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
 
-        /*
+
         //listener per button next
-        mButtonSingUpNext = findViewById(R.id.buttonSingUpNext);
+        mButtonSingUpNext = (Button) findViewById(R.id.buttonSingUpNext);
         mButtonSingUpNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d(TAG, "onClick");
+                Log.d(TAG, "onClick Next");
+                openRegistrationSurveyActivity();
             }
-        });*/
+        });
+    }
+
+    private void openRegistrationSurveyActivity(){
+        Intent intent = new Intent(this, RegistrationSurveyActivity.class);
+        startActivity(intent);
     }
 }
