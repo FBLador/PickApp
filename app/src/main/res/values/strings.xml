@@ -11,10 +11,10 @@
 
     <string name="login">Log in</string>
     <string name="signUp">Sign up</string>
-    <string name="choiceSport">choice your favorite Sport</string>
-    <string name="choiceSportExperience">choice your Sport Experience</string>
+    <string name="chooseSport">Choose your favorite Sport</string>
+    <string name="chooseSportExperience">Choose your Sport Experience</string>
     <string name="beginner">Beginner</string>
-    <string name="intermadiate">Intermadiate</string>
+    <string name="intermediate">Intermediate</string>
     <string name="advanced">Advanced</string>
     <string name="finish">Finish</string>
 
