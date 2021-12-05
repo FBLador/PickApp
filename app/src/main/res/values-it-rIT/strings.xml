@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">PickApp</string>
+    <string name="calendar">Calendario</string>
+    <string name="account">Profilo</string>
+    <string name="login">Accedi</string>
+    <string name="signUp">Registrazione</string>
+    <string name="choiceSport">Scegli il tuo sport preferito</string>
+    <string name="choiceSportExperience">Indica la tua esperienza sportiva</string>
+    <string name="beginner">Principiante</string>
+    <string name="intermadiate">Intermedio</string>
+    <string name="advanced">Avanzato</string>
+    <string name="finish">Fine</string>
+    <string name="nickname">Nome utente</string>
+    <string name="next">Avanti</string>
+    <string name="location">Posizione</string>
+    <string name="name">Nome</string>
+    <string name="surname">Cognome</string>
+</resources>
