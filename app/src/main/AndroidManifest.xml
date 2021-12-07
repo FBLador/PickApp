@@ -12,14 +12,20 @@
         android:theme="@style/Theme.PickApp"
         tools:ignore="AllowBackup">
         <activity
+            android:name=".activity_loading"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:exported="false"
+            android:label="@string/title_activity_loading"
+            android:theme="@style/Theme.PickApp.Fullscreen" />
+        <activity
             android:name=".ui.PickappActivity"
             android:exported="false" />
         <activity
             android:name=".ui.RegistrationActivity"
             android:exported="false" />
         <activity
-        android:name=".ui.RegistrationSurveyActivity"
-        android:exported="false" />
+            android:name=".ui.RegistrationSurveyActivity"
+            android:exported="false" />
         <activity
             android:name=".ui.LoginActivity"
             android:exported="true">
