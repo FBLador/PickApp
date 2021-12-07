@@ -24,4 +24,10 @@
         <item name="fullscreenBackgroundColor">@color/light_blue_600</item>
         <item name="fullscreenTextColor">@color/light_blue_A200</item>
     </style>
+
+    <style name="Theme.NoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimaryDark">@color/mainGreen</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
 </resources>

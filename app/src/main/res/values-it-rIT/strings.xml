@@ -16,4 +16,5 @@
     <string name="surname">Cognome</string>
     <string name="Logo">Logo</string>
     <string name="intermediate">Intermediate</string>
+    <string name="Field">Field</string>
 </resources>
