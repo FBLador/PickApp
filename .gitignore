@@ -1,15 +1,29 @@
+# IntelliJ IDEA
 *.iml
+
+# Gradle files
 .gradle
-/local.properties
+
+# User-specific configurations
 /.idea/caches
+.idea/caches/
+.idea/misc.xml
 /.idea/libraries
 /.idea/modules.xml
 /.idea/workspace.xml
 /.idea/navEditor.xml
 /.idea/assetWizardSettings.xml
+
+# OS-specific files
 .DS_Store
+
+# Android Studio
 /build
 /captures
-.externalNativeBuild
-.cxx
+/local.properties
 local.properties
+
+# External native build folder generated in Android Studio 2.2 and later
+.externalNativeBuild
+
+.cxx
