@@ -14,9 +14,10 @@
     <string name="choiceSport">Choose your favorite Sport</string>
     <string name="choiceSportExperience">Choose your Sport Experience</string>
     <string name="beginner">Beginner</string>
-    <string name="intermadiate">Intermadiate</string>
+    <string name="intermediate">Intermediate</string>
     <string name="advanced">Advanced</string>
     <string name="finish">Finish</string>
+    <string name="Logo">Logo</string>
 
     <string-array name="sports_array">
         <item>Calcio</item>
@@ -31,5 +32,9 @@
     <string name="next">Next</string>
     <string name="name">Name</string>
     <string name="surname">Surname</string>
+    <string name="title_activity_loading" translatable="false">activity_loading</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="Field">Field</string>
 
 </resources>
