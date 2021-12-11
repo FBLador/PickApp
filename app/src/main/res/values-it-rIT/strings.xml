@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="myGames">Partite</string>
+    <string name="myGames">Mie partite</string>
     <string name="account">Profilo</string>
     <string name="login">Accedi</string>
     <string name="signUp">Registrazione</string>
@@ -17,6 +17,7 @@
     <string name="Logo">Logo</string>
     <string name="intermediate">Intermedio</string>
     <string name="forgotPassword">Inserire email per ricevere una nuova password per il tuo account:</string>
-    <string name="send">Manda</string>
+    <string name="send">Invia</string>
     <string name="forgotPasswordLogin">Recupera password</string>
+    <string name="welcomeText">Bentornat*</string>
 </resources>

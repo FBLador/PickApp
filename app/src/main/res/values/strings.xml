@@ -3,7 +3,7 @@
 
     <string name="home" translatable="false">Home</string>
     <string name="location">Location</string>
-    <string name="myGames">My Games</string>
+    <string name="myGames">My games</string>
     <string name="account">Account</string>
 
     <string name="password" translatable="false">Password</string>
@@ -39,5 +39,6 @@
     <string name="forgotPassword">Please write here your email to get a new password for your account:</string>
     <string name="send">Send</string>
     <string name="forgotPasswordLogin">Recover your password</string>
+    <string name="welcomeText">Welcome back</string>
 
 </resources>
