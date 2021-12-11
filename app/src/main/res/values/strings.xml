@@ -33,8 +33,11 @@
     <string name="name">Name</string>
     <string name="surname">Surname</string>
     <string name="title_activity_loading" translatable="false">activity_loading</string>
-    <string name="dummy_button">Dummy Button</string>
-    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="dummy_button" translatable="false">Dummy Button</string>
+    <string name="dummy_content" translatable="false">DUMMY\nCONTENT</string>
     <string name="Field" translatable="false">Field</string>
+    <string name="forgotPassword">Please write here your email to get a new password for your account:</string>
+    <string name="send">Send</string>
+    <string name="forgotPasswordLogin">Recover your password</string>
 
 </resources>

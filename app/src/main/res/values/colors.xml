@@ -7,12 +7,12 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="buttonColor">#92CAF6</color>
+    <color name="buttonColor">#005466</color>
     <color name="menuButtonColor">#0D7700</color>
 
     //bottomNavMenu colors
     <color name="item_color_active">#0D7700</color>
-    <color name="item_color_inactive">#65FA53</color>
+    <color name="item_color_inactive">#696969</color>
     <color name="bottomNavigationMenuBackground">#FFFFFF</color>
 
     <color name="mainGreen">#0D7700</color>
@@ -21,5 +21,6 @@
     <color name="light_blue_A200">#FF40C4FF</color>
     <color name="light_blue_A400">#FF00B0FF</color>
     <color name="black_overlay">#66000000</color>
+    <color name="colorRecoverPassword">#0D7700</color>
 
 </resources>

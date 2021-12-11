@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import it.unimib.pickapp.R;
 /**
@@ -17,6 +18,7 @@ public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "LoginActivity";
     private Button buttonSignUpFromLogin;
     private Button buttonLogin;
+    private TextView textViewForgotPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +46,17 @@ public class LoginActivity extends AppCompatActivity {
                 openRegistrationActivity();
             }
         });
+
+
+        //listener per button per forgot password
+        textViewForgotPassword = (TextView) findViewById(R.id.textViewForgotPasswordFromLogin);
+        textViewForgotPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "onClick Forgot");
+                openForgotPasswordActivity();
+            }
+        });
     }
 
 
@@ -55,6 +68,11 @@ public class LoginActivity extends AppCompatActivity {
 
     private void openPickappActivity() {
         Intent intent = new Intent(this, PickappActivity.class);
+        startActivity(intent);
+    }
+
+    private void openForgotPasswordActivity() {
+        Intent intent = new Intent(this, ForgotPasswordActivity.class);
         startActivity(intent);
     }
 

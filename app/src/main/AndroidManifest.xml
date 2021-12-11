@@ -11,12 +11,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PickApp"
         tools:ignore="AllowBackup">
+
         <activity
             android:name=".activity_loading"
             android:configChanges="orientation|keyboardHidden|screenSize"
+            android:exported="true"
             android:label="@string/title_activity_loading"
-            android:theme="@style/Theme.AppCompat.NoActionBar"
-            android:exported="true">
+            android:theme="@style/Theme.AppCompat.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -34,8 +35,10 @@
             android:exported="false" />
         <activity
             android:name=".ui.LoginActivity"
-            android:exported="true">
-        </activity>
+            android:exported="true"/>
+        <activity
+            android:name=".ui.ForgotPasswordActivity"
+            android:exported="false" />
     </application>
 
 </manifest>

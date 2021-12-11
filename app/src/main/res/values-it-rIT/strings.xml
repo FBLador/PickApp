@@ -16,4 +16,7 @@
     <string name="surname">Cognome</string>
     <string name="Logo">Logo</string>
     <string name="intermediate">Intermedio</string>
+    <string name="forgotPassword">Inserire email per ricevere una nuova password per il tuo account:</string>
+    <string name="send">Manda</string>
+    <string name="forgotPasswordLogin">Recupera password</string>
 </resources>
