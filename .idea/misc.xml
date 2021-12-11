@@ -35,9 +35,11 @@
         <entry key="..\:/Users/flavi/AndroidStudioProjects/PickApp/app/src/main/res/layout/fragment_calendar.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/flavi/AndroidStudioProjects/PickApp/app/src/main/res/layout/fragment_home.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/flavi/AndroidStudioProjects/PickApp/app/src/main/res/layout/fragment_location.xml" value="0.25416666666666665" />
+        <entry key="app/src/main/res/layout/activity_loading.xml" value="0.1634963768115942" />
       </map>
     </option>
   </component>
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
