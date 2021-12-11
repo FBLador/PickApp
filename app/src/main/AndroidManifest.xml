@@ -12,22 +12,29 @@
         android:theme="@style/Theme.PickApp"
         tools:ignore="AllowBackup">
         <activity
-            android:name=".ui.PickappActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.RegistrationActivity"
-            android:exported="false" />
-        <activity
-        android:name=".ui.RegistrationSurveyActivity"
-        android:exported="false" />
-        <activity
-            android:name=".ui.LoginActivity"
+            android:name=".activity_loading"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_loading"
+            android:theme="@style/Theme.AppCompat.NoActionBar"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.PickappActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.RegistrationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.RegistrationSurveyActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.LoginActivity"
+            android:exported="true">
         </activity>
     </application>
 
