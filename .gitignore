@@ -5,6 +5,7 @@
 .gradle
 
 # User-specific configurations
+.idea/
 /.idea/caches
 .idea/caches/
 .idea/misc.xml
