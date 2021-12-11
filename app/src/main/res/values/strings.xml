@@ -3,7 +3,7 @@
 
     <string name="home" translatable="false">Home</string>
     <string name="location">Location</string>
-    <string name="calendar">Calendar</string>
+    <string name="myGames">My Games</string>
     <string name="account">Account</string>
 
     <string name="password" translatable="false">Password</string>

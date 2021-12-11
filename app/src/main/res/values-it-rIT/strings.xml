@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="calendar">Calendario</string>
+    <string name="myGames">Partite</string>
     <string name="account">Profilo</string>
     <string name="login">Accedi</string>
     <string name="signUp">Registrazione</string>

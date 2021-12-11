@@ -18,7 +18,7 @@
     <fragment
         android:id="@+id/calendar"
         android:name="it.unimib.pickapp.ui.CalendarFragment"
-        android:label="@string/calendar"
+        android:label="@string/myGames"
         tools:layout="@layout/fragment_calendar" />
     <fragment
         android:id="@+id/account"
