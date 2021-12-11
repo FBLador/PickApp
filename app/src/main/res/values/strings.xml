@@ -35,6 +35,6 @@
     <string name="title_activity_loading" translatable="false">activity_loading</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
-    <string name="Field">Field</string>
+    <string name="Field" translatable="false">Field</string>
 
 </resources>
