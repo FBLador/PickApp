@@ -3,7 +3,7 @@
 
     <string name="home" translatable="false">Home</string>
     <string name="location">Location</string>
-    <string name="myGames">My games</string>
+    <string name="calendar">Calendar</string>
     <string name="account">Account</string>
 
     <string name="password" translatable="false">Password</string>
@@ -35,10 +35,11 @@
     <string name="title_activity_loading" translatable="false">activity_loading</string>
     <string name="dummy_button" translatable="false">Dummy Button</string>
     <string name="dummy_content" translatable="false">DUMMY\nCONTENT</string>
-    <string name="Field" translatable="false">Field</string>
-    <string name="forgotPassword">Please write here your email to get a new password for your account:</string>
+    <string name="Field">Field</string>
+    <string name="forgotPassword">forgot password</string>
     <string name="send">Send</string>
-    <string name="forgotPasswordLogin">Recover your password</string>
-    <string name="welcomeText">Welcome back</string>
+    <string name="forgotPasswordLogin">Forgot password?</string>
+    <string name="myGames">My games</string>
+    <string name="welcomeText">welcome</string>
 
 </resources>

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.HomeFragment">
+    tools:context=".ui.homeFragment">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -80,7 +80,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_weight="1"
                     android:background="#00FFFFFF"
-                    android:src="@drawable/ic_baseline_sports_basketball_24"
+                    app:srcCompat="@drawable/ic_baseline_sports_basketball_24"
                     tools:ignore="SpeakableTextPresentCheck" />
 
                 <ImageButton
@@ -92,7 +92,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_weight="1"
                     android:background="#00FFFFFF"
-                    android:src="@drawable/ic_baseline_sports_volleyball_24"
+                    app:srcCompat="@drawable/ic_baseline_sports_volleyball_24"
                     tools:ignore="SpeakableTextPresentCheck" />
 
                 <ImageButton
@@ -104,7 +104,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_weight="1"
                     android:background="#00FFFFFF"
-                    android:src="@drawable/ic_baseline_sports_soccer_24"
+                    app:srcCompat="@drawable/ic_baseline_sports_soccer_24"
                     tools:ignore="SpeakableTextPresentCheck" />
 
                 <ImageButton
@@ -115,7 +115,7 @@
                     android:layout_marginLeft="25dp"
                     android:layout_marginTop="10dp"
                     android:background="#00FFFFFF"
-                    android:src="@drawable/ic_baseline_sports_tennis_24"
+                    app:srcCompat="@drawable/ic_baseline_sports_tennis_24"
                     tools:ignore="SpeakableTextPresentCheck" />
 
                 <ImageButton
@@ -126,7 +126,7 @@
                     android:layout_marginLeft="25dp"
                     android:layout_marginTop="10dp"
                     android:background="#00FFFFFF"
-                    android:src="@drawable/ic_baseline_sports_football_24"
+                    app:srcCompat="@drawable/ic_baseline_sports_football_24"
                     tools:ignore="SpeakableTextPresentCheck" />
 
                 <ImageButton
@@ -137,7 +137,7 @@
                     android:layout_marginLeft="25dp"
                     android:layout_marginTop="10dp"
                     android:background="#00FFFFFF"
-                    android:src="@drawable/ic_baseline_sports_rugby_24"
+                    app:srcCompat="@drawable/ic_baseline_sports_rugby_24"
                     tools:ignore="SpeakableTextPresentCheck" />
 
                 <ImageButton
@@ -149,7 +149,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_weight="1"
                     android:background="#00FFFFFF"
-                    android:src="@drawable/ic_baseline_sports_hockey_24" />
+                    app:srcCompat="@drawable/ic_baseline_sports_hockey_24" />
 
                 <ImageButton
                     android:id="@+id/cricketFilter"
@@ -159,7 +159,7 @@
                     android:layout_marginLeft="25dp"
                     android:layout_marginTop="10dp"
                     android:background="#00FFFFFF"
-                    android:src="@drawable/ic_baseline_sports_cricket_24" />
+                    app:srcCompat="@drawable/ic_baseline_sports_cricket_24" />
 
                 <ImageButton
                     android:id="@+id/golfFilter"
@@ -169,7 +169,7 @@
                     android:layout_marginLeft="25dp"
                     android:layout_marginTop="10dp"
                     android:background="#00FFFFFF"
-                    android:src="@drawable/ic_baseline_sports_golf_24" />
+                    app:srcCompat="@drawable/ic_baseline_sports_golf_24" />
 
             </LinearLayout>
         </HorizontalScrollView>
