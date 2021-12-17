@@ -11,11 +11,11 @@ import android.view.ViewGroup;
 import it.unimib.pickapp.R;
 
 /**
- * It shows the account section.
+ * It shows the calendar with the submitted activities .
  */
-public class AccountFragment extends Fragment {
+public class calendarFragment extends Fragment {
 
-    public AccountFragment() {
+    public calendarFragment() {
         // Required empty public constructor
     }
 
@@ -23,6 +23,6 @@ public class AccountFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_account, container, false);
+        return inflater.inflate(R.layout.fragment_calendar, container, false);
     }
 }

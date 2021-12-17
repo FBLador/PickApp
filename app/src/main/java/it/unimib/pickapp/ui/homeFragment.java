@@ -11,11 +11,11 @@ import android.view.ViewGroup;
 import it.unimib.pickapp.R;
 
 /**
- * It shows the calendar with the submitted activities .
+ * It shows the homepage of the app.
  */
-public class CalendarFragment extends Fragment {
+public class homeFragment extends Fragment {
 
-    public CalendarFragment() {
+    public homeFragment() {
         // Required empty public constructor
     }
 
@@ -23,6 +23,6 @@ public class CalendarFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_calendar, container, false);
+        return inflater.inflate(R.layout.fragment_home, container, false);
     }
 }

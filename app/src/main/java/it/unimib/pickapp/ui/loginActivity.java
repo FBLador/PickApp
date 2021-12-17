@@ -13,9 +13,9 @@ import it.unimib.pickapp.R;
 /**
  * It shows the login page.
  */
-public class LoginActivity extends AppCompatActivity {
+public class loginActivity extends AppCompatActivity {
 
-    private static final String TAG = "LoginActivity";
+    private static final String TAG = "loginActivity";
     private Button buttonSignUpFromLogin;
     private Button buttonLogin;
     private TextView textViewForgotPassword;
@@ -61,18 +61,18 @@ public class LoginActivity extends AppCompatActivity {
 
 
     private void openRegistrationActivity() {
-        Intent intent = new Intent(this, RegistrationActivity.class);
+        Intent intent = new Intent(this, registrationActivity.class);
         startActivity(intent);
     }
 
 
     private void openPickappActivity() {
-        Intent intent = new Intent(this, PickappActivity.class);
+        Intent intent = new Intent(this, pickappActivity.class);
         startActivity(intent);
     }
 
     private void openForgotPasswordActivity() {
-        Intent intent = new Intent(this, ForgotPasswordActivity.class);
+        Intent intent = new Intent(this, forgotPasswordActivity.class);
         startActivity(intent);
     }
 
