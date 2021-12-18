@@ -12,7 +12,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import it.unimib.pickapp.R;
 
-public class PickappActivity extends AppCompatActivity {
+public class pickappActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -13,9 +13,9 @@ import it.unimib.pickapp.R;
 /**
  * It shows the map.
  */
-public class LocationFragment extends Fragment {
+public class locationFragment extends Fragment {
 
-    public LocationFragment() {
+    public locationFragment() {
         // Required empty public constructor
     }
 

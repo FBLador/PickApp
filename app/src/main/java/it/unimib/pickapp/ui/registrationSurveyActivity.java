@@ -15,7 +15,7 @@ import it.unimib.pickapp.R;
 /**
  * It shows the registration second page containing survey about sport and current level.
  */
-public class RegistrationSurveyActivity extends AppCompatActivity {
+public class registrationSurveyActivity extends AppCompatActivity {
 
     private static final String TAG = "RegistrSurveyActivity";
     private Button mButtonSingUpFinish;
@@ -43,7 +43,7 @@ public class RegistrationSurveyActivity extends AppCompatActivity {
     }
 
     private void openPickappActivity(){
-        Intent intent = new Intent(this, PickappActivity.class);
+        Intent intent = new Intent(this, pickappActivity.class);
         startActivity(intent);
     }
 

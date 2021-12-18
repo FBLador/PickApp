@@ -1,24 +1,15 @@
-package it.unimib.pickapp;
-
-import android.annotation.SuppressLint;
+package it.unimib.pickapp.ui;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
-import android.view.MotionEvent;
-import android.view.View;
-import android.view.WindowInsets;
 
 import java.util.Timer;
 import java.util.TimerTask;
 
-import it.unimib.pickapp.databinding.ActivityLoadingBinding;
-import it.unimib.pickapp.ui.LoginActivity;
+import it.unimib.pickapp.R;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
@@ -44,7 +35,7 @@ public class activity_loading extends AppCompatActivity {
     }
 
     private void StartHomeActivity() {
-        Intent intent = new Intent( this, LoginActivity.class);
+        Intent intent = new Intent( this, loginActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
         finish();

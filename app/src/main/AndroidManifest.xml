@@ -5,15 +5,14 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/ic_icon"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.PickApp"
         tools:ignore="AllowBackup">
 
         <activity
-            android:name=".activity_loading"
+            android:name=".ui.activity_loading"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:exported="true"
             android:label="@string/app_name"
@@ -25,19 +24,19 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.PickappActivity"
+            android:name=".ui.pickappActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.RegistrationActivity"
+            android:name=".ui.registrationActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.RegistrationSurveyActivity"
+            android:name=".ui.registrationSurveyActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.LoginActivity"
+            android:name=".ui.loginActivity"
             android:exported="true"/>
         <activity
-            android:name=".ui.ForgotPasswordActivity"
+            android:name=".ui.forgotPasswordActivity"
             android:exported="false" />
     </application>
 

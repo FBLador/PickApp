@@ -8,15 +8,13 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
-import com.google.android.material.snackbar.Snackbar;
-
 import it.unimib.pickapp.R;
 /**
  * It shows the forgot password page.
  */
-public class ForgotPasswordActivity extends AppCompatActivity {
+public class forgotPasswordActivity extends AppCompatActivity {
 
-    private static final String TAG = "ForgotPasswordActivity";
+    private static final String TAG = "forgotPasswordActivity";
     private Button buttonForgotPassword;
 
     @Override
@@ -36,7 +34,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
     }
 
     public void openLoginActivity(){
-        Intent intent = new Intent(this, LoginActivity.class);
+        Intent intent = new Intent(this, loginActivity.class);
 
         // TODO : logica per far spedire messaggio di reset password
 

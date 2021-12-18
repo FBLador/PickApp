@@ -11,11 +11,11 @@ import android.view.ViewGroup;
 import it.unimib.pickapp.R;
 
 /**
- * It shows the homepage of the app.
+ * It shows the account section.
  */
-public class HomeFragment extends Fragment {
+public class accountFragment extends Fragment {
 
-    public HomeFragment() {
+    public accountFragment() {
         // Required empty public constructor
     }
 
@@ -23,6 +23,6 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false);
+        return inflater.inflate(R.layout.fragment_account, container, false);
     }
 }
