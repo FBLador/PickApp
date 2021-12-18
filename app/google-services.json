@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "893009734895",
+    "project_id": "pickapp-da52b",
+    "storage_bucket": "pickapp-da52b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:893009734895:android:fb2e4181fb5e6c2898ff1a",
+        "android_client_info": {
+          "package_name": "it.unimib.pickapp.ui"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "893009734895-jk0aipacneo7n6muinc2uqdq2r9bmtai.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC-KKVizOygr4vX8EHIsnHXLlhs6GmJVFI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "893009734895-jk0aipacneo7n6muinc2uqdq2r9bmtai.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
