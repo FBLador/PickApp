@@ -22,7 +22,7 @@ import it.unimib.pickapp.R;
 /**
  * It shows the registration first page.
  */
-public class RegistrationActivity extends AppCompatActivity {
+public class registrationActivity extends AppCompatActivity {
 
     private static final String TAG = "RegistrationActivity";
     private Button mButtonSingUpNext;
@@ -57,7 +57,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
 
     private void openRegistrationSurveyActivity(){
-        Intent intent = new Intent(this, RegistrationSurveyActivity.class);
+        Intent intent = new Intent(this, registrationSurveyActivity.class);
 
         intent.putExtra("keyname", editTextName.getText().toString());
         intent.putExtra("keysurname", editTextSurname.getText().toString());

@@ -17,13 +17,12 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 import it.unimib.pickapp.R;
 /**
  * It shows the login page.
  */
-public class LoginActivity extends AppCompatActivity {
+public class loginActivity extends AppCompatActivity {
 
     private static final String TAG = "LoginActivity";
     private Button buttonSignUpFromLogin;
@@ -71,7 +70,7 @@ public class LoginActivity extends AppCompatActivity {
                                     if (task.isSuccessful()) {
                                         // Sign in success, update UI with the signed-in user's information
                                         Log.d(TAG, "signInWithEmail:success");
-                                        Toast.makeText(LoginActivity.this, "login successful", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(loginActivity.this, "login successful", Toast.LENGTH_SHORT).show();
 
                                         //FirebaseUser user = mAuth.getCurrentUser();
                                         //updateUI(user);
@@ -80,7 +79,7 @@ public class LoginActivity extends AppCompatActivity {
                                     } else {
                                         // If sign in fails, display a message to the user.
                                         Log.w(TAG, "signInWithEmail:failure", task.getException());
-                                        Toast.makeText(LoginActivity.this, "authentication failed",
+                                        Toast.makeText(loginActivity.this, "authentication failed",
                                                 Toast.LENGTH_SHORT).show();
                                         //updateUI(null);
                                     }
@@ -114,18 +113,18 @@ public class LoginActivity extends AppCompatActivity {
 
 
     private void openRegistrationActivity() {
-        Intent intent = new Intent(this, RegistrationActivity.class);
+        Intent intent = new Intent(this, registrationActivity.class);
         startActivity(intent);
     }
 
 
     private void openPickappActivity() {
-        Intent intent = new Intent(this, PickappActivity.class);
+        Intent intent = new Intent(this, pickappActivity.class);
         startActivity(intent);
     }
 
     private void openForgotPasswordActivity() {
-        Intent intent = new Intent(this, ForgotPasswordActivity.class);
+        Intent intent = new Intent(this, forgotPasswordActivity.class);
         startActivity(intent);
     }
 

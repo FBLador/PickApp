@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.LoginActivity">
+    tools:context=".ui.loginActivity">
 
     <ScrollView
         android:id="@+id/scrollView2"
@@ -13,6 +13,7 @@
         android:layout_height="match_parent"
         android:alwaysDrawnWithCache="false"
         android:animateLayoutChanges="true"
+        android:background="@color/white"
         android:fillViewport="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -26,6 +27,7 @@
             android:alwaysDrawnWithCache="false"
             android:animateLayoutChanges="false"
             android:animationCache="false"
+            android:background="@drawable/ic_background"
             android:hapticFeedbackEnabled="false">
 
 
@@ -48,7 +50,7 @@
                 android:layout_gravity="center"
                 android:layout_marginStart="32dp"
                 android:layout_marginLeft="32dp"
-                android:layout_marginTop="250dp"
+                android:layout_marginTop="280dp"
                 android:layout_marginEnd="32dp"
                 android:layout_marginRight="32dp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -57,30 +59,29 @@
 
                 <EditText
                     android:id="@+id/editTextTextEmailAddress"
-                    android:layout_width="290dp"
-                    android:layout_height="48dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
                     android:autofillHints="no"
                     android:drawableLeft="@drawable/ic_outline_person_24_gray"
                     android:ems="10"
-                    android:gravity="center"
+                    android:gravity="center_horizontal|left"
                     android:hint="@string/email"
                     android:inputType="textEmailAddress"
                     android:minHeight="48dp"
-                    android:textColor="#000000"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    android:textColor="@color/black"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:ignore="LabelFor,SpeakableTextPresentCheck" />
 
                 <EditText
                     android:id="@+id/editTextTextPassword"
-                    android:layout_width="290dp"
-                    android:layout_height="48dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:drawableLeft="@drawable/ic_outline_info_24_gray"
                     android:ems="10"
-                    android:gravity="center_horizontal"
+                    android:gravity="center_horizontal|left"
                     android:hint="@string/password"
                     android:importantForAutofill="no"
                     android:inputType="textPassword"
@@ -96,6 +97,7 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
