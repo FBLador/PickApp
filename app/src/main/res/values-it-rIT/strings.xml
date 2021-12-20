@@ -22,4 +22,6 @@
     <string name="send">Invia</string>
     <string name="forgotPasswordLogin">Password dimenticata?</string>
     <string name="welcomeText">Benvenuto</string>
+    <string name="backgroundProfile">foto sfondo profilo</string>
+    <string name="accountName">nome account</string>
 </resources>

@@ -14,10 +14,12 @@
         <entry key="..\:/Users/flavi/AndroidStudioProjects/PickApp/app/src/main/res/layout/fragment_home.xml" value="0.2938451356717406" />
         <entry key="..\:/Users/flavi/AndroidStudioProjects/PickApp/app/src/main/res/layout/fragment_location.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/flavi/AndroidStudioProjects/PickApp/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.25416666666666665" />
+        <entry key="app/src/main/res/layout/activity_loading.xml" value="0.27760416666666665" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.29393115942028986" />
         <entry key="app/src/main/res/layout/activity_pickapp.xml" value="0.2859375" />
         <entry key="app/src/main/res/layout/activity_registration.xml" value="0.12135416666666667" />
         <entry key="app/src/main/res/layout/fragment_account.xml" value="0.27760416666666665" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.27760416666666665" />
       </map>
     </option>
   </component>

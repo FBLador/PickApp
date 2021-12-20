@@ -40,6 +40,8 @@
     <string name="send">Send</string>
     <string name="forgotPasswordLogin">Forgot password?</string>
     <string name="myGames">My games</string>
-    <string name="welcomeText">welcome</string>
+    <string name="welcomeText">Welcome</string>
+    <string name="backgroundProfile">background profile image</string>
+    <string name="accountName">account name</string>
 
 </resources>

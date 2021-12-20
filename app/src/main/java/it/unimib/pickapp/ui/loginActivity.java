@@ -75,7 +75,7 @@ public class loginActivity extends AppCompatActivity {
                                         //FirebaseUser user = mAuth.getCurrentUser();
                                         //updateUI(user);
                                         openPickappActivity();
-                                        //finish();
+                                        finish();
                                     } else {
                                         // If sign in fails, display a message to the user.
                                         Log.w(TAG, "signInWithEmail:failure", task.getException());
