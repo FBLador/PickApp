@@ -11,13 +11,18 @@ import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import it.unimib.pickapp.R;
 import it.unimib.pickapp.model.User;
@@ -29,10 +34,15 @@ public class registrationSurveyActivity extends AppCompatActivity {
 
     private static final String TAG = "RegistrSurveyActivity";
     private Button mButtonSingUpFinish;
+
     private Spinner mSpinnerSport;
     private RadioGroup mRadioGroupExperience;
     private RadioButton mRadioButtonExperience;
     private FirebaseAuth mAuth;
+
+    FirebaseDatabase firebaseDatabase;
+    DatabaseReference databaseReference;
+    User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,42 +57,45 @@ public class registrationSurveyActivity extends AppCompatActivity {
         String email = getIntent().getStringExtra("keyemail");
         String password = getIntent().getStringExtra("keypassword");
 
-
+        //firebase database
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference = firebaseDatabase.getReference("Users");
 
         //listener per button finish
         mButtonSingUpFinish = (Button) findViewById(R.id.buttonSingUpFinish);
-        mButtonSingUpFinish.setOnClickListener(v -> {
-            if(!isExperienceSelected())
-                Snackbar.make(findViewById(android.R.id.content), "select your experience level ", Snackbar.LENGTH_SHORT)
-                        .show();
-            else {
-                String favouriteSport = sportSelected();
-                String experienceLevel = experienceSelected();
-                mAuth.createUserWithEmailAndPassword(email, password)
-                        .addOnCompleteListener(task -> {
+        mButtonSingUpFinish.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "onClick Finish");
+                openPickappActivity();
+                if(!isExperienceSelected()) {
+                    Snackbar.make(findViewById(android.R.id.content), "select your experience level ", Snackbar.LENGTH_SHORT)
+                            .show();
+                    Log.d(TAG, "if esterno");
+                }
+                else {
+                    String favouriteSport = sportSelected();
+                    String experienceLevel = experienceSelected();
 
-                            if(task.isSuccessful()){
-                                User user = new User(name, surname, nickname, email, password, favouriteSport, experienceLevel, 0);
-
-                                FirebaseDatabase.getInstance().getReference("Users")
-                                        .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                                        .setValue(user).addOnCompleteListener(task1 -> {
-
-                                            if(task1.isSuccessful()) {
-                                                Snackbar.make(findViewById(android.R.id.content), "registration successful", Snackbar.LENGTH_SHORT)
-                                                        .show();
-                                                openPickappActivity();
-                                            }
-                                            else{
-                                                Snackbar.make(findViewById(android.R.id.content), "registration failed", Snackbar.LENGTH_SHORT)
-                                                        .show();
-                                            }
-                                        });
-                            }else{
-                                Snackbar.make(findViewById(android.R.id.content), "registration failed", Snackbar.LENGTH_SHORT)
-                                        .show();
-                            }
-                        });
+                    mAuth.createUserWithEmailAndPassword(email, password)
+                            .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                    if(task.isSuccessful()){
+                                        user = new User(name, surname, nickname, email, password, favouriteSport, experienceLevel, 2.5);
+                                        Snackbar.make(findViewById(android.R.id.content), "registration successful", Snackbar.LENGTH_SHORT)
+                                                .show();
+                                        addDatatoFirebase();
+                                        openPickappActivity();
+                                        Log.d(TAG, "if interno");
+                                    }else{
+                                        Snackbar.make(findViewById(android.R.id.content), "registration failed", Snackbar.LENGTH_SHORT)
+                                                .show();
+                                        Log.d(TAG, "else esterno");
+                                    }
+                                }
+                            });
+                }
             }
         });
     }
@@ -111,5 +124,23 @@ public class registrationSurveyActivity extends AppCompatActivity {
         mRadioButtonExperience = mRadioGroupExperience.findViewById(radioButtonID);
         String experience = mRadioButtonExperience.getText().toString();
         return experience;
+    }
+
+    private void addDatatoFirebase() {
+        //add user to realtime database firebase
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                databaseReference.child(user.getNickname()).setValue(user);
+
+                Toast.makeText(registrationSurveyActivity.this, "data added", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+                Toast.makeText(registrationSurveyActivity.this, "Fail to add data " + error, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

@@ -17,6 +17,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import it.unimib.pickapp.R;
 /**
@@ -75,7 +76,7 @@ public class loginActivity extends AppCompatActivity {
                                         //FirebaseUser user = mAuth.getCurrentUser();
                                         //updateUI(user);
                                         openPickappActivity();
-                                        finish();
+                                        finish();//non fa tornare indietro alla pagina di login una volta fatto l'accesso
                                     } else {
                                         // If sign in fails, display a message to the user.
                                         Log.w(TAG, "signInWithEmail:failure", task.getException());

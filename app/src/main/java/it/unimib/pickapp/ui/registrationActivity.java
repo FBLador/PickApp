@@ -49,8 +49,8 @@ public class registrationActivity extends AppCompatActivity {
         mButtonSingUpNext = (Button) findViewById(R.id.buttonSingUpNext);
         mButtonSingUpNext.setOnClickListener(v -> {
             Log.d(TAG, "onClick Next");
-            checkData();
-            openRegistrationSurveyActivity();
+            if (checkData())
+                openRegistrationSurveyActivity();
         });
 
     }
@@ -68,7 +68,7 @@ public class registrationActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void checkData(){
+    private boolean checkData(){
         String name = editTextName.getText().toString();
         String surname = editTextSurname.getText().toString();
         String nickname = editTextNickname.getText().toString();
@@ -78,37 +78,38 @@ public class registrationActivity extends AppCompatActivity {
         if(name.isEmpty()){
             editTextName.setError("name required!");
             editTextName.requestFocus();
-            return;
+            return false;
         }
         if(surname.isEmpty()){
             editTextSurname.setError("surname required!");
             editTextSurname.requestFocus();
-            return;
+            return false;
         }
         if(nickname.isEmpty()){
             editTextNickname.setError("nickname required!");
             editTextNickname.requestFocus();
-            return;
+            return false;
         }
         if(email.isEmpty()){
             editTextEmail.setError("email required!");
             editTextEmail.requestFocus();
-            return;
+            return false;
         }
         if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
             editTextEmail.setError("enter a valid email!");
             editTextEmail.requestFocus();
-            return;
+            return false;
         }
         if(password.isEmpty()){
             editTextPassword.setError("password required!");
             editTextPassword.requestFocus();
-            return;
+            return false;
         }
         if(password.length() < 6){
             editTextPassword.setError("a password of at least 6 characters is required!");
             editTextPassword.requestFocus();
-            return;
+            return false;
         }
+        return true;
     }
 }
