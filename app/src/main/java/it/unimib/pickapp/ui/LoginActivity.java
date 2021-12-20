@@ -1,13 +1,23 @@
 package it.unimib.pickapp.ui;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import it.unimib.pickapp.R;
 /**
@@ -20,11 +30,28 @@ public class LoginActivity extends AppCompatActivity {
     private Button buttonLogin;
     private TextView textViewForgotPassword;
 
+    private EditText editTextEmail;
+    private EditText editTextPassword;
+
+    private FirebaseAuth mAuth;
+
+   /* @Override
+    public void onStart() {
+        super.onStart();
+        // Check if user is signed in (non-null) and update UI accordingly.
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if(currentUser != null){
+            //reload();
+        }
+    }*/
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        mAuth = FirebaseAuth.getInstance();
 
         //listener per button per il login
         buttonLogin = (Button) findViewById(R.id.buttonLogin);
@@ -32,10 +59,36 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Log.d(TAG, "onClick Login");
-                openPickappActivity();
+                editTextEmail = findViewById(R.id.editTextTextEmailAddress);
+                editTextPassword = findViewById(R.id.editTextTextPassword);
+                String email = editTextEmail.getText().toString();
+                String password = editTextPassword.getText().toString();
+                if (checkData()) {
+                    mAuth.signInWithEmailAndPassword(email, password)
+                            .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                    if (task.isSuccessful()) {
+                                        // Sign in success, update UI with the signed-in user's information
+                                        Log.d(TAG, "signInWithEmail:success");
+                                        Toast.makeText(LoginActivity.this, "login successful", Toast.LENGTH_SHORT).show();
+
+                                        //FirebaseUser user = mAuth.getCurrentUser();
+                                        //updateUI(user);
+                                        openPickappActivity();
+                                        //finish();
+                                    } else {
+                                        // If sign in fails, display a message to the user.
+                                        Log.w(TAG, "signInWithEmail:failure", task.getException());
+                                        Toast.makeText(LoginActivity.this, "authentication failed",
+                                                Toast.LENGTH_SHORT).show();
+                                        //updateUI(null);
+                                    }
+                                }
+                            });
+                }
             }
         });
-
 
         //listener per button per il sign up
         buttonSignUpFromLogin = (Button) findViewById(R.id.buttonSignUpFromLogin);
@@ -76,4 +129,25 @@ public class LoginActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    private boolean checkData() {
+        String email = editTextEmail.getText().toString();
+        String password = editTextPassword.getText().toString();
+
+        if (email.isEmpty()) {
+            editTextEmail.setError("email required!");
+            editTextEmail.requestFocus();
+            return false;
+        }
+        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            editTextEmail.setError("enter a valid email!");
+            editTextEmail.requestFocus();
+            return false;
+        }
+        if (password.isEmpty()) {
+            editTextPassword.setError("password required!");
+            editTextPassword.requestFocus();
+            return false;
+        }
+        return true;
+    }
 }
