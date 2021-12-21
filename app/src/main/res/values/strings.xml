@@ -43,5 +43,6 @@
     <string name="backgroundProfile">background profile image</string>
     <string name="accountName">account name</string>
     <string name="forgotPassword">Send email to reset password</string>
+    <string name="logout" translatable="false">Logout</string>
 
 </resources>

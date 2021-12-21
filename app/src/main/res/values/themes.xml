@@ -2,7 +2,7 @@
     <!-- Base application theme. -->
     <style name="Theme.PickApp" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/menuButtonColor</item> <!-- colore toolbar -->
+        <item name="colorPrimary">@color/transparent</item> <!-- colore toolbar -->
         <item name="colorPrimaryVariant">@color/white</item> <!-- colore status bar -->
         <item name="colorOnPrimary">@color/white</item> <!-- colore testo bottoni e colore click selezione  -->
         <!-- Secondary brand color. -->

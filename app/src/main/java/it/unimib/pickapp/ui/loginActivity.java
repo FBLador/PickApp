@@ -17,6 +17,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import it.unimib.pickapp.R;
 
@@ -35,15 +36,16 @@ public class loginActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
 
-   /* @Override
+
+    @Override
     public void onStart() {
         super.onStart();
-        // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
+        // Check if user is signed in (non-null) and update UI accordingly.
         if(currentUser != null){
-            //reload();
+            openPickappActivity();
         }
-    }*/
+    }
 
 
     @Override
