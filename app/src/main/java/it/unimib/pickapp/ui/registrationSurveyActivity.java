@@ -15,7 +15,6 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -67,10 +66,8 @@ public class registrationSurveyActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Log.d(TAG, "onClick Finish");
-                openPickappActivity();
                 if(!isExperienceSelected()) {
-                    Snackbar.make(findViewById(android.R.id.content), "select your experience level ", Snackbar.LENGTH_SHORT)
-                            .show();
+                    Toast.makeText(registrationSurveyActivity.this, "select your experiance level", Toast.LENGTH_SHORT).show();
                     Log.d(TAG, "if esterno");
                 }
                 else {
@@ -82,15 +79,13 @@ public class registrationSurveyActivity extends AppCompatActivity {
                                 @Override
                                 public void onComplete(@NonNull Task<AuthResult> task) {
                                     if(task.isSuccessful()){
+                                        Log.d(TAG, "if interno");
                                         user = new User(name, surname, nickname, email, password, favouriteSport, experienceLevel, 2.5);
-                                        Snackbar.make(findViewById(android.R.id.content), "registration successful", Snackbar.LENGTH_SHORT)
-                                                .show();
+                                        Toast.makeText(registrationSurveyActivity.this, "Registration successful ", Toast.LENGTH_SHORT).show();
                                         addDatatoFirebase();
                                         openPickappActivity();
-                                        Log.d(TAG, "if interno");
                                     }else{
-                                        Snackbar.make(findViewById(android.R.id.content), "registration failed", Snackbar.LENGTH_SHORT)
-                                                .show();
+                                        Toast.makeText(registrationSurveyActivity.this, "Registration failed ", Toast.LENGTH_SHORT).show();
                                         Log.d(TAG, "else esterno");
                                     }
                                 }
@@ -102,6 +97,7 @@ public class registrationSurveyActivity extends AppCompatActivity {
 
     private void openPickappActivity(){
         Intent intent = new Intent(this, pickappActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);//funziona come finish() per le activity precedenti
         startActivity(intent);
     }
 
@@ -132,13 +128,11 @@ public class registrationSurveyActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 databaseReference.child(user.getNickname()).setValue(user);
-
                 Toast.makeText(registrationSurveyActivity.this, "data added", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
                 Toast.makeText(registrationSurveyActivity.this, "Fail to add data " + error, Toast.LENGTH_SHORT).show();
             }
         });

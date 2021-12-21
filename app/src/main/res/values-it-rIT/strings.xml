@@ -18,10 +18,10 @@
     <string name="intermediate">Intermediate</string>
     <string name="Field">Field</string>
     <string name="myGames">Le mie partite</string>
-    <string name="forgotPassword">Password dimenticata</string>
     <string name="send">Invia</string>
-    <string name="forgotPasswordLogin">Password dimenticata?</string>
+    <string name="forgotPasswordLogin">Recupera la tua password</string>
     <string name="welcomeText">Benvenuto</string>
     <string name="backgroundProfile">foto sfondo profilo</string>
     <string name="accountName">nome account</string>
+    <string name="forgotPassword">Invia un\'email per il recupero della password</string>
 </resources>

@@ -17,9 +17,9 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 import it.unimib.pickapp.R;
+
 /**
  * It shows the login page.
  */
@@ -59,6 +59,7 @@ public class loginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Log.d(TAG, "onClick Login");
+
                 editTextEmail = findViewById(R.id.editTextTextEmailAddress);
                 editTextPassword = findViewById(R.id.editTextTextPassword);
                 String email = editTextEmail.getText().toString();
@@ -76,7 +77,6 @@ public class loginActivity extends AppCompatActivity {
                                         //FirebaseUser user = mAuth.getCurrentUser();
                                         //updateUI(user);
                                         openPickappActivity();
-                                        finish();//non fa tornare indietro alla pagina di login una volta fatto l'accesso
                                     } else {
                                         // If sign in fails, display a message to the user.
                                         Log.w(TAG, "signInWithEmail:failure", task.getException());
@@ -121,7 +121,9 @@ public class loginActivity extends AppCompatActivity {
 
     private void openPickappActivity() {
         Intent intent = new Intent(this, pickappActivity.class);
+        //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);//funziona come finish() per le activity precedenti
         startActivity(intent);
+        finish();//non fa tornare indietro alla pagina di login una volta fatto l'accesso
     }
 
     private void openForgotPasswordActivity() {

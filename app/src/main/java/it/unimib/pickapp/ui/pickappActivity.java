@@ -4,14 +4,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
-
-import android.content.Intent;
 import android.os.Bundle;
-
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-
 import it.unimib.pickapp.R;
 
+/**
+ * It contains the main fragments of the app.
+ */
 public class pickappActivity extends AppCompatActivity {
 
     @Override
@@ -21,8 +20,10 @@ public class pickappActivity extends AppCompatActivity {
 
 
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.pickapp_fragment_container_view);
-        NavController navController = navHostFragment.getNavController();
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_nav_view);
-        NavigationUI.setupWithNavController(bottomNavigationView, navController);
+        if(navHostFragment.getNavController() != null) {
+            NavController navController = navHostFragment.getNavController();
+            BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_nav_view);
+            NavigationUI.setupWithNavController(bottomNavigationView, navController);
+        }
     }
 }
