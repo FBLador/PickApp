@@ -1,21 +1,15 @@
 package it.unimib.pickapp.ui;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.Patterns;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 import it.unimib.pickapp.R;
@@ -26,9 +20,6 @@ import it.unimib.pickapp.R;
 public class loginActivity extends AppCompatActivity {
 
     private static final String TAG = "LoginActivity";
-    private Button buttonSignUpFromLogin;
-    private Button buttonLogin;
-    private TextView textViewForgotPassword;
 
     private EditText editTextEmail;
     private EditText editTextPassword;
@@ -54,61 +45,49 @@ public class loginActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
         //listener per button per il login
-        buttonLogin = (Button) findViewById(R.id.buttonLogin);
-        buttonLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d(TAG, "onClick Login");
+        Button buttonLogin = findViewById(R.id.buttonLogin);
+        buttonLogin.setOnClickListener(v -> {
+            Log.d(TAG, "onClick Login");
 
-                editTextEmail = findViewById(R.id.editTextTextEmailAddress);
-                editTextPassword = findViewById(R.id.editTextTextPassword);
-                String email = editTextEmail.getText().toString();
-                String password = editTextPassword.getText().toString();
-                if (checkData()) {
-                    mAuth.signInWithEmailAndPassword(email, password)
-                            .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                                @Override
-                                public void onComplete(@NonNull Task<AuthResult> task) {
-                                    if (task.isSuccessful()) {
-                                        // Sign in success, update UI with the signed-in user's information
-                                        Log.d(TAG, "signInWithEmail:success");
-                                        Toast.makeText(loginActivity.this, "login successful", Toast.LENGTH_SHORT).show();
+            editTextEmail = findViewById(R.id.editTextTextEmailAddress);
+            editTextPassword = findViewById(R.id.editTextTextPassword);
+            String email = editTextEmail.getText().toString();
+            String password = editTextPassword.getText().toString();
+            if (checkData()) {
+                mAuth.signInWithEmailAndPassword(email, password)
+                        .addOnCompleteListener(task -> {
+                            if (task.isSuccessful()) {
+                                // Sign in success, update UI with the signed-in user's information
+                                Log.d(TAG, "signInWithEmail:success");
+                                Toast.makeText(loginActivity.this, "login successful", Toast.LENGTH_SHORT).show();
 
-                                        //FirebaseUser user = mAuth.getCurrentUser();
-                                        //updateUI(user);
-                                        openPickappActivity();
-                                    } else {
-                                        // If sign in fails, display a message to the user.
-                                        Log.w(TAG, "signInWithEmail:failure", task.getException());
-                                        Toast.makeText(loginActivity.this, "authentication failed",
-                                                Toast.LENGTH_SHORT).show();
-                                        //updateUI(null);
-                                    }
-                                }
-                            });
-                }
+                                //FirebaseUser user = mAuth.getCurrentUser();
+                                //updateUI(user);
+                                openPickappActivity();
+                            } else {
+                                // If sign in fails, display a message to the user.
+                                Log.w(TAG, "signInWithEmail:failure", task.getException());
+                                Toast.makeText(loginActivity.this, "authentication failed",
+                                        Toast.LENGTH_SHORT).show();
+                                //updateUI(null);
+                            }
+                        });
             }
         });
 
         //listener per button per il sign up
-        buttonSignUpFromLogin = (Button) findViewById(R.id.buttonSignUpFromLogin);
-        buttonSignUpFromLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d(TAG, "onClick SignUp");
-                openRegistrationActivity();
-            }
+        Button buttonSignUpFromLogin = findViewById(R.id.buttonSignUpFromLogin);
+        buttonSignUpFromLogin.setOnClickListener(v -> {
+            Log.d(TAG, "onClick SignUp");
+            openRegistrationActivity();
         });
 
 
         //listener per button per forgot password
-        textViewForgotPassword = (TextView) findViewById(R.id.textViewForgotPasswordFromLogin);
-        textViewForgotPassword.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d(TAG, "onClick Forgot");
-                openForgotPasswordActivity();
-            }
+        TextView textViewForgotPassword = findViewById(R.id.textViewForgotPasswordFromLogin);
+        textViewForgotPassword.setOnClickListener(v -> {
+            Log.d(TAG, "onClick Forgot");
+            openForgotPasswordActivity();
         });
     }
 
