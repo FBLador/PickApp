@@ -118,17 +118,7 @@ public class locationFragment extends Fragment implements OnMapReadyCallback {
                 requireContext(), Manifest.permission.ACCESS_COARSE_LOCATION) ==
                 PackageManager.PERMISSION_GRANTED) {
             // Permessi accettati.
-            map.setMyLocationEnabled(true);
-            client.getLastLocation().addOnSuccessListener(requireActivity(), location -> {
-                double latitude = location.getLatitude();
-                double longitude = location.getLongitude();
-
-                LatLng lastPosition = new LatLng(latitude, longitude);
-                map.addMarker(new MarkerOptions()
-                        .position(new LatLng(latitude+0.01, longitude+0.01))
-                        .title("Partita 1"));
-                map.moveCamera(CameraUpdateFactory.newLatLngZoom(lastPosition, 12));
-            });
+                setupMap(map, client);
         } else {
             // Permessi negati. Posso chiederli direttamente
             // The registered ActivityResultCallback gets the result of this request.
@@ -137,6 +127,21 @@ public class locationFragment extends Fragment implements OnMapReadyCallback {
         }
         map.setBuildingsEnabled(true);
 
+    }
+
+    @SuppressLint("MissingPermission")
+    public void setupMap(GoogleMap map, FusedLocationProviderClient client) {
+        map.setMyLocationEnabled(true);
+        client.getLastLocation().addOnSuccessListener(requireActivity(), location -> {
+            double latitude = location.getLatitude();
+            double longitude = location.getLongitude();
+
+            LatLng lastPosition = new LatLng(latitude, longitude);
+            map.addMarker(new MarkerOptions()
+                    .position(new LatLng(latitude+0.01, longitude+0.01))
+                    .title("Partita 1"));
+            map.moveCamera(CameraUpdateFactory.newLatLngZoom(lastPosition, 12));
+        });
     }
 
     @Override
