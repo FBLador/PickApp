@@ -6,6 +6,11 @@
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
+
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_icon"
@@ -13,6 +18,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PickApp"
         tools:ignore="AllowBackup">
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="${MAPS_API_KEY}" />
+
 
         <activity
             android:name=".ui.activity_loading"
@@ -41,6 +51,7 @@
         <activity
             android:name=".ui.forgotPasswordActivity"
             android:exported="false" />
+
     </application>
 
 </manifest>
