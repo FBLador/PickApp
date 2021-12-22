@@ -9,6 +9,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="buttonColor">#005466</color>
     <color name="menuButtonColor">#0D7700</color>
+    <color name="transparent">#00000000</color>
 
     //bottomNavMenu colors
     <color name="item_color_active">#0D7700</color>

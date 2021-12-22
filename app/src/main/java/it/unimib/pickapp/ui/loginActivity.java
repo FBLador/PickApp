@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import it.unimib.pickapp.R;
 
@@ -26,15 +27,16 @@ public class loginActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
 
-   /* @Override
+
+    @Override
     public void onStart() {
         super.onStart();
-        // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
+        // Check if user is signed in (non-null) and update UI accordingly.
         if(currentUser != null){
-            //reload();
+            openPickappActivity();
         }
-    }*/
+    }
 
 
     @Override

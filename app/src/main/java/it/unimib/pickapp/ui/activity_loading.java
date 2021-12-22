@@ -28,17 +28,23 @@ public class activity_loading extends AppCompatActivity {
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
-                StartHomeActivity();
+                openLoginActivity();
             }
 
         }, time);
     }
 
-    private void StartHomeActivity() {
+    private void openLoginActivity() {
         Intent intent = new Intent( this, loginActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
         finish();
     }
 
+    private void openPickappActivity() {
+        Intent intent = new Intent( this, pickappActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        finish();
+    }
 }
