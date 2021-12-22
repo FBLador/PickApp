@@ -2,6 +2,7 @@ package it.unimib.pickapp.ui;
 
 
 
+
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.pm.PackageManager;
@@ -14,9 +15,12 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
-import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -28,8 +32,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import static it.unimib.pickapp.ui.Constants.MAPVIEW_BUNDLE_KEY;
-import static it.unimib.pickapp.ui.Constants.PERMISSION_DENIED;
-import static it.unimib.pickapp.ui.Constants.PERMISSION_GRANTED;
+
 
 
 public class locationFragment extends Fragment implements OnMapReadyCallback {
@@ -44,8 +47,8 @@ public class locationFragment extends Fragment implements OnMapReadyCallback {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_location, container, false);
         mMapView = view.findViewById(R.id.matches_list_map);
-
         initGoogleMap(savedInstanceState);
+
 
         return view;
     }
@@ -60,7 +63,7 @@ public class locationFragment extends Fragment implements OnMapReadyCallback {
     }
 
     @Override
-    public void onSaveInstanceState(Bundle outState) {
+    public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
 
         Bundle mapViewBundle = outState.getBundle(MAPVIEW_BUNDLE_KEY);
@@ -89,7 +92,7 @@ public class locationFragment extends Fragment implements OnMapReadyCallback {
         mMapView.onStop();
     }
 
-    private ActivityResultLauncher<String> requestPermissionLauncher =
+     private final ActivityResultLauncher<String> requestPermissionLauncher =
             registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {
                 if (isGranted) {
                     // Permission is granted. Continue the action or workflow in your
@@ -106,27 +109,33 @@ public class locationFragment extends Fragment implements OnMapReadyCallback {
     @SuppressLint("MissingPermission")
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
-    public void onMapReady(GoogleMap map) {
+    public void onMapReady(@NonNull GoogleMap map) {
+
+        FusedLocationProviderClient client = LocationServices.getFusedLocationProviderClient(requireContext());
 
         // Controllo se l'utente ha già accettato i permessi
         if (ContextCompat.checkSelfPermission(
-                getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) ==
+                requireContext(), Manifest.permission.ACCESS_COARSE_LOCATION) ==
                 PackageManager.PERMISSION_GRANTED) {
-            // You can use the API that requires the permission.
+            // Permessi accettati.
             map.setMyLocationEnabled(true);
-            map.setBuildingsEnabled(true);
+            client.getLastLocation().addOnSuccessListener(requireActivity(), location -> {
+                double latitude = location.getLatitude();
+                double longitude = location.getLongitude();
+
+                LatLng lastPosition = new LatLng(latitude, longitude);
+                map.addMarker(new MarkerOptions()
+                        .position(new LatLng(latitude+0.01, longitude+0.01))
+                        .title("Partita 1"));
+                map.moveCamera(CameraUpdateFactory.newLatLngZoom(lastPosition, 12));
+            });
         } else {
-            // You can directly ask for the permission.
+            // Permessi negati. Posso chiederli direttamente
             // The registered ActivityResultCallback gets the result of this request.
             requestPermissionLauncher.launch(
                     Manifest.permission.ACCESS_COARSE_LOCATION);
         }
-
-        //map.addMarker(new MarkerOptions()
-        //        .position(new LatLng(0, 0))
-        //        .title("Partita 1"));
-
-
+        map.setBuildingsEnabled(true);
 
     }
 
