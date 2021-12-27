@@ -1,8 +1,6 @@
 package it.unimib.pickapp.ui;
 
 
-
-
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.pm.PackageManager;
@@ -24,6 +22,8 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
+
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,10 +34,11 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import static it.unimib.pickapp.ui.Constants.MAPVIEW_BUNDLE_KEY;
 
 
-
 public class locationFragment extends Fragment implements OnMapReadyCallback {
 
     private MapView mMapView;
+    private String TAG = "locationFragment";
+    private boolean locPermissionGranted = false;
 
     public locationFragment() {
         // Required empty public constructor
@@ -48,7 +49,6 @@ public class locationFragment extends Fragment implements OnMapReadyCallback {
         View view = inflater.inflate(R.layout.fragment_location, container, false);
         mMapView = view.findViewById(R.id.matches_list_map);
         initGoogleMap(savedInstanceState);
-
 
         return view;
     }
@@ -92,17 +92,22 @@ public class locationFragment extends Fragment implements OnMapReadyCallback {
         mMapView.onStop();
     }
 
-     private final ActivityResultLauncher<String> requestPermissionLauncher =
+    private final ActivityResultLauncher<String> requestPermissionLauncher =
             registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {
                 if (isGranted) {
                     // Permission is granted. Continue the action or workflow in your
                     // app.
+                    locPermissionGranted = true;
+                    Log.d(TAG, "registerForActivityResult: GRANTED");
+                    mMapView.getMapAsync(this);
                 } else {
                     // Explain to the user that the feature is unavailable because the
                     // features requires a permission that the user has denied. At the
                     // same time, respect the user's decision. Don't link to system
                     // settings in an effort to convince the user to change their
                     // decision.
+                    locPermissionGranted = false;
+                    Log.d(TAG, "registerForActivityResult: DENIED");
                 }
             });
 
@@ -118,20 +123,21 @@ public class locationFragment extends Fragment implements OnMapReadyCallback {
                 requireContext(), Manifest.permission.ACCESS_COARSE_LOCATION) ==
                 PackageManager.PERMISSION_GRANTED) {
             // Permessi accettati.
-                setupMap(map, client);
+            Log.d(TAG, "onMapReady: GRANTED");
+            setupMap(map, client);
         } else {
+            Log.d(TAG, "onMapReady: DENIED");
             // Permessi negati. Posso chiederli direttamente
             // The registered ActivityResultCallback gets the result of this request.
             requestPermissionLauncher.launch(
                     Manifest.permission.ACCESS_COARSE_LOCATION);
-            onMapReady(map);
         }
-        map.setBuildingsEnabled(true);
 
     }
 
     @SuppressLint("MissingPermission")
     public void setupMap(GoogleMap map, FusedLocationProviderClient client) {
+        map.setBuildingsEnabled(true);
         map.setMyLocationEnabled(true);
         client.getLastLocation().addOnSuccessListener(requireActivity(), location -> {
             double latitude = location.getLatitude();
