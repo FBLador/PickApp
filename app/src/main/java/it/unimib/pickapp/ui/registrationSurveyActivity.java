@@ -15,8 +15,10 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -39,8 +41,9 @@ public class registrationSurveyActivity extends AppCompatActivity {
     private RadioButton mRadioButtonExperience;
     private FirebaseAuth mAuth;
 
-    FirebaseDatabase firebaseDatabase;
-    DatabaseReference databaseReference;
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference myRef = database.getReference("Users");
+    FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
     User user;
 
     @Override
@@ -56,9 +59,6 @@ public class registrationSurveyActivity extends AppCompatActivity {
         String email = getIntent().getStringExtra("keyemail");
         String password = getIntent().getStringExtra("keypassword");
 
-        //firebase database
-        firebaseDatabase = FirebaseDatabase.getInstance();
-        databaseReference = firebaseDatabase.getReference("Users");
 
         //listener per button finish
         mButtonSingUpFinish = (Button) findViewById(R.id.buttonSingUpFinish);
@@ -75,19 +75,19 @@ public class registrationSurveyActivity extends AppCompatActivity {
                     String experienceLevel = experienceSelected();
 
                     mAuth.createUserWithEmailAndPassword(email, password)
-                            .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                                @Override
-                                public void onComplete(@NonNull Task<AuthResult> task) {
-                                    if(task.isSuccessful()){
-                                        Log.d(TAG, "if interno");
-                                        user = new User(name, surname, nickname, email, password, favouriteSport, experienceLevel, 2.5);
-                                        Toast.makeText(registrationSurveyActivity.this, "Registration successful ", Toast.LENGTH_SHORT).show();
-                                        addDatatoFirebase();
+                         .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                               @Override
+                               public void onComplete(@NonNull Task<AuthResult> task) {
+                                   if (task.isSuccessful()) {
+                                       Log.d(TAG, "if interno");
+                                       user = new User(name, surname, nickname, email, password, favouriteSport, experienceLevel, 2.5);
+                                       Toast.makeText(registrationSurveyActivity.this, "Registration successful ", Toast.LENGTH_SHORT).show();
+                                        addDataToFirebase();
                                         openPickappActivity();
-                                    }else{
+                                   } else{
                                         Toast.makeText(registrationSurveyActivity.this, "Registration failed ", Toast.LENGTH_SHORT).show();
                                         Log.d(TAG, "else esterno");
-                                    }
+                                   }
                                 }
                             });
                 }
@@ -122,12 +122,12 @@ public class registrationSurveyActivity extends AppCompatActivity {
         return experience;
     }
 
-    private void addDatatoFirebase() {
+    private void addDataToFirebase() {
         //add user to realtime database firebase
-        databaseReference.addValueEventListener(new ValueEventListener() {
+        myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                databaseReference.child(user.getNickname()).setValue(user);
+                myRef.child(currentFirebaseUser.getUid()).setValue(user);
                 Toast.makeText(registrationSurveyActivity.this, "data added", Toast.LENGTH_SHORT).show();
             }
 

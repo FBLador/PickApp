@@ -14,11 +14,26 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import androidx.appcompat.widget.Toolbar;
+import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import it.unimib.pickapp.R;
+import it.unimib.pickapp.model.Match;
 
 /**
  * It shows the account section.
@@ -26,7 +41,23 @@ import it.unimib.pickapp.R;
 public class accountFragment extends Fragment {
 
     private static final String TAG = "AccountFragment";
-    private Toolbar toolbar;
+    private static final String SHARED_PREF_EMAIL = "email";
+    private ImageView image_profile;
+    private TextView match, followers, following, fullname, bio, nickname;
+    private Button edit_profile;
+
+
+    //get info from firebase
+    private FirebaseUser user;
+    private DatabaseReference reference;
+    private String userID;
+
+    private RecyclerView recyclerView_activities;
+
+    private RecyclerView recyclerView_post;
+
+    private ImageButton activities, posts;
+
 
     public accountFragment() {
         // Required empty public constructor
@@ -35,7 +66,6 @@ public class accountFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //toolbar = findViewById(R.id.toolbarMain);
         // It is necessary to specify that the toolbar has a custom menu
         setHasOptionsMenu(true);
     }
@@ -43,8 +73,51 @@ public class accountFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_account, container, false);
+        View view = inflater.inflate(R.layout.fragment_account, container, false);// Inflate the layout for this fragment
+
+        image_profile = view.findViewById(R.id.image_profile);
+        match = view.findViewById(R.id.matches);
+        followers = view.findViewById(R.id.followers);
+        following = view.findViewById(R.id.following);
+        fullname = view.findViewById(R.id.fullname);
+        bio = view.findViewById(R.id.bio);
+        edit_profile = view.findViewById(R.id.edit_profile);
+        nickname = view.findViewById(R.id.nickname);
+        activities = view.findViewById(R.id.activities);
+        posts = view.findViewById(R.id.posts);
+
+        recyclerView_activities = view.findViewById(R.id.recycler_view_activities);
+        recyclerView_activities.setHasFixedSize(true);
+        LinearLayoutManager mLayoutManager = new GridLayoutManager(getContext(), 3);
+        recyclerView_activities.setLayoutManager(mLayoutManager);
+
+        recyclerView_post = view.findViewById(R.id.recycler_view_posts);
+        recyclerView_post.setHasFixedSize(true);
+        LinearLayoutManager mLayoutManagers = new GridLayoutManager(getContext(), 3);
+        recyclerView_post.setLayoutManager(mLayoutManagers);
+
+        recyclerView_activities.setVisibility(View.VISIBLE);
+        recyclerView_post.setVisibility(View.GONE);
+
+        userInfo(view);
+
+        activities.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                recyclerView_activities.setVisibility(View.VISIBLE);
+                recyclerView_post.setVisibility(View.GONE);
+            }
+        });
+
+        posts.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                recyclerView_activities.setVisibility(View.GONE);
+                recyclerView_post.setVisibility(View.VISIBLE);
+            }
+        });
+
+        return view;
     }
 
 
@@ -54,6 +127,59 @@ public class accountFragment extends Fragment {
         inflater.inflate(R.menu.logout_menu, menu);
     }
 
+
+    private void userInfo(View view) {
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        reference = FirebaseDatabase.getInstance().getReference("Users");
+        userID = user.getUid();
+        Log.d(TAG, userID);
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String nick_name = snapshot.child(userID).child("nickname").getValue(String.class);
+                String full_name = snapshot.child(userID).child("fullname").getValue(String.class);
+                String b_io = snapshot.child(userID).child("bio").getValue(String.class);
+
+                nickname.setText(nick_name);
+                fullname.setText(full_name);
+                bio.setText(b_io);
+
+                Log.d(TAG, nick_name);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+/*
+    private void getNrMatches(){
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        reference = FirebaseDatabase.getInstance().getReference("Users");
+        userID = user.getUid();
+        Log.d(TAG, userID);
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Matches");
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                int i = 0;
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()){
+                    Match match = snapshot.getValue(Match.class);
+                    if (match.contains(userID)){
+                        Log.d(TAG, userID);
+                        i++;
+                    }
+                }
+                match.setText(""+i);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }*/
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
@@ -66,4 +192,6 @@ public class accountFragment extends Fragment {
         }
         return super.onOptionsItemSelected(item);
     }
+
+
 }

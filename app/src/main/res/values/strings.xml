@@ -44,5 +44,8 @@
     <string name="accountName">account name</string>
     <string name="forgotPassword">Send email to reset password</string>
     <string name="logout" translatable="false">Logout</string>
+    <string name="matches">Matches</string>
+    <string name="followers" translatable="false">Followers</string>
+    <string name="following" translatable="false">Following</string>
 
 </resources>

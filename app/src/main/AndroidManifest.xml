@@ -3,8 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="it.unimib.pickapp">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -18,7 +18,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PickApp"
         tools:ignore="AllowBackup">
-
+        <activity
+            android:name=".EditProfileActivity"
+            android:exported="false" />
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="${MAPS_API_KEY}" />
@@ -47,7 +49,7 @@
             android:exported="false" />
         <activity
             android:name=".ui.loginActivity"
-            android:exported="true"/>
+            android:exported="true" />
         <activity
             android:name=".ui.forgotPasswordActivity"
             android:exported="false" />

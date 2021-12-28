@@ -1,4 +1,7 @@
+
 package it.unimib.pickapp.model;
+
+import androidx.annotation.NonNull;
 
 public class User {
     private String name;
@@ -10,8 +13,13 @@ public class User {
     private double experienceLevel;
     private double reliabilityLevel;
 
-    public User(){
 
+    private String imageurl;
+    private String bio;
+
+
+    public User(){
+        //lasciare vuoto, serve per firebase realtime
     }
 
     public User(String name, String surname, String nickname, String email, String password, String favouriteSport, String experienceLevel, double reliabilityLevel) {
@@ -28,6 +36,8 @@ public class User {
         if (experienceLevel.equals("Advanced"))
             this.experienceLevel = 5;
         this.reliabilityLevel = reliabilityLevel;
+        this.imageurl = "https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png";
+        this.bio = "bio vuota";
     }
 
     public String getName() {
@@ -36,6 +46,10 @@ public class User {
 
     public String getSurname() {
         return surname;
+    }
+
+    public String getFullname() {
+        return name + " " + surname;
     }
 
     public String getNickname() {
@@ -60,6 +74,14 @@ public class User {
 
     public double getReliabilityLevel() {
         return reliabilityLevel;
+    }
+
+    public String getImageurl() {
+        return imageurl;
+    }
+
+    public String getBio() {
+        return bio;
     }
 
     public void setName(String name) {
@@ -98,4 +120,41 @@ public class User {
     public void setReliabilityLevel(double reliabilityLevel) {
         this.reliabilityLevel = reliabilityLevel;
     }
+
+    public void setImageurl(String imageurl) {
+        this.imageurl = imageurl;
+    }
+
+    public void setBio(String bio) {
+        this.bio = bio;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return "User{" +
+                "name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", nickname='" + nickname + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", favouriteSport='" + favouriteSport + '\'' +
+                ", experienceLevel=" + experienceLevel +
+                ", reliabilityLevel=" + reliabilityLevel +
+                ", imageurl='" + imageurl + '\'' +
+                ", bio='" + bio + '\'' +
+                '}';
+    }
 }
+
+/*
+    private static final String SHARED_PREF_NAME = "nickname";
+    private static final String KEY_NAME = "key_nickname";
+
+
+
+    private void displayNickname() {
+        SharedPreferences sp = getSharedPreferences(SHARED_PREF_NAME, MODE_PRIVATE);
+        String name = sp.getString(KEY_NAME, null);
+    }
+/*/
