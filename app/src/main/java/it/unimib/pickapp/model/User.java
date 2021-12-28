@@ -147,14 +147,3 @@ public class User {
     }
 }
 
-/*
-    private static final String SHARED_PREF_NAME = "nickname";
-    private static final String KEY_NAME = "key_nickname";
-
-
-
-    private void displayNickname() {
-        SharedPreferences sp = getSharedPreferences(SHARED_PREF_NAME, MODE_PRIVATE);
-        String name = sp.getString(KEY_NAME, null);
-    }
-/*/

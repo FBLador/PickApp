@@ -41,6 +41,8 @@ public class registrationSurveyActivity extends AppCompatActivity {
     private RadioButton mRadioButtonExperience;
     private FirebaseAuth mAuth;
 
+    FirebaseDatabase firebaseDatabase;
+    DatabaseReference databaseReference;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference myRef = database.getReference("Users");
     FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -59,6 +61,9 @@ public class registrationSurveyActivity extends AppCompatActivity {
         String email = getIntent().getStringExtra("keyemail");
         String password = getIntent().getStringExtra("keypassword");
 
+        //firebase database
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference = firebaseDatabase.getReference("Users");
 
         //listener per button finish
         mButtonSingUpFinish = (Button) findViewById(R.id.buttonSingUpFinish);
@@ -82,9 +87,10 @@ public class registrationSurveyActivity extends AppCompatActivity {
                                        Log.d(TAG, "if interno");
                                        user = new User(name, surname, nickname, email, password, favouriteSport, experienceLevel, 2.5);
                                        Toast.makeText(registrationSurveyActivity.this, "Registration successful ", Toast.LENGTH_SHORT).show();
+                                       Log.d(TAG, "FINO A QUI TUTTO BENE");
                                         addDataToFirebase();
                                         openPickappActivity();
-                                   } else{
+                                   }else{
                                         Toast.makeText(registrationSurveyActivity.this, "Registration failed ", Toast.LENGTH_SHORT).show();
                                         Log.d(TAG, "else esterno");
                                    }
@@ -124,9 +130,11 @@ public class registrationSurveyActivity extends AppCompatActivity {
 
     private void addDataToFirebase() {
         //add user to realtime database firebase
+        Log.d(TAG, "PURE FINO A QUI TUTTO BENE");
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Log.d(TAG, "QUA VA COSì COSì");
                 myRef.child(currentFirebaseUser.getUid()).setValue(user);
                 Toast.makeText(registrationSurveyActivity.this, "data added", Toast.LENGTH_SHORT).show();
             }
