@@ -24,4 +24,5 @@
     <string name="backgroundProfile">foto sfondo profilo</string>
     <string name="accountName">nome account</string>
     <string name="forgotPassword">Invia un\'email per il recupero della password</string>
+    <string name="matches">Partite</string>
 </resources>
