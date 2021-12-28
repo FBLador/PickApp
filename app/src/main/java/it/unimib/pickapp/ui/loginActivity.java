@@ -27,7 +27,7 @@ public class loginActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
 
-
+/*
     @Override
     public void onStart() {
         super.onStart();
@@ -36,7 +36,7 @@ public class loginActivity extends AppCompatActivity {
         if(currentUser != null){
             openPickappActivity();
         }
-    }
+    }*/
 
 
     @Override
