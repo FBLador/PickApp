@@ -25,4 +25,9 @@
     <string name="accountName">nome account</string>
     <string name="forgotPassword">Invia un\'email per il recupero della password</string>
     <string name="matches">Partite</string>
+    <string name="won">Vinte</string>
+    <string name="editProfile">Modifica Profilo</string>
+    <string name="cancel">Cancella</string>
+    <string name="done">Salva</string>
+    <string name="editPhoto">Cambia la foto profilo</string>
 </resources>

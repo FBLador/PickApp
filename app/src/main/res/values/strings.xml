@@ -45,7 +45,12 @@
     <string name="forgotPassword">Send email to reset password</string>
     <string name="logout" translatable="false">Logout</string>
     <string name="matches">Matches</string>
-    <string name="followers" translatable="false">Followers</string>
-    <string name="following" translatable="false">Following</string>
+    <string name="won">Won</string>
+    <string name="played" translatable="false">Games</string>
+    <string name="editProfile">Edit Profile</string>
+    <string name="cancel">Cancel</string>
+    <string name="done">Done</string>
+    <string name="editPhoto">Change profile photo</string>
+    <string name="bio" translatable="false">Bio</string>
 
 </resources>

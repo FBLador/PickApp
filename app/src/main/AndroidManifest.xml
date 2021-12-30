@@ -5,8 +5,6 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-
-
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -19,12 +17,14 @@
         android:theme="@style/Theme.PickApp"
         tools:ignore="AllowBackup">
         <activity
-            android:name=".EditProfileActivity"
+            android:name=".ui.editProfileActivity"
             android:exported="false" />
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="${MAPS_API_KEY}" />
-
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
 
         <activity
             android:name=".ui.activity_loading"
@@ -53,7 +53,6 @@
         <activity
             android:name=".ui.forgotPasswordActivity"
             android:exported="false" />
-
     </application>
 
 </manifest>
