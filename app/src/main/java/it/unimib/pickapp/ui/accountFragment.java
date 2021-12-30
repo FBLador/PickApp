@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
 import android.util.Log;
@@ -32,19 +33,22 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.Objects;
+
 import it.unimib.pickapp.R;
-import it.unimib.pickapp.model.Match;
 
 /**
  * It shows the account section.
  */
 public class accountFragment extends Fragment {
 
+    private Toolbar toolbar;
+
     private static final String TAG = "AccountFragment";
     private static final String SHARED_PREF_EMAIL = "email";
-    private ImageView image_profile;
-    private TextView match, followers, following, fullname, bio, nickname;
-    private Button edit_profile;
+    private ImageView imageProfile;
+    private TextView match, won, played, fullname, bio, nickname;
+    private Button editProfile;
 
 
     //get info from firebase
@@ -74,14 +78,17 @@ public class accountFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_account, container, false);// Inflate the layout for this fragment
+        Toolbar toolbar = view.findViewById(R.id.toolbarAccount);
+        Objects.requireNonNull(((pickappActivity) Objects.requireNonNull(getActivity())).getSupportActionBar()).hide();
+        ((pickappActivity) getActivity()).setSupportActionBar(toolbar);
 
-        image_profile = view.findViewById(R.id.image_profile);
+        imageProfile = view.findViewById(R.id.image_profile);
         match = view.findViewById(R.id.matches);
-        followers = view.findViewById(R.id.followers);
-        following = view.findViewById(R.id.following);
+        won = view.findViewById(R.id.won);
+        played = view.findViewById(R.id.played);
         fullname = view.findViewById(R.id.fullname);
         bio = view.findViewById(R.id.bio);
-        edit_profile = view.findViewById(R.id.edit_profile);
+        editProfile = view.findViewById(R.id.edit_profile);
         nickname = view.findViewById(R.id.nickname);
         activities = view.findViewById(R.id.activities);
         posts = view.findViewById(R.id.posts);
@@ -117,6 +124,13 @@ public class accountFragment extends Fragment {
             }
         });
 
+        editProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openEditProfileActivity();
+            }
+        });
+
         return view;
     }
 
@@ -139,12 +153,19 @@ public class accountFragment extends Fragment {
                 String nick_name = snapshot.child(userID).child("nickname").getValue(String.class);
                 String full_name = snapshot.child(userID).child("fullname").getValue(String.class);
                 String b_io = snapshot.child(userID).child("bio").getValue(String.class);
+                String image_profile = snapshot.child(userID).child("imageurl").getValue(String.class);
+
 
                 nickname.setText(nick_name);
                 fullname.setText(full_name);
                 bio.setText(b_io);
+                Glide.with(view)
+                        .load(image_profile)
+                        .circleCrop()
+                        .placeholder(R.drawable.ic_baseline_person_24)
+                        .into(imageProfile);
 
-                Log.d(TAG, nick_name);
+               // Log.d(TAG, nick_name);
             }
 
             @Override
@@ -191,6 +212,11 @@ public class accountFragment extends Fragment {
             requireActivity().finish();
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void openEditProfileActivity() {
+        Intent intent = new Intent(getActivity(), editProfileActivity.class);
+        startActivity(intent);
     }
 
 

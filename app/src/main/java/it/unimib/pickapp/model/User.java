@@ -7,6 +7,7 @@ public class User {
     private String name;
     private String surname;
     private String nickname;
+    private String fullname;
     private String email;
     private String password;
     private String favouriteSport;
@@ -26,6 +27,7 @@ public class User {
         this.name = name;
         this.surname = surname;
         this.nickname = nickname;
+        this.fullname = name + " " + surname;
         this.email = email;
         this.password = password;
         this.favouriteSport = favouriteSport;

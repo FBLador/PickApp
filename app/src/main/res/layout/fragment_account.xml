@@ -13,7 +13,7 @@
         android:background="?android:attr/windowBackground">
 
         <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
+            android:id="@+id/toolbarAccount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="?android:attr/windowBackground">
@@ -31,7 +31,7 @@
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
-                <ImageView
+               <!-- <ImageView
                     android:id="@+id/options"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -39,7 +39,7 @@
                     android:layout_alignParentRight="true"
                     android:layout_marginEnd="10dp"
                     android:layout_marginRight="10dp"
-                    app:srcCompat="@drawable/ic_outline_person_24" />
+                    app:srcCompat="@drawable/ic_outline_person_24" /> -->
 
             </RelativeLayout>
 
@@ -66,12 +66,12 @@
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/image_profile"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"/>
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="80dp"
+                    android:layout_height="100dp"
                     android:paddingLeft="20dp"
                     android:paddingRight="4dp"
                     android:orientation="vertical">
@@ -99,7 +99,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textSize="10sp"
+                                android:textSize="12sp"
                                 android:text="@string/matches"/>
 
                         </LinearLayout>
@@ -111,7 +111,7 @@
                             android:layout_marginStart="35dp">
 
                             <TextView
-                                android:id="@+id/followers"
+                                android:id="@+id/won"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:textColor="@color/black"
@@ -122,8 +122,8 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textSize="10sp"
-                                android:text="@string/followers"/>
+                                android:textSize="12sp"
+                                android:text="@string/won"/>
 
                         </LinearLayout>
 
@@ -134,7 +134,7 @@
                             android:layout_marginStart="35dp">
 
                             <TextView
-                                android:id="@+id/following"
+                                android:id="@+id/played"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:textColor="@color/black"
@@ -145,8 +145,8 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textSize="10sp"
-                                android:text="@string/following"/>
+                                android:textSize="12sp"
+                                android:text="@string/played"/>
 
                         </LinearLayout>
 
@@ -156,8 +156,12 @@
                         android:id="@+id/edit_profile"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:background="@drawable/ic_outline_person_24"/>
+                        android:layout_marginTop="10dp"
+                        android:background="@color/gray"
+                        android:minHeight="48dp"
+                        android:text="@string/editProfile"
+                        android:textSize="13sp"
+                        android:textColor="@color/black"/>
 
                 </LinearLayout>
 
@@ -196,24 +200,25 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginLeft="-5dp"
                 android:layout_marginRight="-5dp"
-                android:background="@drawable/common_full_open_on_phone"
                 android:orientation="horizontal">
 
                 <ImageButton
                     android:id="@+id/posts"
+                    style="?android:attr/buttonBarButtonStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    app:srcCompat="@drawable/ic_outline_person_24_gray"
-                    style="?android:attr/buttonBarButtonStyle"/>
+                    app:srcCompat="@drawable/ic_baseline_videogame_asset_24"
+                    tools:ignore="SpeakableTextPresentCheck" />
 
                 <ImageButton
                     android:id="@+id/activities"
+                    style="?android:attr/buttonBarButtonStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    app:srcCompat="@drawable/ic_outline_person_24_gray"
-                    style="?android:attr/buttonBarButtonStyle"/>
+                    app:srcCompat="@drawable/ic_baseline_trending_up_24"
+                    tools:ignore="SpeakableTextPresentCheck" />
 
             </LinearLayout>
 
