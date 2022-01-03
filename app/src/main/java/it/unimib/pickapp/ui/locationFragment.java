@@ -38,7 +38,6 @@ public class locationFragment extends Fragment implements OnMapReadyCallback {
 
     private MapView mMapView;
     private String TAG = "locationFragment";
-    private boolean locPermissionGranted = false;
 
     public locationFragment() {
         // Required empty public constructor
@@ -97,7 +96,6 @@ public class locationFragment extends Fragment implements OnMapReadyCallback {
                 if (isGranted) {
                     // Permission is granted. Continue the action or workflow in your
                     // app.
-                    locPermissionGranted = true;
                     Log.d(TAG, "registerForActivityResult: GRANTED");
                     mMapView.getMapAsync(this);
                 } else {
@@ -106,7 +104,6 @@ public class locationFragment extends Fragment implements OnMapReadyCallback {
                     // same time, respect the user's decision. Don't link to system
                     // settings in an effort to convince the user to change their
                     // decision.
-                    locPermissionGranted = false;
                     Log.d(TAG, "registerForActivityResult: DENIED");
                 }
             });
