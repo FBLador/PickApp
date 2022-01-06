@@ -130,7 +130,7 @@ public class registrationSurveyActivity extends AppCompatActivity {
 
     private void addDataToFirebase() {
         //add user to realtime database firebase
-        Log.d(TAG, "PURE FINO A QUI TUTTO BENE");
+        Log.d(TAG, currentFirebaseUser.getUid());
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {

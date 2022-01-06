@@ -6,7 +6,7 @@
         <item name="colorPrimaryVariant">@color/white</item> <!-- colore status bar -->
         <item name="colorOnPrimary">@color/white</item> <!-- colore testo bottoni e colore click selezione  -->
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/teal_200</item>
+        <item name="colorSecondary">@color/mainGreen</item>
         <item name="colorSecondaryVariant">@color/teal_700</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
@@ -14,7 +14,7 @@
         <!-- Customize your theme here. -->
         <item name="bottomNavigationStyle">@style/BottomNavigationViewStyle</item>
         <!-- <item name="android:statusBarColor">@color/black</item>  per cambiare colore testo status bar-->
-        <item name="android:windowLightStatusBar">true</item> <!-- setti di avere lo sfondo chiaro, quindi testo status bar grigio-->
+        <item name="android:windowLightStatusBar" tools:targetApi="m">true</item> <!-- setti di avere lo sfondo chiaro, quindi testo status bar grigio-->
     </style>
 
     <style name="Theme.PickApp.Fullscreen" parent="Theme.PickApp">

@@ -30,4 +30,8 @@
     <string name="cancel">Cancella</string>
     <string name="done">Salva</string>
     <string name="editPhoto">Cambia la foto profilo</string>
+    <string name="currentDate">Data Corrente</string>
+    <string name="played">Giocata</string>
+    <string name="date">Data</string>
+    <string name="matches_list_map">Mappa lista partite</string>
 </resources>

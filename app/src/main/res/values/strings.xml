@@ -45,12 +45,17 @@
     <string name="forgotPassword">Send email to reset password</string>
     <string name="logout" translatable="false">Logout</string>
     <string name="matches">Matches</string>
-    <string name="won">Won</string>
-    <string name="played" translatable="false">Games</string>
-    <string name="editProfile">Edit Profile</string>
-    <string name="cancel">Cancel</string>
-    <string name="done">Done</string>
-    <string name="editPhoto">Change profile photo</string>
+    <string name="followers" translatable="false">Followers</string>
+    <string name="following" translatable="false">Following</string>
+    <string name="currentDate">Current date</string>
     <string name="bio" translatable="false">Bio</string>
+    <string name="played">Played</string>
+    <string name="won">Won</string>
+    <string name="editProfile">Edit profile</string>
+    <string name="cancel">Delete</string>
+    <string name="done">Save</string>
+    <string name="editPhoto">Change your profile photo</string>
+    <string name="date">Date</string>
+    <string name="matches_list_map">Matches list map</string>
 
 </resources>

@@ -1,7 +1,5 @@
 package it.unimib.pickapp.ui;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,6 +8,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -27,7 +28,7 @@ public class loginActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
 
-/*
+
     @Override
     public void onStart() {
         super.onStart();
@@ -36,7 +37,7 @@ public class loginActivity extends AppCompatActivity {
         if(currentUser != null){
             openPickappActivity();
         }
-    }*/
+    }
 
 
     @Override

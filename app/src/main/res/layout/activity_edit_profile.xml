@@ -109,8 +109,9 @@
                             android:layout_marginStart="68dp"
                             android:layout_weight="1"
                             android:ems="10"
+                            android:hint="@string/name"
                             android:inputType="textPersonName"
-                            android:hint="@string/name" />
+                            android:minHeight="48dp" />
 
                     </LinearLayout>
 
@@ -133,8 +134,9 @@
                             android:layout_marginStart="43dp"
                             android:layout_weight="1"
                             android:ems="10"
+                            android:hint="@string/surname"
                             android:inputType="textPersonName"
-                            android:hint="@string/surname" />
+                            android:minHeight="48dp" />
 
                     </LinearLayout>
 
@@ -155,10 +157,11 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="90dp"
-                            android:inputType="text|textMultiLine"
                             android:layout_weight="1"
                             android:ems="10"
-                            android:hint="@string/bio" />
+                            android:hint="@string/bio"
+                            android:inputType="text|textMultiLine"
+                            android:minHeight="48dp" />
 
                     </LinearLayout>
 
