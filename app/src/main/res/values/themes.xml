@@ -34,4 +34,13 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+    <style name="Theme.PickApp.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.PickApp.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.PickApp.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
 </resources>

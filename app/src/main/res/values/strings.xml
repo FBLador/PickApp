@@ -57,5 +57,24 @@
     <string name="editPhoto">Change your profile photo</string>
     <string name="date">Date</string>
     <string name="matches_list_map">Matches list map</string>
+    <string name="addMatchTitle">Add match</string>
+    <string name="title">Title</string>
+    <string name="description">Description</string>
+    <string name="sport">Sport</string>
+    <string name="football">Football</string>
+    <string name="basketball">Basketball</string>
+    <string name="volleyball">Volleyball</string>
+    <string name="tennis">Tennis</string>
+    <string name="add">Add</string>
+    <string name="time">Time</string>
+    <string name="address">Address</string>
+    <string name="create">Create</string>
+    <string name="addMatchSuccess">Match added successfully</string>
+    <string name="addMatchFail">Failed to add this match</string>
+    <string name="choosePlaceMessage">You must choose place</string>
+    <string name="invalidTimeDate">Invalid time or date</string>
+    <string name="teamNumber">Number of teams</string>
+    <string name="cost">Cost</string>
+    <string name="privateMatch">Private match</string>
 
 </resources>

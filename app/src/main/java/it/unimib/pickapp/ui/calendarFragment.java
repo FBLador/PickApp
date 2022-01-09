@@ -1,5 +1,6 @@
 package it.unimib.pickapp.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -94,10 +95,8 @@ public class calendarFragment extends Fragment {
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            /*
-            da inserire aggiunta evento
-            openAddEvent();
-             */
+                Intent intent = new Intent(getActivity(), addMatchActivity.class);
+                startActivity(intent);
             }
         });
 

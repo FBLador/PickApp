@@ -34,4 +34,23 @@
     <string name="played">Giocata</string>
     <string name="date">Data</string>
     <string name="matches_list_map">Mappa lista partite</string>
+    <string name="addMatchTitle">Add match</string>
+    <string name="title">Titolo</string>
+    <string name="football">Calcio</string>
+    <string name="basketball">Basket</string>
+    <string name="volleyball">Volley</string>
+    <string name="tennis">Tennis</string>
+    <string name="add">Aggiungi</string>
+    <string name="address">Indirizzo</string>
+    <string name="time">Orario</string>
+    <string name="create">Crea</string>
+    <string name="addMatchSuccess">Partita creata con successo</string>
+    <string name="addMatchFail">Creazione dela partita fallita</string>
+    <string name="choosePlaceMessage">Necessario selezionare un posto</string>
+    <string name="invalidTimeDate">Orario o data non validi</string>
+    <string name="teamNumber">Numero di squadre</string>
+    <string name="cost">Costo</string>
+    <string name="privateMatch">Private match</string>
+    <string name="description">Descrizione</string>
+    <string name="sport">Sport</string>
 </resources>

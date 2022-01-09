@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/ic_background"
+    tools:context=".ui.addMatchActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayoutTopRegistration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="32dp"
+                android:layout_marginLeft="32dp"
+                android:layout_marginTop="60dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginRight="32dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.496"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/textViewNewMatch"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:text="@string/addMatchTitle"
+                    android:textAlignment="center"
+                    android:textSize="36sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBaseline_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <!--<EditText
+                    android:id="@+id/editTextLocation"
+                    android:layout_width="380dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="32dp"
+                    android:ems="10"
+                    android:gravity="left"
+                    android:enabled="false"
+                    android:hint="@string/location"
+                    android:importantForAutofill="no"
+                    android:inputType="text"
+                    android:minHeight="48dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/sportConstraintLayout"
+                    tools:ignore="LabelFor" />-->
+
+
+                <EditText
+                    android:id="@+id/editTextTitle"
+                    android:layout_width="380dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="32dp"
+                    android:ems="10"
+                    android:gravity="left
+"
+                    android:hint="@string/title"
+                    android:importantForAutofill="no"
+                    android:inputType="text"
+                    android:minHeight="48dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textViewNewMatch"
+                    tools:ignore="LabelFor" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/sportConstraintLayout"
+                    android:layout_width="380dp"
+                    android:layout_height="60dp"
+                    android:layout_marginTop="32dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/editTextTitle">
+
+
+                    <TextView
+                        android:id="@+id/sportLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/sport"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <Spinner
+                        android:id="@+id/sportSpinner"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="10dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/locationLinearLayout"
+                    android:layout_width="378dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/sportConstraintLayout">
+
+                    <EditText
+                        android:id="@+id/editTextLocation"
+                        android:layout_width="265dp"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="16dp"
+                        android:ems="10"
+                        android:enabled="false"
+                        android:gravity="left"
+                        android:hint="@string/location"
+                        android:importantForAutofill="no"
+                        android:inputType="textLongMessage"
+                        android:minHeight="48dp"
+                        app:layout_constraintBaseline_toTopOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:ignore="LabelFor" />
+
+                    <Button
+                        android:id="@+id/selectLocationButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="12dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_weight="1"
+                        android:text="@string/add"
+                        app:backgroundTint="@color/buttonColor" />
+                </LinearLayout>
+
+
+                <!-- <LinearLayout
+                    android:layout_width="378dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="1dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/locationLinearLayout">
+
+                    <EditText
+                        android:id="@+id/editTextParticipants"
+                        android:layout_width="265dp"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="16dp"
+                        android:ems="10"
+                        android:gravity="left"
+                        android:hint="@string/participants"
+                        android:importantForAutofill="no"
+                        android:inputType="textPassword"
+                        android:minHeight="48dp"
+                        app:layout_constraintBaseline_toTopOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:ignore="LabelFor" />
+
+                    <Button
+                        android:id="@+id/selectParticipantsButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="12dp"
+                        android:layout_marginTop="12dp"
+                        android:layout_weight="1"
+                        android:text="@string/add"
+                        app:backgroundTint="@color/buttonColor" />
+                </LinearLayout> -->
+                <EditText
+                    android:id="@+id/editTextDate"
+                    android:layout_width="380dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="32dp"
+                    android:ems="10"
+                    android:gravity="left
+"
+                    android:hint="@string/date"
+                    android:importantForAutofill="no"
+                    android:inputType="date"
+                    android:minHeight="48dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/locationLinearLayout"
+                    tools:ignore="LabelFor" />
+
+                <EditText
+                    android:id="@+id/editTextTime"
+                    android:layout_width="380dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="32dp"
+                    android:ems="10"
+                    android:gravity="left
+"
+                    android:hint="@string/time"
+                    android:importantForAutofill="no"
+                    android:inputType="time"
+                    android:minHeight="48dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/editTextDate"
+                    tools:ignore="LabelFor" />
+
+                <EditText
+                    android:id="@+id/editTextNumberOfTeams"
+                    android:layout_width="380dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="32dp"
+                    android:ems="10"
+                    android:gravity="left
+"
+                    android:hint="@string/teamNumber"
+                    android:importantForAutofill="no"
+                    android:inputType="number"
+                    android:minHeight="48dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/editTextTime"
+                    tools:ignore="LabelFor" />
+
+                <EditText
+                    android:id="@+id/editTextCost"
+                    android:layout_width="380dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="32dp"
+                    android:ems="10"
+                    android:gravity="left
+"
+                    android:hint="@string/cost"
+                    android:importantForAutofill="no"
+                    android:inputType="time"
+                    android:minHeight="48dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/editTextNumberOfTeams"
+                    tools:ignore="LabelFor" />
+
+                <com.google.android.material.switchmaterial.SwitchMaterial
+                    android:id="@+id/privateSwitch"
+                    android:layout_width="380dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp"
+                    android:text="@string/privateMatch"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/editTextCost" />
+
+                <EditText
+                    android:id="@+id/editTextDescription"
+                    android:layout_width="377dp"
+                    android:layout_height="176dp"
+                    android:layout_marginTop="32dp"
+                    android:ems="10"
+                    android:gravity="left"
+
+                    android:hint="@string/description"
+                    android:importantForAutofill="no"
+                    android:inputType="textMultiLine"
+                    android:minHeight="48dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/privateSwitch"
+                    tools:ignore="LabelFor" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <Button
+                android:id="@+id/createButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginLeft="32dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginRight="32dp"
+                android:gravity="center"
+                android:text="@string/create"
+                app:backgroundTint="@color/buttonColor"
+                app:cornerRadius="30dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.498"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayoutTopRegistration"
+                app:layout_constraintVertical_bias="0.511" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

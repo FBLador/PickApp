@@ -5,6 +5,9 @@ import java.util.Map;
 
 public class Match {
 
+    private String id;
+    private boolean isPrivate;
+    private int hour;
     private String titolo;
     private String luogo;
     private String sport;
@@ -16,8 +19,50 @@ public class Match {
     private int year;
     private Time durata;
     private double costo;
-    private String tipo; //pubblica o privata
+    private int minutes;
+
+    //TODO temp
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
     private String stato;
+
+    public boolean isPrivate() {
+        return isPrivate;
+    }
+
+    public void setPrivate(boolean aPrivate) {
+        isPrivate = aPrivate;
+    }
+
+    public int getDay() {
+        return day;
+    }
+
+    public void setDay(int day) {
+        this.day = day;
+    }
+
+    public int getMonth() {
+        return month;
+    }
+
+    public void setMonth(int month) {
+        this.month = month;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
+    }
 
 
     /* TODO : eventualmente pensare se usare ad esempio
@@ -26,7 +71,7 @@ public class Match {
     fonte: https://learntutorials.net/it/java/topic/4813/date-e-ora--java-time----
      */
 
-    public boolean contains(String profileid){
+    public boolean contains(String profileid) {
         return partecipanti.containsKey(profileid);
     }
 
@@ -75,10 +120,6 @@ public class Match {
 
     public double getCosto() { return costo; }
 
-    public String getTipo() {
-        return tipo;
-    }
-
     public String getStato() {
         return stato;
     }
@@ -122,11 +163,23 @@ public class Match {
         this.costo = costo;
     }
 
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
-    }
-
     public void setStato(String stato) {
         this.stato = stato;
+    }
+
+    public int getHour() {
+        return hour;
+    }
+
+    public void setHour(int hour) {
+        this.hour = hour;
+    }
+
+    public int getMinutes() {
+        return minutes;
+    }
+
+    public void setMinutes(int minutes) {
+        this.minutes = minutes;
     }
 }
