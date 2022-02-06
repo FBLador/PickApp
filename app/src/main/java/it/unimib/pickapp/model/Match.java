@@ -21,6 +21,8 @@ public class Match {
     private double costo;
     private int minutes;
 
+    public Match() {}
+
     //TODO temp
     public String getId() {
         return id;
@@ -38,30 +40,6 @@ public class Match {
 
     public void setPrivate(boolean aPrivate) {
         isPrivate = aPrivate;
-    }
-
-    public int getDay() {
-        return day;
-    }
-
-    public void setDay(int day) {
-        this.day = day;
-    }
-
-    public int getMonth() {
-        return month;
-    }
-
-    public void setMonth(int month) {
-        this.month = month;
-    }
-
-    public int getYear() {
-        return year;
-    }
-
-    public void setYear(int year) {
-        this.year = year;
     }
 
 
@@ -110,9 +88,11 @@ public class Match {
         return numeroSquadre;
     }
 
-    public CharSequence getDateTime() {
-        return day+ "/" +month+ "/" +year;
-    }
+    public int getDay() { return day;}
+
+    public int getMonth() { return month;}
+
+    public int getYear() { return year;}
 
     public CharSequence getDurata() {
         return (CharSequence) durata;
@@ -148,12 +128,11 @@ public class Match {
         this.numeroSquadre = numeroSquadre;
     }
 
-    public void setDateTime(int day, int month, int year) {
+    public void setDay(int day) { this.day = day; }
 
-        this.day = day;
-        this.month = month;
-        this.year = year;
-    }
+    public void setMonth(int month) { this.month = month; }
+
+    public void setYear(int year) { this.year = year; }
 
     public void setDurata(Time durata) {
         this.durata = durata;

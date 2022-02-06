@@ -1,8 +1,5 @@
 package it.unimib.pickapp.ui;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,9 +10,11 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -103,8 +102,9 @@ public class registrationSurveyActivity extends AppCompatActivity {
 
     private void openPickappActivity(){
         Intent intent = new Intent(this, pickappActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);//funziona come finish() per le activity precedenti
+        //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);//funziona come finish() per le activity precedenti
         startActivity(intent);
+        finish();
     }
 
     private String sportSelected(){
@@ -130,6 +130,7 @@ public class registrationSurveyActivity extends AppCompatActivity {
 
     private void addDataToFirebase() {
         //add user to realtime database firebase
+        currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         Log.d(TAG, currentFirebaseUser.getUid());
         myRef.addValueEventListener(new ValueEventListener() {
             @Override

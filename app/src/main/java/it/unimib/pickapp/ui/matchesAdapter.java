@@ -31,6 +31,9 @@ public class matchesAdapter extends FirebaseRecyclerAdapter<Match, matchesAdapte
     protected void
     onBindViewHolder(@NonNull matchesViewHolder holder,
                      int position, @NonNull Match model) {
+        int day = model.getDay();
+        int month = model.getMonth();
+        int year = model.getYear();
 
         holder.titolo.setText(model.getTitolo());
 
@@ -40,7 +43,7 @@ public class matchesAdapter extends FirebaseRecyclerAdapter<Match, matchesAdapte
 
         holder.numeroSquadre.setText(model.getNumeroSquadre());
 
-        holder.dateTime.setText(model.getDateTime());
+        holder.dateTime.setText(day+"/"+month+"/"+year);
 
         holder.sport.setText(model.getSport());
 
@@ -67,7 +70,7 @@ public class matchesAdapter extends FirebaseRecyclerAdapter<Match, matchesAdapte
 
     // Sub Class to create references of the views in Card
     // view
-    class matchesViewHolder extends RecyclerView.ViewHolder {
+    static class matchesViewHolder extends RecyclerView.ViewHolder {
         TextView titolo, luogo, partecipanti, numeroSquadre, dateTime, sport,
                 descrizione, durata, costo;
         public matchesViewHolder(@NonNull View itemView)
@@ -78,7 +81,7 @@ public class matchesAdapter extends FirebaseRecyclerAdapter<Match, matchesAdapte
             luogo = itemView.findViewById(R.id.luogo);
             partecipanti = itemView.findViewById(R.id.partecipanti);
             numeroSquadre = itemView.findViewById(R.id.numeroSquadre);
-            dateTime = itemView.findViewById(R.id.dateTime);
+            dateTime = itemView.findViewById(R.id.data);
             sport = itemView.findViewById(R.id.sport);
             descrizione = itemView.findViewById(R.id.descrizione);
             durata = itemView.findViewById(R.id.durata);

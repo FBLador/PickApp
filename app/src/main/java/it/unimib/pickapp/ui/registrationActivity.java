@@ -1,13 +1,13 @@
 package it.unimib.pickapp.ui;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.Patterns;
 import android.widget.Button;
 import android.widget.EditText;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -59,6 +59,7 @@ public class registrationActivity extends AppCompatActivity {
         intent.putExtra("keypassword", editTextPassword.getText().toString());
 
         startActivity(intent);
+        finish();
     }
 
     private boolean checkData(){

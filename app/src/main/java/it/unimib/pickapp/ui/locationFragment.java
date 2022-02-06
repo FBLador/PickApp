@@ -1,12 +1,17 @@
 package it.unimib.pickapp.ui;
 
 
+import static it.unimib.pickapp.repository.Constants.MAPVIEW_BUNDLE_KEY;
+
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
-import it.unimib.pickapp.R;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
@@ -22,16 +27,10 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
-
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-import static it.unimib.pickapp.ui.Constants.MAPVIEW_BUNDLE_KEY;
+import it.unimib.pickapp.R;
 
 
 public class locationFragment extends Fragment implements OnMapReadyCallback {
