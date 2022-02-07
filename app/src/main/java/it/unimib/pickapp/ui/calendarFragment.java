@@ -56,21 +56,89 @@ public class calendarFragment extends Fragment {
     public View onCreateView(
             @NonNull LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_calendar, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_calendar, container, false);
+
+        calendarView = rootView.findViewById(R.id.calendarView);
+        addButton = rootView.findViewById(R.id.create_game);
+
+        recyclerView = rootView.findViewById(R.id.recycler_view_games);
+
+        // To display the Recycler view linearly
+        recyclerView.setLayoutManager(
+                new LinearLayoutManager(getActivity()));
+
+        // Create a instance of the database and get
+        // its reference
+        mbase = FirebaseDatabase.getInstance().getReference("Matches");
+
+
+        // It is a class provide by the FirebaseUI to make a
+        // query in the database to fetch appropriate data
+        FirebaseRecyclerOptions<Match> options
+                = new FirebaseRecyclerOptions.Builder<Match>()
+                .setQuery(mbase, Match.class)
+                .build();
+        // Connecting object of required Adapter class to
+        // the Adapter class itself
+        adapter = new matchesAdapter(options);
+        // Connecting Adapter class with the Recycler view
+        recyclerView.setAdapter(adapter);
+
+
+        return rootView;
     }
 
     @Override
     public void onViewCreated(@NonNull final View view, @Nullable final Bundle savedInstanceState) {
-        calendarView = view.findViewById(R.id.calendarView);
-        addButton = view.findViewById(R.id.create_game);
 
+
+
+        /*
+        List<Match> matchList = new ArrayList<>();
+        mbase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                matchList.clear();
+                for (DataSnapshot postSnapshot: snapshot.getChildren()) {
+                    Match match = postSnapshot.getValue(Match.class);
+                    matchList.add(match);
+
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                System.out.println("The read failed: " + databaseError.getMessage());
+            }
+        });
+
+
+        System.out.println(matchList); */
 
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(@NonNull final CalendarView view, final int year, final int month,
                                             final int dayOfMonth) {
-                Toast.makeText(getActivity(), "Date changed to" + dayOfMonth + "/" + month + "/" + year, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Date changed to " + dayOfMonth + "/" + month + "/" + year, Toast.LENGTH_SHORT).show();
+                Log.i(TAG, "Date changed to " + dayOfMonth + "/" + month + "/" + year);
 
+                mbase = FirebaseDatabase.getInstance().getReference("Matches");
+
+                // TODO
+                //.orderByChild("dateTime").equalTo(dayOfMonth + "/" + month + "/" + year)
+                FirebaseRecyclerOptions<Match> options
+                        = new FirebaseRecyclerOptions.Builder<Match>()
+                        .setQuery(mbase, Match.class)
+                        .build();
+                // Connecting object of required Adapter class to
+                // the Adapter class itself
+                adapter = new matchesAdapter(options);
+                // Connecting Adapter class with the Recycler view*/
+                recyclerView.setAdapter(adapter);
+                adapter.startListening();
+                recyclerView.invalidate();
+
+               /*
                 // Create a instance of the database and get
                 // its reference
                 mbase = FirebaseDatabase.getInstance().getReference("Matches");
@@ -80,6 +148,7 @@ public class calendarFragment extends Fragment {
                 // To display the Recycler view linearly
                 recyclerView.setLayoutManager(
                         new LinearLayoutManager(getContext()));
+
 
                 // It is a class provide by the FirebaseUI to make a
                 // query in the database to fetch appropriate data
@@ -91,16 +160,13 @@ public class calendarFragment extends Fragment {
                 // the Adapter class itself
                 adapter = new matchesAdapter(options);
 
-                adapter.startListening();
+                // Connecting Adapter class with the Recycler view
+                recyclerView.setAdapter(adapter);*/
 
-                // Connecting Adapter class with the Recycler view*/
-                recyclerView.setAdapter(adapter);
-
-                adapter.stopListening();
             }
 
-                //updateRecycler();
-            });
+            //updateRecycler();
+        });
 
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -141,7 +207,6 @@ public class calendarFragment extends Fragment {
         });
     }
 
-    /*
     @Override
         public void onStart() {
             super.onStart();
@@ -154,6 +219,5 @@ public class calendarFragment extends Fragment {
             super.onStop();
             adapter.stopListening();
         }
-     */
 
 }

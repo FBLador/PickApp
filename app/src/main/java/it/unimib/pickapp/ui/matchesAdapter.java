@@ -41,7 +41,7 @@ public class matchesAdapter extends FirebaseRecyclerAdapter<Match, matchesAdapte
 
         holder.partecipanti.setText(model.getPartecipanti());
 
-        holder.numeroSquadre.setText(model.getNumeroSquadre());
+        holder.numeroSquadre.setText(Integer.toString(model.getNumeroSquadre()));
 
         holder.dateTime.setText(day+"/"+month+"/"+year);
 
@@ -51,7 +51,7 @@ public class matchesAdapter extends FirebaseRecyclerAdapter<Match, matchesAdapte
 
         holder.durata.setText(model.getDurata());
 
-        holder.costo.setText((int) model.getCosto());
+        holder.costo.setText(Double.toString(model.getCosto()));
     }
 
     // Function to tell the class about the Card view in
