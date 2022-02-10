@@ -155,7 +155,6 @@ public class accountFragment extends Fragment {
                 String b_io = snapshot.child(userID).child("bio").getValue(String.class);
                 String image_profile = snapshot.child(userID).child("imageurl").getValue(String.class);
 
-
                 nickname.setText(nick_name);
                 fullname.setText(full_name);
                 bio.setText(b_io);
