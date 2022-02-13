@@ -93,9 +93,13 @@
             </LinearLayout>
         </HorizontalScrollView>
 
-        <ScrollView
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view_games"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="9dp" />
+            android:layout_margin="9dp"
+            android:background="@color/white"
+            android:gravity="center"
+            android:orientation="vertical" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
