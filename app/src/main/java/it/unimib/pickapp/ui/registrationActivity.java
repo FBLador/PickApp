@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.firebase.auth.FirebaseAuth;
 
 import it.unimib.pickapp.R;
+
 /**
  * It shows the registration first page.
  */
@@ -39,7 +40,7 @@ public class registrationActivity extends AppCompatActivity {
         editTextEmail = findViewById(R.id.editTextEmailAdd);
         editTextPassword = findViewById(R.id.editTextPasswordAdd);
 
-        mButtonSingUpNext = (Button) findViewById(R.id.buttonSingUpNext);
+        mButtonSingUpNext = findViewById(R.id.buttonSingUpNext);
         mButtonSingUpNext.setOnClickListener(v -> {
             Log.d(TAG, "onClick Next");
             if (checkData())

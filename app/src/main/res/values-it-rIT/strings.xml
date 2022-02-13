@@ -53,4 +53,5 @@
     <string name="privateMatch">Private match</string>
     <string name="description">Descrizione</string>
     <string name="sport">Sport</string>
+    <string name="createGame">crea partita</string>
 </resources>

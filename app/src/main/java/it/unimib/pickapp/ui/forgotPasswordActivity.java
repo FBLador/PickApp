@@ -17,6 +17,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 
 import it.unimib.pickapp.R;
+
 /**
  * It shows the forgot password page.
  */
@@ -35,7 +36,7 @@ public class forgotPasswordActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
         //listener per button per il login
-        buttonForgotPassword = (Button) findViewById(R.id.buttonForgotPasswordSend);
+        buttonForgotPassword = findViewById(R.id.buttonForgotPasswordSend);
         buttonForgotPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

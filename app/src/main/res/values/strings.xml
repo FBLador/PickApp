@@ -76,5 +76,6 @@
     <string name="teamNumber">Number of teams</string>
     <string name="cost">Cost</string>
     <string name="privateMatch">Private match</string>
+    <string name="createGame">create game</string>
 
 </resources>
