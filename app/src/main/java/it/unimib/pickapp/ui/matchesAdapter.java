@@ -39,19 +39,19 @@ public class matchesAdapter extends FirebaseRecyclerAdapter<Match, matchesAdapte
 
         holder.luogo.setText(model.getLuogo());
 
-        holder.partecipanti.setText(model.getPartecipanti());
+        //holder.partecipanti.setText(model.getPartecipanti());
 
-        holder.numeroSquadre.setText(Integer.toString(model.getNumeroSquadre()));
+        //holder.numeroSquadre.setText(Integer.toString(model.getNumeroSquadre()));
 
         holder.dateTime.setText(day+"/"+month+"/"+year);
 
         holder.sport.setText(model.getSport());
 
-        holder.descrizione.setText(model.getDescrizione());
+        //holder.descrizione.setText(model.getDescrizione());
 
-        holder.durata.setText(model.getDurata());
+        //holder.durata.setText(model.getDurata());
 
-        holder.costo.setText(Double.toString(model.getCosto()));
+        //holder.costo.setText(Double.toString(model.getCosto()));
     }
 
     // Function to tell the class about the Card view in
@@ -79,13 +79,13 @@ public class matchesAdapter extends FirebaseRecyclerAdapter<Match, matchesAdapte
 
             titolo = itemView.findViewById(R.id.titolo);
             luogo = itemView.findViewById(R.id.luogo);
-            partecipanti = itemView.findViewById(R.id.partecipanti);
-            numeroSquadre = itemView.findViewById(R.id.numeroSquadre);
+            //partecipanti = itemView.findViewById(R.id.partecipanti);
+            //numeroSquadre = itemView.findViewById(R.id.numeroSquadre);
             dateTime = itemView.findViewById(R.id.data);
             sport = itemView.findViewById(R.id.sport);
-            descrizione = itemView.findViewById(R.id.descrizione);
-            durata = itemView.findViewById(R.id.durata);
-            costo = itemView.findViewById(R.id.costo);
+            //descrizione = itemView.findViewById(R.id.descrizione);
+            //durata = itemView.findViewById(R.id.durata);
+            //costo = itemView.findViewById(R.id.costo);
         }
     }
 }

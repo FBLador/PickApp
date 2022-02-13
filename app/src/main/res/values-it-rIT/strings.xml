@@ -11,7 +11,7 @@
     <string name="finish">Fine</string>
     <string name="nickname">Nome utente</string>
     <string name="next">Avanti</string>
-    <string name="location">Partite nei dintorni</string>
+    <string name="location">Nei dintorni</string>
     <string name="name">Nome</string>
     <string name="surname">Cognome</string>
     <string name="Logo">Logo</string>
@@ -55,4 +55,5 @@
     <string name="sport">Sport</string>
     <string name="createGame">crea partita</string>
     <string name="enable_gps">Attiva il GPS sul tuo dispositivo per condividere la posizione con l\'app</string>
+    <string name="search_match">Cerca partita</string>
 </resources>

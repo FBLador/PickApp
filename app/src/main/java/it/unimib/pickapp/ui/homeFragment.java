@@ -50,23 +50,6 @@ public class homeFragment extends Fragment {
         recyclerView.setLayoutManager(
                 new LinearLayoutManager(getActivity()));
 
-        // Create a instance of the database and get
-        // its reference
-        mbase = FirebaseDatabase.getInstance().getReference("Matches");
-
-
-        // It is a class provide by the FirebaseUI to make a
-        // query in the database to fetch appropriate data
-        FirebaseRecyclerOptions<Match> options
-                = new FirebaseRecyclerOptions.Builder<Match>()
-                .setQuery(mbase, Match.class)
-                .build();
-        // Connecting object of required Adapter class to
-        // the Adapter class itself
-        adapter = new matchesAdapter(options);
-        // Connecting Adapter class with the Recycler view
-        recyclerView.setAdapter(adapter);
-
         return view;
     }
     @Override
