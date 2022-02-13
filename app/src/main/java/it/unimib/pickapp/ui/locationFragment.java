@@ -32,6 +32,8 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.util.Random;
+
 import it.unimib.pickapp.R;
 
 
@@ -145,27 +147,44 @@ public class locationFragment extends Fragment implements OnMapReadyCallback {
                 LatLng lastPosition = new LatLng(latitude, longitude);
                 Log.d(TAG, "location != null");
                 MapsInitializer.initialize(getContext());
-                map.addMarker(new MarkerOptions()
-                        .position(new LatLng(latitude+0.011, longitude+0.019))
-                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)) // null = default icon
-                        .title("Partita di tennis"));
-                map.addMarker(new MarkerOptions()
-                        .position(new LatLng(latitude-0.017, longitude+0.0102))
-                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)) // null = default icon
-                        .title("Partita di basket"));
-                map.addMarker(new MarkerOptions()
-                        .position(new LatLng(latitude+0.023, longitude+0.01))
-                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_CYAN)) // null = default icon
-                        .title("Partita di calcio"));
-                map.addMarker(new MarkerOptions()
-                        .position(new LatLng(latitude-0.0104, longitude-0.0205))
-                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)) // null = default icon
-                        .title("Partita di tennis"));
+                createRandomMarkers(2, map, latitude, longitude, "tennis");
+                createRandomMarkers(1, map, latitude, longitude, "basketball");
+                createRandomMarkers(1, map, latitude, longitude, "football");
                 map.moveCamera(CameraUpdateFactory.newLatLngZoom(lastPosition, 13));
             } else {
                 Toast.makeText(getActivity(), R.string.enable_gps, Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    public void createRandomMarkers(int markersQuantity, GoogleMap map, double latitude, double longitude, String sport) {
+        Random rand = new Random();
+        switch(sport) {
+            case "tennis":
+                for(int i=0; i<markersQuantity; i++){
+                    map.addMarker(new MarkerOptions()
+                            .position(new LatLng(latitude+((rand.nextDouble()/100)-(rand.nextDouble()/100)), longitude+((rand.nextDouble()/100)-(rand.nextDouble()/100))))
+                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)) // null = default icon
+                            .title("Partita di tennis"));
+                }
+                break;
+            case "basketball":
+                for(int i=0; i<markersQuantity; i++){
+                map.addMarker(new MarkerOptions()
+                        .position(new LatLng(latitude+((rand.nextDouble()/100)-(rand.nextDouble()/100)), longitude+((rand.nextDouble()/100)-(rand.nextDouble()/100))))
+                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)) // null = default icon
+                        .title("Partita di basket"));
+                }
+                break;
+            case "football":
+                for(int i=0; i<markersQuantity; i++){
+                    map.addMarker(new MarkerOptions()
+                            .position(new LatLng(latitude+((rand.nextDouble()/100)-(rand.nextDouble()/100)), longitude+((rand.nextDouble()/100)-(rand.nextDouble()/100))))
+                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_CYAN)) // null = default icon
+                            .title("Partita di calcio"));
+                }
+                break;
+        }
     }
 
     @Override

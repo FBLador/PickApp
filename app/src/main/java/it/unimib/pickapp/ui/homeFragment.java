@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,6 +57,7 @@ public class homeFragment extends Fragment {
     public void onViewCreated(@NonNull final View view, @Nullable final Bundle savedInstanceState) {
 
         mbase = FirebaseDatabase.getInstance().getReference("Matches");
+        Log.d(TAG, String.valueOf(mbase.orderByChild("sport").equalTo("TENNIS")));
 
         // TODO
         //.orderByChild("dateTime").equalTo(dayOfMonth + "/" + month + "/" + year)
