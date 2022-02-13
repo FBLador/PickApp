@@ -1,96 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+
+    android:id="@+id/linearLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.homeFragment">
+    tools:context=".ui.homeFragment" >
 
-
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/homeTitle"
-            android:layout_width="wrap_content"
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/home"
-            android:textSize="28sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="@+id/guideline2"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_margin="9dp">
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_begin="10dp" />
-
-        <TextView
-            android:id="@+id/welcomeBackText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/welcomeText"
-            app:layout_constraintStart_toStartOf="@+id/guideline2"
-            app:layout_constraintTop_toBottomOf="@+id/homeTitle" />
+            <TextView
+                android:id="@+id/titleHome"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="28sp"
+                android:textStyle="bold" />
+        </androidx.appcompat.widget.Toolbar>
 
         <SearchView
             android:id="@+id/searchGames"
-            android:layout_width="390dp"
-            android:layout_height="40dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/welcomeBackText" />
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"/>
 
         <HorizontalScrollView
             android:id="@+id/horizontalScrollView"
             android:layout_width="390dp"
-            android:layout_height="34dp"
-            android:layout_marginTop="10dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/searchGames">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp" >
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_marginStart="9dp">
 
                 <ImageButton
                     android:id="@+id/basketFilter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="25dp"
-                    android:layout_marginLeft="25dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_margin="10dp"
                     android:layout_weight="1"
-                    android:background="#00FFFFFF"
+                    android:background="@color/transparent"
                     app:srcCompat="@drawable/ic_baseline_sports_basketball_24"
-                    tools:ignore="SpeakableTextPresentCheck" />
-
-                <ImageButton
-                    android:id="@+id/volleyFilter"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="25dp"
-                    android:layout_marginLeft="25dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_weight="1"
-                    android:background="#00FFFFFF"
-                    app:srcCompat="@drawable/ic_baseline_sports_volleyball_24"
-                    tools:ignore="SpeakableTextPresentCheck" />
+                    tools:ignore="SpeakableTextPresentCheck"
+                    android:contentDescription="basketFilter" />
 
                 <ImageButton
                     android:id="@+id/soccerFilter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="25dp"
-                    android:layout_marginLeft="25dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_margin="10dp"
                     android:layout_weight="1"
-                    android:background="#00FFFFFF"
+                    android:background="@color/transparent"
                     app:srcCompat="@drawable/ic_baseline_sports_soccer_24"
                     tools:ignore="SpeakableTextPresentCheck" />
 
@@ -98,10 +75,8 @@
                     android:id="@+id/tennisFilter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="25dp"
-                    android:layout_marginLeft="25dp"
-                    android:layout_marginTop="10dp"
-                    android:background="#00FFFFFF"
+                    android:layout_margin="10dp"
+                    android:background="@color/transparent"
                     app:srcCompat="@drawable/ic_baseline_sports_tennis_24"
                     tools:ignore="SpeakableTextPresentCheck" />
 
@@ -109,66 +84,16 @@
                     android:id="@+id/footballFilter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="25dp"
-                    android:layout_marginLeft="25dp"
-                    android:layout_marginTop="10dp"
-                    android:background="#00FFFFFF"
+                    android:layout_margin="10dp"
+                    android:background="@color/transparent"
                     app:srcCompat="@drawable/ic_baseline_sports_football_24"
                     tools:ignore="SpeakableTextPresentCheck" />
-
-                <ImageButton
-                    android:id="@+id/rugbyFilter"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="25dp"
-                    android:layout_marginLeft="25dp"
-                    android:layout_marginTop="10dp"
-                    android:background="#00FFFFFF"
-                    app:srcCompat="@drawable/ic_baseline_sports_rugby_24"
-                    tools:ignore="SpeakableTextPresentCheck" />
-
-                <ImageButton
-                    android:id="@+id/hockeyFilter"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="25dp"
-                    android:layout_marginLeft="25dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_weight="1"
-                    android:background="#00FFFFFF"
-                    app:srcCompat="@drawable/ic_baseline_sports_hockey_24"
-                    tools:ignore="SpeakableTextPresentCheck" />
-
-                <ImageButton
-                    android:id="@+id/cricketFilter"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="25dp"
-                    android:layout_marginLeft="25dp"
-                    android:layout_marginTop="10dp"
-                    android:background="#00FFFFFF"
-                    app:srcCompat="@drawable/ic_baseline_sports_cricket_24" />
-
-                <ImageButton
-                    android:id="@+id/golfFilter"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="25dp"
-                    android:layout_marginLeft="25dp"
-                    android:layout_marginTop="10dp"
-                    android:background="#00FFFFFF"
-                    app:srcCompat="@drawable/ic_baseline_sports_golf_24" />
-
             </LinearLayout>
         </HorizontalScrollView>
 
         <ScrollView
-            android:layout_width="400dp"
-            android:layout_height="550dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/guideline2"/>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-</FrameLayout>
+            android:layout_width="match_parent"
+            android:layout_height="500dp"
+            android:layout_margin="9dp" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

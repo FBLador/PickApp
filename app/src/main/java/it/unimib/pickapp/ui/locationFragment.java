@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
@@ -35,6 +36,8 @@ import it.unimib.pickapp.R;
 
 public class locationFragment extends Fragment implements OnMapReadyCallback {
 
+    private TextView titleToolbar;
+    private final String title = "Location";
     private MapView mMapView;
     private String TAG = "locationFragment";
 
@@ -45,6 +48,8 @@ public class locationFragment extends Fragment implements OnMapReadyCallback {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_location, container, false);
+        setTitle(view);
+
         mMapView = view.findViewById(R.id.matches_list_map);
         initGoogleMap(savedInstanceState);
 
@@ -163,5 +168,10 @@ public class locationFragment extends Fragment implements OnMapReadyCallback {
     public void onLowMemory() {
         super.onLowMemory();
         mMapView.onLowMemory();
+    }
+
+    public void setTitle(View view){
+        titleToolbar = view.findViewById(R.id.titleHome);
+        titleToolbar.setText(title);
     }
 }

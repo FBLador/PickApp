@@ -9,15 +9,22 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:weightSum="100">
+        android:weightSum="100"
+        tools:ignore="UselessParent">
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/location"
-            android:layout_weight="10"
-            android:textSize="28sp" />
+            android:layout_margin="9dp">
+
+            <TextView
+                android:id="@+id/titleHome"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="28sp"
+                android:textStyle="bold" />
+        </androidx.appcompat.widget.Toolbar>
 
         <RelativeLayout
             android:id="@+id/map_container"
@@ -27,9 +34,9 @@
 
             <com.google.android.gms.maps.MapView
                 android:id="@+id/matches_list_map"
-                android:contentDescription="@string/matches_list_map"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:contentDescription="@string/matches_list_map" />
         </RelativeLayout>
 
     </LinearLayout>

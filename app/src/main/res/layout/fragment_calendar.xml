@@ -1,133 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-
     xmlns:tools="http://schemas.android.com/tools"
+
     android:id="@+id/linearLayout"
-
     android:layout_width="match_parent"
-
     android:layout_height="match_parent">
 
-    <androidx.appcompat.widget.Toolbar
 
-        android:id="@+id/toolbar"
-
-        android:layout_width="0dp"
-
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
-        android:layout_marginBottom="10dp"
-        android:background="@color/mainGreen"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+        android:orientation="vertical"
+        android:gravity="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-
-            android:layout_width="wrap_content"
-
-            android:layout_height="wrap_content"
-
-            android:text="@string/myGames"
-
-            android:textColor="@android:color/white"
-
-            android:textSize="17sp"
-
-            android:textStyle="bold" />
-
-    </androidx.appcompat.widget.Toolbar>
-
-    <LinearLayout
-
-        android:id="@+id/linearLayout2"
-
-        android:layout_width="0dp"
-
-        android:layout_height="0dp"
-
-        android:layout_marginStart="9dp"
-
-        android:layout_marginLeft="9dp"
-        android:layout_marginEnd="9dp"
-        android:layout_marginRight="9dp"
-        android:layout_marginBottom="20dp"
-        android:background="@color/white"
-        android:gravity="center"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/recycler_view_games"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar">
-
-
-        <View
-
+       <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="9dp">
 
-            android:layout_height="1dp"
-
-            android:background="@color/mainGreen" />
+            <TextView
+                android:id="@+id/titleCalendar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="28sp"
+                android:textStyle="bold" />
+        </androidx.appcompat.widget.Toolbar>
 
         <LinearLayout
+            android:id="@+id/linearLayout2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="9dp"
+            android:layout_marginLeft="9dp"
+            android:layout_marginEnd="9dp"
+            android:layout_marginRight="9dp"
+            android:layout_marginBottom="20dp"
+            android:background="@color/white"
+            android:gravity="center"
+            android:orientation="vertical">
 
-            android:layout_width="match_parent"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.2"
+                android:background="@color/browser_actions_bg_grey">
 
-            android:layout_height="0dp"
-
-            android:layout_weight="0.2"
-            android:background="@color/browser_actions_bg_grey">
-
-            <CalendarView
-                android:id="@+id/calendarView"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_margin="10dp"
-                android:layout_weight="1"
-                android:background="@color/transparent"
-                tools:ignore="NestedWeights" />
-
+                <CalendarView
+                    android:id="@+id/calendarView"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="10dp"
+                    android:layout_weight="1"
+                    android:background="@color/transparent"
+                    tools:ignore="NestedWeights" />
+            </LinearLayout>
         </LinearLayout>
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view_games"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="9dp"
+            android:background="@color/white"
+            android:gravity="center"
+            android:orientation="vertical" />
     </LinearLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view_games"
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true">
 
-        android:layout_width="0dp"
-
-        android:layout_height="0dp"
-
-        android:layout_marginStart="9dp"
-
-        android:layout_marginLeft="9dp"
-
-        android:layout_marginEnd="9dp"
-        android:layout_marginRight="9dp"
-        android:layout_marginBottom="3dp"
-        android:background="@color/white"
-        android:gravity="center"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/create_game"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="20dp"
-        android:clickable="true"
-        android:focusable="true"
-        android:src="@android:drawable/ic_input_add"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:ignore="ContentDescription,SpeakableTextPresentCheck" />
-
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/create_game"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="20dp"
+            android:clickable="true"
+            android:contentDescription="@string/createGame"
+            android:focusable="true"
+            android:src="@android:drawable/ic_input_add" />
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
