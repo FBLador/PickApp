@@ -1,6 +1,4 @@
 package it.unimib.pickapp.ui;
-
-
 import static it.unimib.pickapp.repository.Constants.MAPVIEW_BUNDLE_KEY;
 
 import android.Manifest;
@@ -13,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
@@ -27,7 +26,9 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
+import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
@@ -36,10 +37,8 @@ import it.unimib.pickapp.R;
 
 public class locationFragment extends Fragment implements OnMapReadyCallback {
 
-    private TextView titleToolbar;
-    private final String title = "Location";
     private MapView mMapView;
-    private String TAG = "locationFragment";
+    private final String TAG = "locationFragment";
 
     public locationFragment() {
         // Required empty public constructor
@@ -138,17 +137,34 @@ public class locationFragment extends Fragment implements OnMapReadyCallback {
 
     @SuppressLint("MissingPermission")
     public void setupMap(GoogleMap map, FusedLocationProviderClient client) {
-        map.setBuildingsEnabled(true);
         map.setMyLocationEnabled(true);
         client.getLastLocation().addOnSuccessListener(requireActivity(), location -> {
-            double latitude = location.getLatitude();
-            double longitude = location.getLongitude();
-
-            LatLng lastPosition = new LatLng(latitude, longitude);
-            map.addMarker(new MarkerOptions()
-                    .position(new LatLng(latitude+0.01, longitude+0.01))
-                    .title("Partita 1"));
-            map.moveCamera(CameraUpdateFactory.newLatLngZoom(lastPosition, 12));
+            if(location != null) {
+                double latitude = location.getLatitude();
+                double longitude = location.getLongitude();
+                LatLng lastPosition = new LatLng(latitude, longitude);
+                Log.d(TAG, "location != null");
+                MapsInitializer.initialize(getContext());
+                map.addMarker(new MarkerOptions()
+                        .position(new LatLng(latitude+0.011, longitude+0.019))
+                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)) // null = default icon
+                        .title("Partita di tennis"));
+                map.addMarker(new MarkerOptions()
+                        .position(new LatLng(latitude-0.017, longitude+0.0102))
+                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)) // null = default icon
+                        .title("Partita di basket"));
+                map.addMarker(new MarkerOptions()
+                        .position(new LatLng(latitude+0.023, longitude+0.01))
+                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_CYAN)) // null = default icon
+                        .title("Partita di calcio"));
+                map.addMarker(new MarkerOptions()
+                        .position(new LatLng(latitude-0.0104, longitude-0.0205))
+                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)) // null = default icon
+                        .title("Partita di tennis"));
+                map.moveCamera(CameraUpdateFactory.newLatLngZoom(lastPosition, 13));
+            } else {
+                Toast.makeText(getActivity(), R.string.enable_gps, Toast.LENGTH_SHORT).show();
+            }
         });
     }
 
@@ -171,7 +187,8 @@ public class locationFragment extends Fragment implements OnMapReadyCallback {
     }
 
     public void setTitle(View view){
-        titleToolbar = view.findViewById(R.id.titleHome);
+        TextView titleToolbar = view.findViewById(R.id.titleHome);
+        String title = "Location";
         titleToolbar.setText(title);
     }
 }

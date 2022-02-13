@@ -11,12 +11,12 @@
     <string name="finish">Fine</string>
     <string name="nickname">Nome utente</string>
     <string name="next">Avanti</string>
-    <string name="location">Posizione</string>
+    <string name="location">Partite nei dintorni</string>
     <string name="name">Nome</string>
     <string name="surname">Cognome</string>
     <string name="Logo">Logo</string>
-    <string name="intermediate">Intermediate</string>
-    <string name="Field">Field</string>
+    <string name="intermediate">Intermedio</string>
+    <string name="Field">Campo</string>
     <string name="myGames">Le mie partite</string>
     <string name="send">Invia</string>
     <string name="forgotPasswordLogin">Recupera la tua password</string>
@@ -34,11 +34,11 @@
     <string name="played">Giocata</string>
     <string name="date">Data</string>
     <string name="matches_list_map">Mappa lista partite</string>
-    <string name="addMatchTitle">Add match</string>
+    <string name="addMatchTitle">Aggiungi partita</string>
     <string name="title">Titolo</string>
     <string name="football">Calcio</string>
-    <string name="basketball">Basket</string>
-    <string name="volleyball">Volley</string>
+    <string name="basketball">Pallacanestro</string>
+    <string name="volleyball">Pallavolo</string>
     <string name="tennis">Tennis</string>
     <string name="add">Aggiungi</string>
     <string name="address">Indirizzo</string>
@@ -50,8 +50,9 @@
     <string name="invalidTimeDate">Orario o data non validi</string>
     <string name="teamNumber">Numero di squadre</string>
     <string name="cost">Costo</string>
-    <string name="privateMatch">Private match</string>
+    <string name="privateMatch">Partita privata</string>
     <string name="description">Descrizione</string>
     <string name="sport">Sport</string>
     <string name="createGame">crea partita</string>
+    <string name="enable_gps">Attiva il GPS sul tuo dispositivo per condividere la posizione con l\'app</string>
 </resources>
