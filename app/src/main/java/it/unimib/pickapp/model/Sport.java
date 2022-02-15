@@ -5,7 +5,7 @@ public enum Sport {
     BASKETBALL,
     VOLLEYBALL,
     TENNIS;
-
+    //ritorna un array di String che contine gli sport
     public static String[] names() {
         Sport[] sports = values();
         String[] names = new String[sports.length];

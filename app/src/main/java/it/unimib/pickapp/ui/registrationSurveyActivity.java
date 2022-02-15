@@ -33,11 +33,15 @@ import it.unimib.pickapp.model.User;
 public class registrationSurveyActivity extends AppCompatActivity {
 
     private static final String TAG = "RegistrSurveyActivity";
+    //riferimento per il bottone finish
     private Button mButtonSingUpFinish;
 
+    //riferimenti allo Spinner al RadioGroup e ai RadioButton
     private Spinner mSpinnerSport;
     private RadioGroup mRadioGroupExperience;
     private RadioButton mRadioButtonExperience;
+
+    //oggetti firebase
     private FirebaseAuth mAuth;
 
     FirebaseDatabase firebaseDatabase;
@@ -54,6 +58,7 @@ public class registrationSurveyActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
 
+        //recupero le informazione passate da registrationActivity
         String name = getIntent().getStringExtra("keyname");
         String surname = getIntent().getStringExtra("keysurname");
         String nickname = getIntent().getStringExtra("keynickname");
@@ -66,32 +71,41 @@ public class registrationSurveyActivity extends AppCompatActivity {
 
         //listener per button finish
         mButtonSingUpFinish = (Button) findViewById(R.id.buttonSingUpFinish);
+        //se il bottone finish viene schiacciato
         mButtonSingUpFinish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.d(TAG, "onClick Finish");
+                //se non è stato selezionato un livello di esperienza
                 if(!isExperienceSelected()) {
                     Toast.makeText(registrationSurveyActivity.this, "select your experiance level", Toast.LENGTH_SHORT).show();
                     Log.d(TAG, "if esterno");
                 }
+                //livello di esperienza selezionato, tutto ok
                 else {
+                    //recupero sport e livello di esperienza
                     String favouriteSport = sportSelected();
                     String experienceLevel = experienceSelected();
 
+                    //creo un nuvo utente e lo aggiungo alla sezione FirebaseAuth
                     mAuth.createUserWithEmailAndPassword(email, password)
                          .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                                @Override
                                public void onComplete(@NonNull Task<AuthResult> task) {
                                    if (task.isSuccessful()) {
                                        Log.d(TAG, "if interno");
+                                       //creo l'utente
                                        user = new User(name, surname, nickname, email, password, favouriteSport, experienceLevel, 2.5);
                                        Toast.makeText(registrationSurveyActivity.this, "Registration successful ", Toast.LENGTH_SHORT).show();
                                        Log.d(TAG, "FINO A QUI TUTTO BENE");
-                                        addDataToFirebase();
-                                        openPickappActivity();
+                                       //aggiungo l'utente a firebase db
+                                       addDataToFirebase();
+                                       //apro pickappActivity
+                                       openPickappActivity();
                                    }else{
-                                        Toast.makeText(registrationSurveyActivity.this, "Registration failed ", Toast.LENGTH_SHORT).show();
-                                        Log.d(TAG, "else esterno");
+                                       //registrazione fallita
+                                       Toast.makeText(registrationSurveyActivity.this, "Registration failed ", Toast.LENGTH_SHORT).show();
+                                       Log.d(TAG, "else esterno");
                                    }
                                 }
                             });
@@ -101,6 +115,7 @@ public class registrationSurveyActivity extends AppCompatActivity {
     }
 
     private void openPickappActivity(){
+        //Apro l'activity pickappActivity
         Intent intent = new Intent(this, pickappActivity.class);
         //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);//funziona come finish() per le activity precedenti
         startActivity(intent);
@@ -108,11 +123,13 @@ public class registrationSurveyActivity extends AppCompatActivity {
     }
 
     private String sportSelected(){
+        //ritorna lo sport selezionato
         mSpinnerSport = findViewById(R.id.spinner_sport);
         String sport = mSpinnerSport.getSelectedItem().toString();
         return sport;
     }
 
+    //ritona true sse è stato selezionato un livello di esperienza
     private boolean isExperienceSelected(){
         mRadioGroupExperience = findViewById(R.id.radioGroup_experience);
         if(mRadioGroupExperience.getCheckedRadioButtonId() == -1)
@@ -120,6 +137,7 @@ public class registrationSurveyActivity extends AppCompatActivity {
         return true;
     }
 
+    //ritorna il livello di esperienza
     private String experienceSelected(){
         mRadioGroupExperience = findViewById(R.id.radioGroup_experience);
         int radioButtonID = mRadioGroupExperience.getCheckedRadioButtonId();
@@ -128,6 +146,7 @@ public class registrationSurveyActivity extends AppCompatActivity {
         return experience;
     }
 
+    //metodo per aggiungere l'utente al real-time db
     private void addDataToFirebase() {
         //add user to realtime database firebase
         currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -136,6 +155,7 @@ public class registrationSurveyActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Log.d(TAG, "QUA VA COSì COSì");
+                //aggiungo l'utente al path "Users" con chiave Uid dell'autenticazione
                 myRef.child(currentFirebaseUser.getUid()).setValue(user);
                 Toast.makeText(registrationSurveyActivity.this, "data added", Toast.LENGTH_SHORT).show();
             }

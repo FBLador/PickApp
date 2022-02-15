@@ -23,13 +23,15 @@ public class loginActivity extends AppCompatActivity {
 
     private static final String TAG = "LoginActivity";
 
+    //riferimenti alle due EditText: mail e password
     private EditText editTextEmail;
     private EditText editTextPassword;
-
+    //oggetto firebase
     private FirebaseAuth mAuth;
 
 
     @Override
+    //se l'utente è gia loggato lo rimando dirrettamente a PickappActivity
     public void onStart() {
         super.onStart();
         FirebaseUser currentUser = mAuth.getCurrentUser();
@@ -51,14 +53,17 @@ public class loginActivity extends AppCompatActivity {
         Button buttonLogin = findViewById(R.id.buttonLogin);
         buttonLogin.setOnClickListener(v -> {
             Log.d(TAG, "onClick Login");
-
+            //recupero mail e password
             editTextEmail = findViewById(R.id.editTextTextEmailAddress);
             editTextPassword = findViewById(R.id.editTextTextPassword);
             String email = editTextEmail.getText().toString();
             String password = editTextPassword.getText().toString();
+            //controlla validità dati
             if (checkData()) {
+                //autenticazione con mail e password
                 mAuth.signInWithEmailAndPassword(email, password)
                         .addOnCompleteListener(task -> {
+                            //tutto ok
                             if (task.isSuccessful()) {
                                 // Sign in success, update UI with the signed-in user's information
                                 Log.d(TAG, "signInWithEmail:success");
@@ -66,8 +71,10 @@ public class loginActivity extends AppCompatActivity {
 
                                 //FirebaseUser user = mAuth.getCurrentUser();
                                 //updateUI(user);
+                                //apro PickappActivity
                                 openPickappActivity();
                             } else {
+                                //stampo errore
                                 // If sign in fails, display a message to the user.
                                 Log.w(TAG, "signInWithEmail:failure", task.getException());
                                 Toast.makeText(loginActivity.this, "authentication failed",
@@ -114,6 +121,7 @@ public class loginActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    //controllo validità dati inseriti
     private boolean checkData() {
         String email = editTextEmail.getText().toString();
         String password = editTextPassword.getText().toString();

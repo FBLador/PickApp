@@ -24,9 +24,14 @@ import it.unimib.pickapp.R;
 public class forgotPasswordActivity extends AppCompatActivity {
 
     private static final String TAG = "forgotPasswordActivity";
+    //riferimento al bottone send
     private Button buttonForgotPassword;
-    private FirebaseAuth mAuth;
+    //riferimento alla EditText per la mail
     private EditText editTextEmail;
+
+    //oggetto firebase
+    private FirebaseAuth mAuth;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,16 +46,19 @@ public class forgotPasswordActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Log.d(TAG, "onClick Send");
-
+                //recupero la mail inserita
                 editTextEmail = findViewById(R.id.editTextEmailForgot);
                 String email = editTextEmail.getText().toString();
+                //se la mail è valida
                 if(checkData()) {
+                    //mando la mail per il reset
                     mAuth.sendPasswordResetEmail(email)
                             .addOnCompleteListener(new OnCompleteListener<Void>() {
                                @Override
                                public void onComplete(@NonNull Task<Void> task) {
                                    if (task.isSuccessful()) {
                                        Toast.makeText(forgotPasswordActivity.this, "Check your email to reset password", Toast.LENGTH_LONG).show();
+                                       //se tutto ok rimando alla LoginActivity
                                        openLoginActivity();
                                    } else {
                                        Toast.makeText(forgotPasswordActivity.this, "Unable to send reset mail", Toast.LENGTH_LONG).show();
@@ -68,6 +76,7 @@ public class forgotPasswordActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    //cotrollo validità mail
     private boolean checkData() {
         String email = editTextEmail.getText().toString();
 

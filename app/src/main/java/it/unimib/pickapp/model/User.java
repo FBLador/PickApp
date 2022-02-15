@@ -1,9 +1,9 @@
-
 package it.unimib.pickapp.model;
 
 import androidx.annotation.NonNull;
 
 public class User {
+    //attributi utente
     private String name;
     private String surname;
     private String nickname;
@@ -14,15 +14,16 @@ public class User {
     private double experienceLevel;
     private double reliabilityLevel;
 
-
+    //percorso immagine profilo
     private String imageurl;
     private String bio;
 
-
+    //costruttore vuoto
     public User(){
         //lasciare vuoto, serve per firebase realtime
     }
 
+    //costruttore per inserimento su db
     public User(String name, String surname, String nickname, String email, String password, String favouriteSport, String experienceLevel, double reliabilityLevel) {
         this.name = name;
         this.surname = surname;
@@ -38,10 +39,12 @@ public class User {
         if (experienceLevel.equals("Advanced"))
             this.experienceLevel = 5;
         this.reliabilityLevel = reliabilityLevel;
+        //immagine profile di default
         this.imageurl = "https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png";
         this.bio = "bio vuota";
     }
 
+    //getter
     public String getName() {
         return name;
     }
@@ -86,6 +89,7 @@ public class User {
         return bio;
     }
 
+    //setter
     public void setName(String name) {
         this.name = name;
     }
@@ -130,7 +134,7 @@ public class User {
     public void setBio(String bio) {
         this.bio = bio;
     }
-
+    //toString
     @NonNull
     @Override
     public String toString() {

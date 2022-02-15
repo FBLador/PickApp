@@ -4,7 +4,7 @@ import java.sql.Time;
 import java.util.Map;
 
 public class Match {
-
+    //attributi della partita
     private String id;
     private boolean isPrivate;
     private int hour;
@@ -49,14 +49,17 @@ public class Match {
     fonte: https://learntutorials.net/it/java/topic/4813/date-e-ora--java-time----
      */
 
+    //verifica se c'è un partecipante
     public boolean contains(String profileid) {
         return partecipanti.containsKey(profileid);
     }
 
+    //aggiunge un partecipante
     public void addPartecipante(User user) {
         this.partecipanti.put(user.getNickname(), user);
     }
 
+    //rimuove un partecipante
     public void removePartecipante(String nickname) {
         this.partecipanti.remove(nickname);
     }
@@ -120,6 +123,7 @@ public class Match {
         this.descrizione = descrizione;
     }
 
+    //setta la lista dei partecipanti
     public void setPartecipanti(Map<String, User> partecipanti) {
         this.partecipanti = partecipanti;
     }

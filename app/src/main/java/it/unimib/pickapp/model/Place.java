@@ -3,6 +3,7 @@ package it.unimib.pickapp.model;
 import android.location.Location;
 
 public class Place {
+    //attributi luogo della partita
     private String id;
     private String name;
     private String address;
@@ -15,6 +16,7 @@ public class Place {
         this.location = location;
     }
 
+    //getter e setter
     public String getId() {
         return id;
     }
