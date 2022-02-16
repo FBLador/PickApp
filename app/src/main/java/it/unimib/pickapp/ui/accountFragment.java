@@ -79,7 +79,7 @@ public class accountFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_account, container, false);// Inflate the layout for this fragment
         Toolbar toolbar = view.findViewById(R.id.toolbarAccount);
-        Objects.requireNonNull(((pickappActivity) Objects.requireNonNull(getActivity())).getSupportActionBar()).hide();
+        Objects.requireNonNull(((pickappActivity) requireActivity()).getSupportActionBar()).hide();
         ((pickappActivity) getActivity()).setSupportActionBar(toolbar);
 
         imageProfile = view.findViewById(R.id.image_profile);

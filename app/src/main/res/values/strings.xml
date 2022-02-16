@@ -2,7 +2,7 @@
     <string name="app_name" translatable="false">PickApp</string>
 
     <string name="home" translatable="false">Home</string>
-    <string name="location">Around you</string>
+    <string name="location">Near you</string>
     <string name="calendar">Calendar</string>
     <string name="account">Account</string>
 

@@ -1,11 +1,13 @@
 package it.unimib.pickapp.ui;
 
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -46,6 +48,17 @@ public class matchesAdapter extends FirebaseRecyclerAdapter<Match, matchesAdapte
         holder.dateTime.setText(day+"/"+month+"/"+year);
 
         holder.sport.setText(model.getSport());
+        int row_index=-1;
+        if(model.getSport().equals("TENNIS")) {
+            row_index = position;
+        }
+        if(row_index==position){
+            holder.titolo.setTextColor(Color.parseColor("#55bb55"));
+
+        }
+        else
+        { holder.titolo.setTextColor(Color.parseColor("#000000"));
+        }
 
         //holder.descrizione.setText(model.getDescrizione());
 

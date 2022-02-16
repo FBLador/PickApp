@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -28,7 +29,6 @@ import it.unimib.pickapp.model.Match;
 public class homeFragment extends Fragment {
 
     private TextView titleToolbar;
-    private final String title = "Home";
     private RecyclerView recyclerView;
     DatabaseReference mbase;
     private static final String TAG = "homeFragment";
@@ -44,7 +44,7 @@ public class homeFragment extends Fragment {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_home, container, false);
 
-        setTitle(view);
+        setTitle(view, getString(R.string.home));
         recyclerView = view.findViewById(R.id.recycler_view_games);
 
         // To display the Recycler view linearly
@@ -74,7 +74,7 @@ public class homeFragment extends Fragment {
         recyclerView.invalidate();
     }
 
-    public void setTitle(View view){
+    public void setTitle(View view, String title){
         titleToolbar = view.findViewById(R.id.titleHome);
         titleToolbar.setText(title);
     }

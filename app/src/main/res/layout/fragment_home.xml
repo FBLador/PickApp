@@ -22,7 +22,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="9dp">
+            android:layout_margin="2dp">
 
             <TextView
                 android:id="@+id/titleHome"
@@ -31,14 +31,6 @@
                 android:textSize="28sp"
                 android:textStyle="bold" />
         </androidx.appcompat.widget.Toolbar>
-
-        <SearchView
-            android:id="@+id/searchGames"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:queryHint="@string/search_match"/>
 
         <HorizontalScrollView
             android:id="@+id/horizontalScrollView"
@@ -49,26 +41,26 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:orientation="horizontal"
+                android:layout_gravity="center"
                 android:layout_marginStart="9dp"
-                android:layout_gravity="center">
+                android:orientation="horizontal">
 
                 <ImageButton
                     android:id="@+id/basketFilter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
+                    android:layout_margin="20dp"
                     android:layout_weight="1"
                     android:background="@color/transparent"
+                    android:contentDescription="basketFilter"
                     app:srcCompat="@drawable/ic_baseline_sports_basketball_24"
-                    tools:ignore="SpeakableTextPresentCheck"
-                    android:contentDescription="basketFilter" />
+                    tools:ignore="SpeakableTextPresentCheck" />
 
                 <ImageButton
                     android:id="@+id/soccerFilter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
+                    android:layout_margin="20dp"
                     android:layout_weight="1"
                     android:background="@color/transparent"
                     app:srcCompat="@drawable/ic_baseline_sports_soccer_24"
@@ -78,7 +70,7 @@
                     android:id="@+id/tennisFilter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
+                    android:layout_margin="20dp"
                     android:background="@color/transparent"
                     app:srcCompat="@drawable/ic_baseline_sports_tennis_24"
                     tools:ignore="SpeakableTextPresentCheck" />
@@ -87,7 +79,7 @@
                     android:id="@+id/footballFilter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
+                    android:layout_margin="20dp"
                     android:background="@color/transparent"
                     app:srcCompat="@drawable/ic_baseline_sports_football_24"
                     tools:ignore="SpeakableTextPresentCheck" />
@@ -102,5 +94,6 @@
             android:background="@color/white"
             android:gravity="center"
             android:orientation="vertical" />
+
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

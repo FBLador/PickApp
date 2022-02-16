@@ -32,7 +32,6 @@ import it.unimib.pickapp.model.Match;
 public class calendarFragment extends Fragment {
 
     private TextView titleToolbar;
-    private final String title = "My Games";
     private CalendarView calendarView;
     private RecyclerView recyclerView;
     private FloatingActionButton addButton;
@@ -60,7 +59,7 @@ public class calendarFragment extends Fragment {
             Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_calendar, container, false);
 
-        setTitle(rootView);
+        setTitle(rootView, getString(R.string.calendar));
 
         calendarView = rootView.findViewById(R.id.calendarView);
         addButton = rootView.findViewById(R.id.create_game);
@@ -224,7 +223,7 @@ public class calendarFragment extends Fragment {
             adapter.stopListening();
         }
 
-    public void setTitle(View view){
+    public void setTitle(View view, String title){
         titleToolbar = view.findViewById(R.id.titleCalendar);
         titleToolbar.setText(title);
     }

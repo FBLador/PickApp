@@ -49,7 +49,7 @@ public class locationFragment extends Fragment implements OnMapReadyCallback {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_location, container, false);
-        setTitle(view);
+        setTitle(view, getString(R.string.location));
 
         mMapView = view.findViewById(R.id.matches_list_map);
         initGoogleMap(savedInstanceState);
@@ -205,9 +205,8 @@ public class locationFragment extends Fragment implements OnMapReadyCallback {
         mMapView.onLowMemory();
     }
 
-    public void setTitle(View view){
+    public void setTitle(View view, String title){
         TextView titleToolbar = view.findViewById(R.id.titleHome);
-        String title = "Location";
         titleToolbar.setText(title);
     }
 }
