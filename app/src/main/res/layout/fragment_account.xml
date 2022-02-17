@@ -16,7 +16,8 @@
             android:id="@+id/toolbarAccount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="?android:attr/windowBackground">
+            android:background="?android:attr/windowBackground"
+            android:layout_margin="9dp">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -27,8 +28,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:maxLines="1"
-                    android:textColor="@color/black"
-                    android:textSize="18sp"
+                    android:textColor="@color/mainGreen"
+                    android:textSize="28sp"
                     android:textStyle="bold" />
 
                <!-- <ImageView

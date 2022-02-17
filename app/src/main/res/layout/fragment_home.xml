@@ -22,12 +22,13 @@
             android:id="@+id/toolbarHome"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="2dp">
+            android:layout_margin="9dp">
 
             <TextView
                 android:id="@+id/titleHome"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="@color/mainGreen"
                 android:textSize="28sp"
                 android:textStyle="bold" />
         </androidx.appcompat.widget.Toolbar>
@@ -53,7 +54,7 @@
                     android:layout_weight="1"
                     android:background="@color/transparent"
                     android:contentDescription="basketFilter"
-                    android:tint="@color/item_color_inactive"
+                    app:tint="@color/item_color_inactive"
                     app:srcCompat="@drawable/ic_baseline_sports_basketball_24"
                     tools:ignore="SpeakableTextPresentCheck" />
 

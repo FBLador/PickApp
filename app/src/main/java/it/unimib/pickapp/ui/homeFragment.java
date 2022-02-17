@@ -39,13 +39,11 @@ import it.unimib.pickapp.model.Match;
  */
 public class homeFragment extends Fragment {
 
-    private TextView titleToolbar;
     private ImageButton basket, soccer, tennis, football;
     private RecyclerView recyclerView;
     DatabaseReference mbase;
     private static final String TAG = "homeFragment";
     matchesAdapter adapter; // Create Object of the Adapter class
-    private matchesAdapter.ItemClickListener itemClickListener;
 
 
     public homeFragment() {
@@ -143,7 +141,7 @@ public class homeFragment extends Fragment {
                 .setQuery(mbase, Match.class)
                 .build();
 
-        itemClickListener = match -> {
+        matchesAdapter.ItemClickListener itemClickListener = match -> {
             MatchViewModel matchViewModel =
                     new ViewModelProvider(requireActivity()).get(MatchViewModel.class);
 
@@ -161,7 +159,7 @@ public class homeFragment extends Fragment {
     }
 
     public void setTitle(View view, String title){
-        titleToolbar = view.findViewById(R.id.titleHome);
+        TextView titleToolbar = view.findViewById(R.id.titleHome);
         titleToolbar.setText(title);
     }
     @Override

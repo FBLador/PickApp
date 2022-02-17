@@ -40,17 +40,10 @@ import it.unimib.pickapp.model.Match;
 
 public class calendarFragment extends Fragment {
 
-    private TextView titleToolbar;
     private CalendarView calendarView;
     private RecyclerView recyclerView;
     private FloatingActionButton addButton;
-    private RecyclerView.LayoutParams params;
     private DatabaseReference mbase;
-
-    //get info from firebase
-    private FirebaseUser user;
-    private DatabaseReference reference;
-    private String userID;
 
     private static final String TAG = "calendarFragment";
     private TextView titolo, luogo, numeroSquadre, data, durata, costo, sport, descrizione;
@@ -148,58 +141,53 @@ public class calendarFragment extends Fragment {
 
         System.out.println(matchList); */
 
-        calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
-            @Override
-            public void onSelectedDayChange(@NonNull final CalendarView view, final int year, final int month,
-                                            final int dayOfMonth) {
-                Toast.makeText(getActivity(), "Date changed to " + dayOfMonth + "/" + month + "/" + year, Toast.LENGTH_SHORT).show();
-                Log.i(TAG, "Date changed to " + dayOfMonth + "/" + month + "/" + year);
+        //updateRecycler();
+        calendarView.setOnDateChangeListener((view1, year, month, dayOfMonth) -> {
+            Toast.makeText(getActivity(), "Date changed to " + dayOfMonth + "/" + month + "/" + year, Toast.LENGTH_SHORT).show();
+            Log.i(TAG, "Date changed to " + dayOfMonth + "/" + month + "/" + year);
 
-                mbase = FirebaseDatabase.getInstance().getReference("Matches");
+            mbase = FirebaseDatabase.getInstance().getReference("Matches");
 
-                // TODO
-                //.orderByChild("dateTime").equalTo(dayOfMonth + "/" + month + "/" + year)
-                FirebaseRecyclerOptions<Match> options
-                        = new FirebaseRecyclerOptions.Builder<Match>()
-                        .setQuery(mbase, Match.class)
-                        .build();
-                // Connecting object of required Adapter class to
-                // the Adapter class itself
+            // TODO
+            //.orderByChild("dateTime").equalTo(dayOfMonth + "/" + month + "/" + year)
+            FirebaseRecyclerOptions<Match> options
+                    = new FirebaseRecyclerOptions.Builder<Match>()
+                    .setQuery(mbase, Match.class)
+                    .build();
+            // Connecting object of required Adapter class to
+            // the Adapter class itself
 
-                adapter = new matchesAdapter(options, itemClickListener, "");
-                // Connecting Adapter class with the Recycler view*/
-                recyclerView.setAdapter(adapter);
-                adapter.startListening();
-                recyclerView.invalidate();
+            adapter = new matchesAdapter(options, itemClickListener, "");
+            // Connecting Adapter class with the Recycler view*/
+            recyclerView.setAdapter(adapter);
+            adapter.startListening();
+            recyclerView.invalidate();
 
-               /*
-                // Create a instance of the database and get
-                // its reference
-                mbase = FirebaseDatabase.getInstance().getReference("Matches");
+           /*
+            // Create a instance of the database and get
+            // its reference
+            mbase = FirebaseDatabase.getInstance().getReference("Matches");
 
-                recyclerView = getActivity().findViewById(R.id.recycler_view_games);
+            recyclerView = getActivity().findViewById(R.id.recycler_view_games);
 
-                // To display the Recycler view linearly
-                recyclerView.setLayoutManager(
-                        new LinearLayoutManager(getContext()));
+            // To display the Recycler view linearly
+            recyclerView.setLayoutManager(
+                    new LinearLayoutManager(getContext()));
 
 
-                // It is a class provide by the FirebaseUI to make a
-                // query in the database to fetch appropriate data
-                FirebaseRecyclerOptions<Match> options
-                        = new FirebaseRecyclerOptions.Builder<Match>()
-                        .setQuery(mbase, Match.class)
-                        .build();
-                // Connecting object of required Adapter class to
-                // the Adapter class itself
-                adapter = new matchesAdapter(options);
+            // It is a class provide by the FirebaseUI to make a
+            // query in the database to fetch appropriate data
+            FirebaseRecyclerOptions<Match> options
+                    = new FirebaseRecyclerOptions.Builder<Match>()
+                    .setQuery(mbase, Match.class)
+                    .build();
+            // Connecting object of required Adapter class to
+            // the Adapter class itself
+            adapter = new matchesAdapter(options);
 
-                // Connecting Adapter class with the Recycler view
-                recyclerView.setAdapter(adapter);*/
+            // Connecting Adapter class with the Recycler view
+            recyclerView.setAdapter(adapter);*/
 
-            }
-
-            //updateRecycler();
         });
 
         addButton.setOnClickListener(v -> {
@@ -215,9 +203,10 @@ public class calendarFragment extends Fragment {
     }
 
     public void updateRecycler() { //Aggiorna la recycle view con le partite del giorno selezionato
-        user = FirebaseAuth.getInstance().getCurrentUser();
-        reference = FirebaseDatabase.getInstance().getReference("Matches");
-        userID = user.getUid();
+        //get info from firebase
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Matches");
+        String userID = Objects.requireNonNull(user).getUid();
         Log.d(TAG, userID);
 
         reference.addValueEventListener(new ValueEventListener() {
@@ -255,7 +244,7 @@ public class calendarFragment extends Fragment {
         }
 
     public void setTitle(View view, String title){
-        titleToolbar = view.findViewById(R.id.titleCalendar);
+        TextView titleToolbar = view.findViewById(R.id.titleCalendar);
         titleToolbar.setText(title);
     }
     @Override
