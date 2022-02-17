@@ -92,7 +92,7 @@ public class calendarFragment extends Fragment {
 
             matchViewModel.setMatch(match);
             NavController navController = NavHostFragment.findNavController(this);
-            navController.navigate(R.id.calendar_to_match);
+            navController.navigate(R.id.action_calendar_to_match);
         };
 
         // Connecting object of required Adapter class to
@@ -192,7 +192,7 @@ public class calendarFragment extends Fragment {
 
             matchViewModel.setMatch(new Match());
             NavController navController = NavHostFragment.findNavController(this);
-            navController.navigate(R.id.calendar_to_match);
+            navController.navigate(R.id.action_calendar_to_match);
         });
 
 

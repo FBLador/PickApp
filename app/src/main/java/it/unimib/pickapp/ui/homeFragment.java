@@ -1,22 +1,22 @@
 package it.unimib.pickapp.ui;
 
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.fragment.NavHostFragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.firebase.ui.database.FirebaseRecyclerOptions;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -33,6 +33,8 @@ public class homeFragment extends Fragment {
     DatabaseReference mbase;
     private static final String TAG = "homeFragment";
     matchesAdapter adapter; // Create Object of the Adapter class
+    private matchesAdapter.ItemClickListener itemClickListener;
+
 
     public homeFragment() {
         // Required empty public constructor
@@ -65,9 +67,18 @@ public class homeFragment extends Fragment {
                 = new FirebaseRecyclerOptions.Builder<Match>()
                 .setQuery(mbase, Match.class)
                 .build();
+
+        itemClickListener = match -> {
+            MatchViewModel matchViewModel =
+                    new ViewModelProvider(requireActivity()).get(MatchViewModel.class);
+
+            matchViewModel.setMatch(match);
+            NavController navController = NavHostFragment.findNavController(this);
+            navController.navigate(R.id.action_home_to_match);
+        };
         // Connecting object of required Adapter class to
         // the Adapter class itself
-        adapter = new matchesAdapter(options);
+        adapter = new matchesAdapter(options, itemClickListener);
         // Connecting Adapter class with the Recycler view*/
         recyclerView.setAdapter(adapter);
         adapter.startListening();

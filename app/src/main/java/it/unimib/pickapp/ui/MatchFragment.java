@@ -100,7 +100,7 @@ public class MatchFragment extends Fragment {
 
         selectLocationButton.setOnClickListener(v -> {
             NavController navController = NavHostFragment.findNavController(this);
-            navController.navigate(R.id.matchFragment_select_placeFragment);
+            navController.navigate(R.id.action_select_match_to_place);
         });
 
         locationEditText.setOnTouchListener(((View v, MotionEvent motionEvent) -> true));
