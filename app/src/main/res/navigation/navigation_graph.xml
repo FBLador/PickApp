@@ -19,10 +19,32 @@
         android:id="@+id/calendar"
         android:name="it.unimib.pickapp.ui.calendarFragment"
         android:label="@string/myGames"
-        tools:layout="@layout/fragment_calendar" />
+        tools:layout="@layout/fragment_calendar">
+        <action
+            android:id="@+id/calendar_to_match"
+            app:destination="@id/matchFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out" />
+    </fragment>
     <fragment
         android:id="@+id/account"
         android:name="it.unimib.pickapp.ui.accountFragment"
         android:label="@string/account"
         tools:layout="@layout/fragment_account" />
+    <fragment
+        android:id="@+id/matchFragment"
+        android:name="it.unimib.pickapp.ui.MatchFragment"
+        android:label="fragment_match"
+        tools:layout="@layout/fragment_match">
+        <action
+            android:id="@+id/matchFragment_select_placeFragment"
+            app:destination="@id/placeFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out" />
+    </fragment>
+    <fragment
+        android:id="@+id/placeFragment"
+        android:name="it.unimib.pickapp.ui.PlaceFragment"
+        android:label="place_fragment_item_list"
+        tools:layout="@layout/place_fragment_item_list" />
 </navigation>

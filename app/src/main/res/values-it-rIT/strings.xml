@@ -44,8 +44,8 @@
     <string name="address">Indirizzo</string>
     <string name="time">Orario</string>
     <string name="create">Crea</string>
-    <string name="addMatchSuccess">Partita creata con successo</string>
-    <string name="addMatchFail">Creazione dela partita fallita</string>
+    <string name="editSuccess">Partita modificata con successo</string>
+    <string name="editFailure">Modifica della partita fallita</string>
     <string name="choosePlaceMessage">Necessario selezionare un posto</string>
     <string name="invalidTimeDate">Orario o data non validi</string>
     <string name="teamNumber">Numero di squadre</string>
@@ -53,7 +53,14 @@
     <string name="privateMatch">Partita privata</string>
     <string name="description">Descrizione</string>
     <string name="sport">Sport</string>
-    <string name="createGame">crea partita</string>
+    <string name="createGame">Crea partita</string>
+    <string name="select">scegli</string>
+    <string name="options">Opzioni</string>
+    <string name="delete">cancella</string>
+    <string name="join">Unisciti</string>
+    <string name="leave">Lascia</string>
+    <string name="save">Salva</string>
+    <string name="match">Partita</string>
     <string name="enable_gps">Attiva il GPS sul tuo dispositivo per condividere la posizione con l\'app</string>
     <string name="search_match">Cerca partita</string>
 </resources>
