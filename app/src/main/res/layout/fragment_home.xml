@@ -32,7 +32,7 @@
                 android:textStyle="bold" />
         </androidx.appcompat.widget.Toolbar>
 
-        <HorizontalScrollView
+        <androidx.cardview.widget.CardView
             android:id="@+id/horizontalScrollView"
             android:layout_width="390dp"
             android:layout_height="wrap_content"
@@ -53,6 +53,7 @@
                     android:layout_weight="1"
                     android:background="@color/transparent"
                     android:contentDescription="basketFilter"
+                    android:tint="@color/item_color_inactive"
                     app:srcCompat="@drawable/ic_baseline_sports_basketball_24"
                     tools:ignore="SpeakableTextPresentCheck" />
 
@@ -63,6 +64,7 @@
                     android:layout_margin="20dp"
                     android:layout_weight="1"
                     android:background="@color/transparent"
+                    android:tint="@color/item_color_inactive"
                     app:srcCompat="@drawable/ic_baseline_sports_soccer_24"
                     tools:ignore="SpeakableTextPresentCheck" />
 
@@ -72,6 +74,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="20dp"
                     android:background="@color/transparent"
+                    android:tint="@color/item_color_inactive"
                     app:srcCompat="@drawable/ic_baseline_sports_tennis_24"
                     tools:ignore="SpeakableTextPresentCheck" />
 
@@ -81,10 +84,11 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="20dp"
                     android:background="@color/transparent"
+                    android:tint="@color/item_color_inactive"
                     app:srcCompat="@drawable/ic_baseline_sports_football_24"
                     tools:ignore="SpeakableTextPresentCheck" />
             </LinearLayout>
-        </HorizontalScrollView>
+        </androidx.cardview.widget.CardView>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view_games"

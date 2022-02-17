@@ -20,11 +20,16 @@ import it.unimib.pickapp.model.Match;
 // FirebaseUI. it provides functions to bind, adapt and show
 // database contents in a Recycler View
 public class matchesAdapter extends FirebaseRecyclerAdapter<Match, matchesAdapter.matchesViewHolder> {
+    private String filtro;
 
-    public matchesAdapter(
-            @NonNull FirebaseRecyclerOptions<Match> options)
+    public matchesAdapter(@NonNull FirebaseRecyclerOptions<Match> options)
     {
         super(options);
+    }
+
+    public matchesAdapter(@NonNull FirebaseRecyclerOptions<Match> options, String filtro) {
+        super(options);
+        this.filtro = filtro;
     }
 
     // Function to bind the view in Card view with data in
@@ -49,7 +54,7 @@ public class matchesAdapter extends FirebaseRecyclerAdapter<Match, matchesAdapte
 
         holder.sport.setText(model.getSport());
         int row_index=-1;
-        if(model.getSport().equals("TENNIS")) {
+        if(model.getSport().equals(filtro)) {
             row_index = position;
         }
         if(row_index==position){
