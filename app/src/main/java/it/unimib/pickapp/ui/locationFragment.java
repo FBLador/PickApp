@@ -3,11 +3,15 @@ import static it.unimib.pickapp.repository.Constants.MAPVIEW_BUNDLE_KEY;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -18,6 +22,7 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
@@ -31,7 +36,9 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.firebase.auth.FirebaseAuth;
 
+import java.util.Objects;
 import java.util.Random;
 
 import it.unimib.pickapp.R;
@@ -47,9 +54,18 @@ public class locationFragment extends Fragment implements OnMapReadyCallback {
     }
 
     @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // It is necessary to specify that the toolbar has a custom menu
+        setHasOptionsMenu(true);
+    }
+    @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_location, container, false);
         setTitle(view, getString(R.string.location));
+        Toolbar toolbar = view.findViewById(R.id.toolbarLocation);
+        Objects.requireNonNull(((pickappActivity) requireActivity()).getSupportActionBar()).hide();
+        ((pickappActivity) getActivity()).setSupportActionBar(toolbar);
 
         mMapView = view.findViewById(R.id.matches_list_map);
         initGoogleMap(savedInstanceState);
@@ -206,7 +222,23 @@ public class locationFragment extends Fragment implements OnMapReadyCallback {
     }
 
     public void setTitle(View view, String title){
-        TextView titleToolbar = view.findViewById(R.id.titleHome);
+        TextView titleToolbar = view.findViewById(R.id.titleLocation);
         titleToolbar.setText(title);
+    }
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        // The custom menu that we want to add to the toolbar
+        inflater.inflate(R.menu.logout_menu, menu);
+    }
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        // Listener for the items in the custom menu
+        if (item.getItemId() == R.id.logout) {
+            FirebaseAuth.getInstance().signOut();
+            startActivity(new Intent(requireActivity(), loginActivity.class));
+            requireActivity().finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

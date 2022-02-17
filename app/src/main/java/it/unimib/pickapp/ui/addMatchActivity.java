@@ -46,7 +46,7 @@ public class addMatchActivity extends AppCompatActivity {
         addMatchViewModel = new ViewModelProvider(this).get(AddMatchViewModel.class);
         placeViewModel = new ViewModelProvider(this).get(PlaceViewModel.class);
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbarHome);
         setSupportActionBar(toolbar);
 
         Spinner spinner = (Spinner) findViewById(R.id.sportSpinner);

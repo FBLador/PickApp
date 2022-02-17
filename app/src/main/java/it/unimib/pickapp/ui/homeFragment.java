@@ -1,8 +1,12 @@
 package it.unimib.pickapp.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +15,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
@@ -20,8 +25,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.Objects;
 
 import it.unimib.pickapp.R;
 import it.unimib.pickapp.model.Match;
@@ -45,10 +53,20 @@ public class homeFragment extends Fragment {
     }
 
     @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // It is necessary to specify that the toolbar has a custom menu
+        setHasOptionsMenu(true);
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_home, container, false);
+        Toolbar toolbar = view.findViewById(R.id.toolbarHome);
+        Objects.requireNonNull(((pickappActivity) requireActivity()).getSupportActionBar()).hide();
+        ((pickappActivity) getActivity()).setSupportActionBar(toolbar);
 
         setTitle(view, getString(R.string.home));
         basket = view.findViewById(R.id.basketFilter);
@@ -145,6 +163,22 @@ public class homeFragment extends Fragment {
     public void setTitle(View view, String title){
         titleToolbar = view.findViewById(R.id.titleHome);
         titleToolbar.setText(title);
+    }
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        // The custom menu that we want to add to the toolbar
+        inflater.inflate(R.menu.logout_menu, menu);
+    }
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        // Listener for the items in the custom menu
+        if (item.getItemId() == R.id.logout) {
+            FirebaseAuth.getInstance().signOut();
+            startActivity(new Intent(requireActivity(), loginActivity.class));
+            requireActivity().finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
     public void activateImgBttn(ImageButton bttn) {
         bttn.setScaleX(1.2F);

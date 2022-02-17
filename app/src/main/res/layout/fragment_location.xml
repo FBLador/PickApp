@@ -13,13 +13,13 @@
         tools:ignore="UselessParent">
 
         <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
+            android:id="@+id/toolbarLocation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="9dp">
 
             <TextView
-                android:id="@+id/titleHome"
+                android:id="@+id/titleLocation"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="28sp"

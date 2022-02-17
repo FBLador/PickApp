@@ -52,7 +52,7 @@ public class MatchFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_match, container, false);
 
-        Toolbar toolbar = view.findViewById(R.id.toolbar);
+        Toolbar toolbar = view.findViewById(R.id.toolbarHome);
         ((AppCompatActivity) requireActivity()).setSupportActionBar(toolbar);
 
         return view;

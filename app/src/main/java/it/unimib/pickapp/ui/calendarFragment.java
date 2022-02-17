@@ -1,8 +1,12 @@
 package it.unimib.pickapp.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CalendarView;
@@ -11,6 +15,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
@@ -27,6 +32,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.Objects;
 
 import it.unimib.pickapp.R;
 import it.unimib.pickapp.model.Match;
@@ -58,12 +65,21 @@ public class calendarFragment extends Fragment {
     }
 
     @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // It is necessary to specify that the toolbar has a custom menu
+        setHasOptionsMenu(true);
+    }
+    @Override
     public View onCreateView(
             @NonNull LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_calendar, container, false);
 
         setTitle(rootView, getString(R.string.calendar));
+        Toolbar toolbar = rootView.findViewById(R.id.toolbarCalendar);
+        Objects.requireNonNull(((pickappActivity) requireActivity()).getSupportActionBar()).hide();
+        ((pickappActivity) getActivity()).setSupportActionBar(toolbar);
 
         calendarView = rootView.findViewById(R.id.calendarView);
         addButton = rootView.findViewById(R.id.create_game);
@@ -241,6 +257,22 @@ public class calendarFragment extends Fragment {
     public void setTitle(View view, String title){
         titleToolbar = view.findViewById(R.id.titleCalendar);
         titleToolbar.setText(title);
+    }
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        // The custom menu that we want to add to the toolbar
+        inflater.inflate(R.menu.logout_menu, menu);
+    }
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        // Listener for the items in the custom menu
+        if (item.getItemId() == R.id.logout) {
+            FirebaseAuth.getInstance().signOut();
+            startActivity(new Intent(requireActivity(), loginActivity.class));
+            requireActivity().finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 }
