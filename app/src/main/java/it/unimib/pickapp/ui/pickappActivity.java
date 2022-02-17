@@ -1,6 +1,7 @@
 package it.unimib.pickapp.ui;
 
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -32,6 +33,15 @@ public class pickappActivity extends AppCompatActivity {
             NavController navController = navHostFragment.getNavController();
             BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_nav_view);
             NavigationUI.setupWithNavController(bottomNavigationView, navController);
+
+            navController.addOnDestinationChangedListener((controller, destination, argument) -> {
+                if (destination.getId() == R.id.matchFragment
+                        || destination.getId() == R.id.placeFragment) {
+                    bottomNavigationView.setVisibility(View.GONE);
+                } else {
+                    bottomNavigationView.setVisibility(View.VISIBLE);
+                }
+            });
         }
     }
 

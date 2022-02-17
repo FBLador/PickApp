@@ -56,7 +56,6 @@ dependencies {
     implementation 'androidx.cardview:cardview:1.0.0' // for cardview
     implementation 'androidx.recyclerview:recyclerview:1.1.0' // for recyclerview
     implementation 'com.google.firebase:firebase-storage:20.0.0'
-    implementation 'com.android.car.ui:car-ui-lib:+'
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.3.1'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1'
 //for image saved on firebase storage

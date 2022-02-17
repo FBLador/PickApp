@@ -7,13 +7,11 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import java.util.Objects;
 
 import it.unimib.pickapp.R;
 import it.unimib.pickapp.utils.RecyclerItemClickListener;
@@ -58,7 +56,7 @@ public class PlaceFragment extends Fragment {
         mAdapter = new PlaceRecyclerViewAdapter();
         recyclerView.setAdapter(mAdapter);
 
-        mViewModel.getPlaces().observe(this, (places -> mAdapter.updatePlaceList(places)));
+        mViewModel.getPlaces().observe(getViewLifecycleOwner(), (places -> mAdapter.updatePlaceList(places)));
 
 
         recyclerView.addOnItemTouchListener(
@@ -67,11 +65,8 @@ public class PlaceFragment extends Fragment {
                     public void onItemClick(View view, int position) {
                         mViewModel.setSelected(mViewModel.getPlaces().getValue().get(position));
 
-                        FragmentManager manager = requireActivity().getSupportFragmentManager();
-                        FragmentTransaction ft = manager.beginTransaction();
-                        // TODO ft.setCustomAnimations(R.anim.fade_out, R.anim.fade_in);
-                        ft.remove(Objects.requireNonNull(manager.findFragmentByTag("PlaceFragment")));
-                        ft.commit();
+                        NavController navController = NavHostFragment.findNavController(PlaceFragment.this);
+                        navController.popBackStack();
                     }
 
                     @Override

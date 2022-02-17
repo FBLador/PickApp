@@ -1,6 +1,5 @@
 package it.unimib.pickapp.ui;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,6 +12,9 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -36,7 +38,7 @@ public class calendarFragment extends Fragment {
     private RecyclerView recyclerView;
     private FloatingActionButton addButton;
     private RecyclerView.LayoutParams params;
-    DatabaseReference mbase;
+    private DatabaseReference mbase;
 
     //get info from firebase
     private FirebaseUser user;
@@ -48,6 +50,8 @@ public class calendarFragment extends Fragment {
 
     matchesAdapter adapter; // Create Object of the Adapter class
     DatabaseReference mDatabase; // Create object of the Firebase Realtime Database
+
+    private matchesAdapter.ItemClickListener itemClickListener;
 
     public calendarFragment() {
         // Required empty public constructor
@@ -81,9 +85,19 @@ public class calendarFragment extends Fragment {
                 = new FirebaseRecyclerOptions.Builder<Match>()
                 .setQuery(mbase, Match.class)
                 .build();
+
+        itemClickListener = match -> {
+            MatchViewModel matchViewModel =
+                    new ViewModelProvider(requireActivity()).get(MatchViewModel.class);
+
+            matchViewModel.setMatch(match);
+            NavController navController = NavHostFragment.findNavController(this);
+            navController.navigate(R.id.action_calendar_to_match);
+        };
+
         // Connecting object of required Adapter class to
         // the Adapter class itself
-        adapter = new matchesAdapter(options);
+        adapter = new matchesAdapter(options, itemClickListener);
         // Connecting Adapter class with the Recycler view
         recyclerView.setAdapter(adapter);
 
@@ -135,7 +149,8 @@ public class calendarFragment extends Fragment {
                         .build();
                 // Connecting object of required Adapter class to
                 // the Adapter class itself
-                adapter = new matchesAdapter(options);
+
+                adapter = new matchesAdapter(options, itemClickListener);
                 // Connecting Adapter class with the Recycler view*/
                 recyclerView.setAdapter(adapter);
                 adapter.startListening();
@@ -171,14 +186,14 @@ public class calendarFragment extends Fragment {
             //updateRecycler();
         });
 
-        addButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), addMatchActivity.class);
-                startActivity(intent);
-            }
-        });
+        addButton.setOnClickListener(v -> {
+            MatchViewModel matchViewModel =
+                    new ViewModelProvider(requireActivity()).get(MatchViewModel.class);
 
+            matchViewModel.setMatch(new Match());
+            NavController navController = NavHostFragment.findNavController(this);
+            navController.navigate(R.id.action_calendar_to_match);
+        });
 
 
     }

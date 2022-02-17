@@ -7,15 +7,21 @@ import android.util.Log;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.Objects;
 
 import it.unimib.pickapp.model.Match;
 
 public class AddMatchViewModel extends ViewModel {
     private static final String TAG = "AddMatchViewModel";
 
-    private final Match match;
+    private Match match;
+
+    private boolean creationMode;
+    private boolean userIsCreator;
 
     private final DatabaseReference databaseReference;
     private final String collectionName = "Matches";
@@ -35,10 +41,17 @@ public class AddMatchViewModel extends ViewModel {
         return match;
     }
 
+    public void setMatch(Match match) {
+        this.match = match;
+    }
+
+
     public void saveMatch() {
         final String id;
         if (match.getId() == null) {
             id = databaseReference.push().getKey();
+            match.setId(Objects.requireNonNull(
+                    FirebaseAuth.getInstance().getCurrentUser()).getUid());
         } else {
             id = match.getId();
         }

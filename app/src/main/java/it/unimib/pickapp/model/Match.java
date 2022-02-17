@@ -1,18 +1,20 @@
 package it.unimib.pickapp.model;
 
 import java.sql.Time;
+import java.util.HashMap;
 import java.util.Map;
 
 public class Match {
+
     //attributi della partita
-    private String id;
     private boolean isPrivate;
     private int hour;
     private String titolo;
     private String luogo;
     private String sport;
     private String descrizione;
-    private Map<String, User> partecipanti;
+    private Map<String, User> partecipanti; //TODO Rimuovere
+    private Map<String, Boolean> participants;
     private int numeroSquadre;
     private int day;
     private int month;
@@ -20,10 +22,21 @@ public class Match {
     private Time durata;
     private double costo;
     private int minutes;
+    private String id;
+    private String creatorId;
 
-    public Match() {}
+    public Match() {
+        participants = new HashMap<>();
+    }
 
-    //TODO temp
+    public Map<String, Boolean> getParticipants() {
+        return participants;
+    }
+
+    public void setParticipants(Map<String, Boolean> participants) {
+        this.participants = participants;
+    }
+
     public String getId() {
         return id;
     }
@@ -166,4 +179,11 @@ public class Match {
         this.minutes = minutes;
     }
 
+    public String getCreatorId() {
+        return creatorId;
+    }
+
+    public void setCreatorId(String creatorId) {
+        this.creatorId = creatorId;
+    }
 }
