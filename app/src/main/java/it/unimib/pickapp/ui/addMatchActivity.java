@@ -1,13 +1,20 @@
 package it.unimib.pickapp.ui;
 
+import android.annotation.SuppressLint;
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -16,7 +23,9 @@ import androidx.lifecycle.ViewModelProvider;
 import com.google.android.material.switchmaterial.SwitchMaterial;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Objects;
 import java.util.regex.Pattern;
 
 import it.unimib.pickapp.R;
@@ -28,6 +37,7 @@ public class addMatchActivity extends AppCompatActivity {
     private PlaceViewModel placeViewModel;
     private AddMatchViewModel addMatchViewModel;
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,18 +46,24 @@ public class addMatchActivity extends AppCompatActivity {
         addMatchViewModel = new ViewModelProvider(this).get(AddMatchViewModel.class);
         placeViewModel = new ViewModelProvider(this).get(PlaceViewModel.class);
 
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
         Spinner spinner = (Spinner) findViewById(R.id.sportSpinner);
         String[] keys = Sport.names();
         String[] values = getApplicationContext().getResources().getStringArray(R.array.sports);
-        EditText titleEditText = findViewById(R.id.editTextTitle);
-        EditText locationEditText = findViewById(R.id.editTextLocation);
+        EditText titleEditText = findViewById(R.id.titleInput);
+        EditText locationEditText = findViewById(R.id.locationInput);
         EditText dateEditText = findViewById(R.id.editTextDate);
         EditText timeEditText = findViewById(R.id.editTextTime);
         EditText descriptionEditText = findViewById(R.id.editTextDescription);
         EditText costEditText = findViewById(R.id.editTextCost);
         EditText numberOfTeamsEditText = findViewById(R.id.editTextNumberOfTeams);
         SwitchMaterial isPrivateSwitch = findViewById(R.id.privateSwitch);
-        Button createButton = findViewById(R.id.createButton);
+        Button createButton = findViewById(R.id.saveButton);
+        Button deleteButton = findViewById(R.id.deleteButton);
+        Button joinButton = findViewById(R.id.joinButton);
+        Button leaveButton = findViewById(R.id.leaveButton);
 
 
         List<SpinnerItem> items = new ArrayList<SpinnerItem>();
@@ -67,6 +83,8 @@ public class addMatchActivity extends AppCompatActivity {
             transaction.addToBackStack(null);
             transaction.commit();
         });
+
+        locationEditText.setOnTouchListener(((view, motionEvent) -> true));
 
         placeViewModel.getSelected().observe(this, selected -> {
             if (selected != null)
@@ -111,14 +129,84 @@ public class addMatchActivity extends AppCompatActivity {
         addMatchViewModel.status.observe(this, status -> {
             if (status == AddMatchViewModel.Status.SUCCESSFUL) {
                 Toast.makeText(addMatchActivity.this,
-                        getResources().getString(R.string.addMatchSuccess), Toast.LENGTH_SHORT).show();
+                        getResources().getString(R.string.editSuccess), Toast.LENGTH_SHORT).show();
                 addMatchActivity.this.finish();
             } else if (status == AddMatchViewModel.Status.FAILED) {
                 Toast.makeText(addMatchActivity.this,
-                        getResources().getString(R.string.addMatchFail), Toast.LENGTH_SHORT).show();
+                        getResources().getString(R.string.editFailure), Toast.LENGTH_SHORT).show();
             }
 
         });
+
+/*        MaterialDatePicker.Builder dpBuilder = MaterialDatePicker.Builder.datePicker();
+        dpBuilder.setTitleText("SELECT A DATE");
+        final MaterialDatePicker materialDatePicker = dpBuilder.build();
+
+
+        dateEditText.setOnClickListener(v -> {
+            materialDatePicker.show(getSupportFragmentManager(), "DATE_PICKER");
+        });*/
+
+
+        dateEditText.setOnTouchListener(((view, motionEvent) -> true));
+
+        findViewById(R.id.selectDateButton).setOnClickListener((view) -> {
+            final Calendar cldr = Calendar.getInstance();
+            int day = cldr.get(Calendar.DAY_OF_MONTH);
+            int month = cldr.get(Calendar.MONTH);
+            int year = cldr.get(Calendar.YEAR);
+            // date picker dialog
+            DatePickerDialog picker = new DatePickerDialog(addMatchActivity.this, R.style.DateDialogTheme,
+                    new DatePickerDialog.OnDateSetListener() {
+                        @Override
+                        public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                            dateEditText.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
+                        }
+                    }, year, month, day);
+            picker.show();
+        });
+
+
+        timeEditText.setOnTouchListener(((view, motionEvent) -> true));
+
+        findViewById(R.id.selectTimeButton).setOnClickListener((view) -> {
+            final Calendar cldr = Calendar.getInstance();
+            int hour = cldr.get(Calendar.HOUR_OF_DAY);
+            int minute = cldr.get(Calendar.MINUTE);
+            TimePickerDialog picker;
+            picker = new TimePickerDialog(addMatchActivity.this, R.style.TimePickerDialogTheme,
+                    new TimePickerDialog.OnTimeSetListener() {
+                        @Override
+                        public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
+                            timeEditText.setText(hour + ":" + minute);
+                        }
+                    }, hour, minute, true);//Yes 24 hour time
+            picker.show();
+        });
+
+
+        if (addMatchViewModel.getMatch().getId() == null) {
+            Objects.requireNonNull(getSupportActionBar()).setTitle(R.string.createGame);
+            deleteButton.setVisibility(View.GONE);
+        }
+
+
+//        dateEditText.setOnClickListener(v -> {
+//            final Calendar cldr = Calendar.getInstance();
+//            int day = cldr.get(Calendar.DAY_OF_MONTH);
+//            int month = cldr.get(Calendar.MONTH);
+//            int year = cldr.get(Calendar.YEAR);
+//            // date picker dialog
+//            DatePickerDialog picker = new DatePickerDialog(addMatchActivity.this, R.style.DateDialogTheme,
+//                    new DatePickerDialog.OnDateSetListener() {
+//                        @Override
+//                        public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+//                            dateEditText.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
+//                        }
+//                    }, year, month, day);
+//            picker.show();
+//        });
+
 
     }
 

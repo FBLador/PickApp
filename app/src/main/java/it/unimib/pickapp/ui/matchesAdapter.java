@@ -19,10 +19,13 @@ import it.unimib.pickapp.model.Match;
 // database contents in a Recycler View
 public class matchesAdapter extends FirebaseRecyclerAdapter<Match, matchesAdapter.matchesViewHolder> {
 
+    private final ItemClickListener itemClickListener;
+
     public matchesAdapter(
-            @NonNull FirebaseRecyclerOptions<Match> options)
-    {
+            @NonNull FirebaseRecyclerOptions<Match> options,
+            ItemClickListener itemClickListener) {
         super(options);
+        this.itemClickListener = itemClickListener;
     }
 
     // Function to bind the view in Card view with data in
@@ -35,6 +38,8 @@ public class matchesAdapter extends FirebaseRecyclerAdapter<Match, matchesAdapte
         int month = model.getMonth();
         int year = model.getYear();
 
+        holder.itemView.setOnClickListener(view -> itemClickListener.onItemClick(model));
+
         holder.titolo.setText(model.getTitolo());
 
         holder.luogo.setText(model.getLuogo());
@@ -43,7 +48,7 @@ public class matchesAdapter extends FirebaseRecyclerAdapter<Match, matchesAdapte
 
         holder.numeroSquadre.setText(Integer.toString(model.getNumeroSquadre()));
 
-        holder.dateTime.setText(day+"/"+month+"/"+year);
+        holder.dateTime.setText(day + "/" + month + "/" + year);
 
         holder.sport.setText(model.getSport());
 
@@ -60,12 +65,15 @@ public class matchesAdapter extends FirebaseRecyclerAdapter<Match, matchesAdapte
     @Override
     public matchesViewHolder
     onCreateViewHolder(@NonNull ViewGroup parent,
-                       int viewType)
-    {
+                       int viewType) {
         View view
                 = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.match_layout, parent, false);
         return new matchesAdapter.matchesViewHolder(view);
+    }
+
+    public interface ItemClickListener {
+        void onItemClick(Match match);
     }
 
     // Sub Class to create references of the views in Card
@@ -73,8 +81,8 @@ public class matchesAdapter extends FirebaseRecyclerAdapter<Match, matchesAdapte
     static class matchesViewHolder extends RecyclerView.ViewHolder {
         TextView titolo, luogo, partecipanti, numeroSquadre, dateTime, sport,
                 descrizione, durata, costo;
-        public matchesViewHolder(@NonNull View itemView)
-        {
+
+        public matchesViewHolder(@NonNull View itemView) {
             super(itemView);
 
             titolo = itemView.findViewById(R.id.titolo);

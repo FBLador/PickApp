@@ -69,13 +69,20 @@
     <string name="time">Time</string>
     <string name="address">Address</string>
     <string name="create">Create</string>
-    <string name="addMatchSuccess">Match added successfully</string>
-    <string name="addMatchFail">Failed to add this match</string>
+    <string name="editSuccess">Match edited successfully</string>
+    <string name="editFailure">Failed to edit this match</string>
     <string name="choosePlaceMessage">You must choose place</string>
     <string name="invalidTimeDate">Invalid time or date</string>
     <string name="teamNumber">Number of teams</string>
     <string name="cost">Cost</string>
     <string name="privateMatch">Private match</string>
-    <string name="createGame">create game</string>
+    <string name="select">select</string>
+    <string name="options">Options</string>
+    <string name="createGame">Create game</string>
+    <string name="delete">delete</string>
+    <string name="join">join</string>
+    <string name="leave">leave</string>
+    <string name="save">save</string>
+    <string name="match">Match</string>
 
 </resources>

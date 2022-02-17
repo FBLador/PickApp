@@ -5,8 +5,7 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/ic_background"
-    tools:context=".ui.addMatchActivity">
+    tools:context=".ui.MatchFragment">
 
 
     <com.google.android.material.appbar.AppBarLayout
@@ -474,9 +473,9 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="32dp"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:layout_marginTop="32dp"
                 android:orientation="vertical"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/constraintLayout1">
@@ -488,7 +487,7 @@
                     android:layout_marginBottom="20dp"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="@string/create"
+                    android:text="@string/save"
                     android:textSize="13sp"
                     app:backgroundTint="@color/buttonColor"
                     app:cornerRadius="30dp" />
