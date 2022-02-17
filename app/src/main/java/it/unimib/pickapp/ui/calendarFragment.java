@@ -97,7 +97,7 @@ public class calendarFragment extends Fragment {
 
         // Connecting object of required Adapter class to
         // the Adapter class itself
-        adapter = new matchesAdapter(options, itemClickListener);
+        adapter = new matchesAdapter(options, itemClickListener, "");
         // Connecting Adapter class with the Recycler view
         recyclerView.setAdapter(adapter);
 
@@ -150,7 +150,7 @@ public class calendarFragment extends Fragment {
                 // Connecting object of required Adapter class to
                 // the Adapter class itself
 
-                adapter = new matchesAdapter(options, itemClickListener);
+                adapter = new matchesAdapter(options, itemClickListener, "");
                 // Connecting Adapter class with the Recycler view*/
                 recyclerView.setAdapter(adapter);
                 adapter.startListening();

@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
@@ -134,8 +135,7 @@ public class homeFragment extends Fragment {
         };
         // Connecting object of required Adapter class to
         // the Adapter class itself
-        adapter = new matchesAdapter(options, "TENNIS");
-        adapter = new matchesAdapter(options, itemClickListener);
+        adapter = new matchesAdapter(options, itemClickListener, "TENNIS");
         // Connecting Adapter class with the Recycler view*/
         recyclerView.setAdapter(adapter);
         adapter.startListening();

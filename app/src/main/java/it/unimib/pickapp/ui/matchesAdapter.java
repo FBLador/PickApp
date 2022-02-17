@@ -21,21 +21,15 @@ import it.unimib.pickapp.model.Match;
 // database contents in a Recycler View
 public class matchesAdapter extends FirebaseRecyclerAdapter<Match, matchesAdapter.matchesViewHolder> {
     private String filtro;
-
-    private final ItemClickListener itemClickListener;
+private final ItemClickListener itemClickListener;
 
     public matchesAdapter(
             @NonNull FirebaseRecyclerOptions<Match> options,
-            ItemClickListener itemClickListener) {
-    public matchesAdapter(@NonNull FirebaseRecyclerOptions<Match> options)
-    {
-        super(options);
-        this.itemClickListener = itemClickListener;
-    }
-
-    public matchesAdapter(@NonNull FirebaseRecyclerOptions<Match> options, String filtro) {
-        super(options);
-        this.filtro = filtro;
+            ItemClickListener itemClickListener,
+            String filtro) {
+                super(options);
+                this.itemClickListener = itemClickListener;
+                this.filtro = filtro;
     }
 
     // Function to bind the view in Card view with data in
