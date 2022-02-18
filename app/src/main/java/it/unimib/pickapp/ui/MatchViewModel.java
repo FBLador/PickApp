@@ -15,10 +15,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 import it.unimib.pickapp.model.Match;
 import it.unimib.pickapp.model.Place;
+import it.unimib.pickapp.model.User;
 
 public class MatchViewModel extends ViewModel {
 
@@ -33,6 +35,9 @@ public class MatchViewModel extends ViewModel {
     private boolean creatorUser;
     private boolean participantUser;
     private final MutableLiveData<Place> selectedPlace;
+    private ArrayList<User> participants;
+    private final DatabaseReference databaseReferencetoUser;
+
 
 
     public MatchViewModel() {
@@ -42,6 +47,8 @@ public class MatchViewModel extends ViewModel {
 
         matchDatabaseReference = FirebaseDatabase.getInstance(FIREBASE_DATABASE_URL).
                 getReference().child(this.collectionName);
+
+        databaseReferencetoUser = FirebaseDatabase.getInstance().getReference("Users");
 
         locationDatabaseReference = FirebaseDatabase.getInstance(FIREBASE_DATABASE_URL).
                 getReference().child("Places");
@@ -83,6 +90,25 @@ public class MatchViewModel extends ViewModel {
         }
 
         participantUser = match.getParticipants().containsKey(currentUserId);
+
+        participants = new ArrayList<User>();
+
+        for (String userID: match.getParticipants().keySet()) {
+            //.child(userID);
+            databaseReferencetoUser.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    participants.add(dataSnapshot.child(userID).getValue(User.class));
+                    System.out.println(participants);
+                    Log.d(TAG, "user" + participants);
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    System.out.println("The read failed: " + databaseError.getCode());
+                }
+            });
+        }
     }
 
     public MutableLiveData<AddMatchViewModel.Status> getStatus() {
