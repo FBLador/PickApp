@@ -4,11 +4,11 @@ import static it.unimib.pickapp.repository.Constants.FIREBASE_DATABASE_URL;
 
 import android.util.Log;
 
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -19,12 +19,14 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 import it.unimib.pickapp.model.Match;
+import it.unimib.pickapp.model.Place;
 import it.unimib.pickapp.model.User;
 
 public class MatchViewModel extends ViewModel {
 
     private static final String TAG = "MatchViewModel";
-    private final DatabaseReference databaseReference;
+    private final DatabaseReference matchDatabaseReference;
+    private final DatabaseReference locationDatabaseReference;
     private final String collectionName = "Matches";
     private final MutableLiveData<AddMatchViewModel.Status> status;
     private final String currentUserId;
@@ -32,20 +34,28 @@ public class MatchViewModel extends ViewModel {
     private boolean creationModeEnabled;
     private boolean creatorUser;
     private boolean participantUser;
+    private final MutableLiveData<Place> selectedPlace;
     private ArrayList<User> participants;
     private final DatabaseReference databaseReferencetoUser;
+
+
 
     public MatchViewModel() {
         status = new MutableLiveData<AddMatchViewModel.Status>(null);
 
         this.match = new Match();
 
-        databaseReference = FirebaseDatabase.getInstance(FIREBASE_DATABASE_URL).
+        matchDatabaseReference = FirebaseDatabase.getInstance(FIREBASE_DATABASE_URL).
                 getReference().child(this.collectionName);
 
         databaseReferencetoUser = FirebaseDatabase.getInstance().getReference("Users");
+
+        locationDatabaseReference = FirebaseDatabase.getInstance(FIREBASE_DATABASE_URL).
+                getReference().child("Places");
+
         currentUserId = Objects.requireNonNull(
                 FirebaseAuth.getInstance().getCurrentUser()).getUid();
+        selectedPlace = new MutableLiveData<>(null);
         creationModeEnabled = true;
         creatorUser = false;
         participantUser = false;
@@ -64,7 +74,23 @@ public class MatchViewModel extends ViewModel {
                 Objects.requireNonNull(
                         FirebaseAuth.getInstance().getCurrentUser()).getUid());
 
+        if (match.getLuogo() != null) {
+            locationDatabaseReference.child(match.getLuogo()).addListenerForSingleValueEvent(
+                    new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            selectedPlace.setValue(dataSnapshot.getValue(Place.class));
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+                        }
+                    }
+            );
+        }
+
         participantUser = match.getParticipants().containsKey(currentUserId);
+
         participants = new ArrayList<User>();
 
         for (String userID: match.getParticipants().keySet()) {
@@ -103,7 +129,7 @@ public class MatchViewModel extends ViewModel {
         final String id;
         match.setMonth(match.getMonth());
         if (match.getId() == null) {
-            id = databaseReference.push().getKey();
+            id = matchDatabaseReference.push().getKey();
             match.setId(id);
             match.setCreatorId(currentUserId);
             match.getParticipants().put(match.getCreatorId(), true);
@@ -111,7 +137,7 @@ public class MatchViewModel extends ViewModel {
             id = match.getId();
         }
         assert id != null;
-        DatabaseReference reference = databaseReference.child(id);
+        DatabaseReference reference = matchDatabaseReference.child(id);
         Log.i(TAG, "Saving '" + id + "' in '" + collectionName + "'.");
         reference.setValue(match).addOnFailureListener(e ->
                 Log.d(TAG, "There was an error saving '"
@@ -132,28 +158,17 @@ public class MatchViewModel extends ViewModel {
         return participantUser;
     }
 
+    public LiveData<Place> getSelectedPlace() {
+        return selectedPlace;
+    }
+
+    public void setSelectedPlace(Place place) {
+        selectedPlace.setValue(place);
+    }
+
     public enum Status {
         FAILED,
         SUCCESSFUL
     }
 
 }
-/*
-    // Get a reference to our posts
-    final FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference ref = database.getReference("server/saving-data/fireblog/posts");
-
-    // Attach a listener to read the data at our posts reference
-    ref.addValueEventListener(new ValueEventListener() {
-        @Override
-        public void onDataChange(DataSnapshot dataSnapshot) {
-            Post post = dataSnapshot.getValue(Post.class);
-            System.out.println(post);
-        }
-
-        @Override
-        public void onCancelled(DatabaseError databaseError) {
-                System.out.println("The read failed: " + databaseError.getCode());
-        }
-     });
-        */

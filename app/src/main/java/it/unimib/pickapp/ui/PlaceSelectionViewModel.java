@@ -8,11 +8,11 @@ import java.util.ArrayList;
 
 import it.unimib.pickapp.model.Place;
 
-public class PlaceViewModel extends ViewModel {
+public class PlaceSelectionViewModel extends ViewModel {
     private final MutableLiveData<Place> selected;
     private MutableLiveData<ArrayList<Place>> places;
 
-    public PlaceViewModel() {
+    public PlaceSelectionViewModel() {
         selected = new MutableLiveData<Place>(null);
     }
 

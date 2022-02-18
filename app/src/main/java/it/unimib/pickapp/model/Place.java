@@ -16,6 +16,10 @@ public class Place {
         this.location = location;
     }
 
+    public Place() {
+
+    }
+
     //getter e setter
     public String getId() {
         return id;
