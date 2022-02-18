@@ -86,7 +86,8 @@
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical">
+                            android:orientation="vertical"
+                            tools:ignore="UselessParent">
 
                             <TextView
                                 android:id="@+id/matches"
@@ -94,6 +95,7 @@
                                 android:layout_height="wrap_content"
                                 android:textColor="@color/black"
                                 android:layout_gravity="center"
+                                android:text="0"
                                 android:textSize="18sp"
                                 style="bold"/>
 
@@ -105,64 +107,21 @@
 
                         </LinearLayout>
 
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:layout_marginStart="35dp">
-
-                            <TextView
-                                android:id="@+id/won"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textColor="@color/black"
-                                android:layout_gravity="center"
-                                android:textSize="18sp"
-                                style="bold"/>
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textSize="12sp"
-                                android:text="@string/won"/>
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:layout_marginStart="35dp">
-
-                            <TextView
-                                android:id="@+id/played"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textColor="@color/black"
-                                android:layout_gravity="center"
-                                android:textSize="18sp"
-                                style="bold"/>
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textSize="12sp"
-                                android:text="@string/played"/>
-
-                        </LinearLayout>
-
                     </LinearLayout>
 
                     <Button
                         android:id="@+id/edit_profile"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
+                        android:paddingStart="30dp"
+                        android:paddingEnd="30dp"
                         android:background="@color/gray"
                         android:minHeight="48dp"
                         android:text="@string/editProfile"
                         android:textSize="13sp"
-                        android:textColor="@color/black"/>
+                        android:textColor="@color/black"
+                        android:layout_gravity="center"/>
 
                 </LinearLayout>
 
@@ -210,8 +169,9 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     app:srcCompat="@drawable/ic_baseline_videogame_asset_24"
-                    tools:ignore="SpeakableTextPresentCheck" />
-
+                    tools:ignore="SpeakableTextPresentCheck"
+                    android:contentDescription="matches recycler view" />
+<!--
                 <ImageButton
                     android:id="@+id/activities"
                     style="?android:attr/buttonBarButtonStyle"
@@ -219,20 +179,20 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     app:srcCompat="@drawable/ic_baseline_trending_up_24"
-                    tools:ignore="SpeakableTextPresentCheck" />
+                    tools:ignore="SpeakableTextPresentCheck" /> -->
 
             </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recycler_view_activities"
+                android:id="@+id/recycler_view_matches_profile"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
-
+<!--
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_view_posts"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:visibility="gone"/>
+                android:visibility="gone"/>-->
 
     </LinearLayout>
 

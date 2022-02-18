@@ -47,7 +47,7 @@ public class accountFragment extends Fragment {
     private static final String TAG = "AccountFragment";
     private static final String SHARED_PREF_EMAIL = "email";
     private ImageView imageProfile;
-    private TextView match, won, played, fullname, bio, nickname;
+    private TextView matches, fullname, bio, nickname;
     private Button editProfile;
 
 
@@ -56,11 +56,9 @@ public class accountFragment extends Fragment {
     private DatabaseReference reference;
     private String userID;
 
-    private RecyclerView recyclerView_activities;
+    private RecyclerView recyclerView_matches_profile;
 
-    private RecyclerView recyclerView_post;
-
-    private ImageButton activities, posts;
+    private ImageButton matches_profile, posts;
 
 
     public accountFragment() {
@@ -83,46 +81,25 @@ public class accountFragment extends Fragment {
         ((pickappActivity) getActivity()).setSupportActionBar(toolbar);
 
         imageProfile = view.findViewById(R.id.image_profile);
-        match = view.findViewById(R.id.matches);
-        won = view.findViewById(R.id.won);
-        played = view.findViewById(R.id.played);
+        matches = view.findViewById(R.id.matches);
         fullname = view.findViewById(R.id.fullname);
         bio = view.findViewById(R.id.bio);
         editProfile = view.findViewById(R.id.edit_profile);
         nickname = view.findViewById(R.id.nickname);
-        activities = view.findViewById(R.id.activities);
-        posts = view.findViewById(R.id.posts);
 
-        recyclerView_activities = view.findViewById(R.id.recycler_view_activities);
-        recyclerView_activities.setHasFixedSize(true);
-        LinearLayoutManager mLayoutManager = new GridLayoutManager(getContext(), 3);
-        recyclerView_activities.setLayoutManager(mLayoutManager);
+        //recyclerView_activities.setHasFixedSize(true);
+        //LinearLayoutManager mLayoutManager = new GridLayoutManager(getContext(), 3);
+        //recyclerView_activities.setLayoutManager(mLayoutManager);
 
-        recyclerView_post = view.findViewById(R.id.recycler_view_posts);
-        recyclerView_post.setHasFixedSize(true);
+        recyclerView_matches_profile = view.findViewById(R.id.recycler_view_matches_profile);
+        recyclerView_matches_profile.setHasFixedSize(true);
         LinearLayoutManager mLayoutManagers = new GridLayoutManager(getContext(), 3);
-        recyclerView_post.setLayoutManager(mLayoutManagers);
+        recyclerView_matches_profile.setLayoutManager(mLayoutManagers);
 
-        recyclerView_activities.setVisibility(View.VISIBLE);
-        recyclerView_post.setVisibility(View.GONE);
+        //recyclerView_activities.setVisibility(View.VISIBLE);
+        recyclerView_matches_profile.setVisibility(View.GONE);
 
         userInfo(view);
-
-        activities.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                recyclerView_activities.setVisibility(View.VISIBLE);
-                recyclerView_post.setVisibility(View.GONE);
-            }
-        });
-
-        posts.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                recyclerView_activities.setVisibility(View.GONE);
-                recyclerView_post.setVisibility(View.VISIBLE);
-            }
-        });
 
         editProfile.setOnClickListener(new View.OnClickListener() {
             @Override
