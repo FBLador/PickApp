@@ -24,6 +24,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.Locale;
+
 import it.unimib.pickapp.R;
 import it.unimib.pickapp.model.User;
 
@@ -84,7 +86,7 @@ public class registrationSurveyActivity extends AppCompatActivity {
                 //livello di esperienza selezionato, tutto ok
                 else {
                     //recupero sport e livello di esperienza
-                    String favouriteSport = sportSelected();
+                    String favouriteSport = sportSelected().toUpperCase(Locale.ROOT);
                     String experienceLevel = experienceSelected();
 
                     //creo un nuvo utente e lo aggiungo alla sezione FirebaseAuth

@@ -13,6 +13,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import it.unimib.pickapp.R;
 import it.unimib.pickapp.model.Match;
 
@@ -20,16 +23,13 @@ import it.unimib.pickapp.model.Match;
 // FirebaseUI. it provides functions to bind, adapt and show
 // database contents in a Recycler View
 public class matchesAdapter extends FirebaseRecyclerAdapter<Match, matchesAdapter.matchesViewHolder> {
-    private String filtro;
-private final ItemClickListener itemClickListener;
+    private final ItemClickListener itemClickListener;
 
     public matchesAdapter(
             @NonNull FirebaseRecyclerOptions<Match> options,
-            ItemClickListener itemClickListener,
-            String filtro) {
+            ItemClickListener itemClickListener) {
                 super(options);
                 this.itemClickListener = itemClickListener;
-                this.filtro = filtro;
     }
 
     // Function to bind the view in Card view with data in
@@ -41,6 +41,7 @@ private final ItemClickListener itemClickListener;
         int day = model.getDay();
         int month = model.getMonth();
         int year = model.getYear();
+
 
         holder.itemView.setOnClickListener(view -> itemClickListener.onItemClick(model));
 
@@ -55,17 +56,6 @@ private final ItemClickListener itemClickListener;
         holder.dateTime.setText(day + "/" + month + "/" + year);
 
         holder.sport.setText(model.getSport());
-        int row_index=-1;
-        if(model.getSport().equals(filtro)) {
-            row_index = position;
-        }
-        if(row_index==position){
-            holder.titolo.setTextColor(Color.parseColor("#55bb55"));
-
-        }
-        else
-        { holder.titolo.setTextColor(Color.parseColor("#000000"));
-        }
 
         //holder.descrizione.setText(model.getDescrizione());
 

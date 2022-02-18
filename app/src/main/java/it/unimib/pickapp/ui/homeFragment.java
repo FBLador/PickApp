@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -24,11 +25,20 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
 import java.util.Objects;
 
 import it.unimib.pickapp.R;
@@ -44,6 +54,11 @@ public class homeFragment extends Fragment {
     DatabaseReference mbase;
     private static final String TAG = "homeFragment";
     matchesAdapter adapter; // Create Object of the Adapter class
+    private String filtroSport;
+    //get info from firebase
+    private FirebaseUser user;
+    private DatabaseReference reference;
+    private String userID;
 
 
     public homeFragment() {
@@ -82,10 +97,27 @@ public class homeFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull final View view, @Nullable final Bundle savedInstanceState) {
 
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        reference = FirebaseDatabase.getInstance().getReference("Users");
+        userID = user.getUid();
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                filtroSport = snapshot.child(userID).child("favouriteSport").getValue().toString();
+                creaRecyclerView();
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+
+
         basket.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    filtroSport = "BASKET";
+                    creaRecyclerView();
                     activateImgBttn(basket);
                     inactivateImgBttn(soccer);
                     inactivateImgBttn(tennis);
@@ -98,6 +130,8 @@ public class homeFragment extends Fragment {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    filtroSport = "SOCCER";
+                    creaRecyclerView();
                     activateImgBttn(soccer);
                     inactivateImgBttn(football);
                     inactivateImgBttn(tennis);
@@ -110,6 +144,8 @@ public class homeFragment extends Fragment {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    filtroSport = "TENNIS";
+                    creaRecyclerView();
                     activateImgBttn(tennis);
                     inactivateImgBttn(soccer);
                     inactivateImgBttn(football);
@@ -122,6 +158,8 @@ public class homeFragment extends Fragment {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    filtroSport = "FOOTBALL";
+                    creaRecyclerView();
                     activateImgBttn(football);
                     inactivateImgBttn(soccer);
                     inactivateImgBttn(tennis);
@@ -130,32 +168,6 @@ public class homeFragment extends Fragment {
                 return true;
             }
         });
-
-        mbase = FirebaseDatabase.getInstance().getReference("Matches");
-        Log.d(TAG, String.valueOf(mbase.orderByChild("sport").equalTo("TENNIS")));
-
-        // TODO
-        //.orderByChild("dateTime").equalTo(dayOfMonth + "/" + month + "/" + year)
-        FirebaseRecyclerOptions<Match> options
-                = new FirebaseRecyclerOptions.Builder<Match>()
-                .setQuery(mbase, Match.class)
-                .build();
-
-        matchesAdapter.ItemClickListener itemClickListener = match -> {
-            MatchViewModel matchViewModel =
-                    new ViewModelProvider(requireActivity()).get(MatchViewModel.class);
-
-            matchViewModel.setMatch(match);
-            NavController navController = NavHostFragment.findNavController(this);
-            navController.navigate(R.id.action_home_to_match);
-        };
-        // Connecting object of required Adapter class to
-        // the Adapter class itself
-        adapter = new matchesAdapter(options, itemClickListener, "TENNIS");
-        // Connecting Adapter class with the Recycler view*/
-        recyclerView.setAdapter(adapter);
-        adapter.startListening();
-        recyclerView.invalidate();
     }
 
     public void setTitle(View view, String title){
@@ -192,7 +204,6 @@ public class homeFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        adapter.startListening();
     }
 
 
@@ -200,5 +211,34 @@ public class homeFragment extends Fragment {
     public void onStop() {
         super.onStop();
         adapter.stopListening();
+    }
+
+    public void creaRecyclerView() {
+        mbase = FirebaseDatabase.getInstance().getReference("Matches");
+        Query query = mbase.orderByChild("sport").equalTo(filtroSport);
+
+        // TODO
+        //.orderByChild("dateTime").equalTo(dayOfMonth + "/" + month + "/" + year)
+        FirebaseRecyclerOptions<Match> options
+                = new FirebaseRecyclerOptions.Builder<Match>()
+                .setQuery(query, Match.class)
+                .build();
+
+
+        matchesAdapter.ItemClickListener itemClickListener = match -> {
+            MatchViewModel matchViewModel =
+                    new ViewModelProvider(requireActivity()).get(MatchViewModel.class);
+
+            matchViewModel.setMatch(match);
+            NavController navController = NavHostFragment.findNavController(this);
+            navController.navigate(R.id.action_home_to_match);
+        };
+        // Connecting object of required Adapter class to
+        // the Adapter class itself
+        adapter = new matchesAdapter(options, itemClickListener);
+        // Connecting Adapter class with the Recycler view*/
+        recyclerView.setAdapter(adapter);
+        adapter.startListening();
+        recyclerView.invalidate();
     }
 }

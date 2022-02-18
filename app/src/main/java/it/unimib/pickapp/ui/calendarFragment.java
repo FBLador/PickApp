@@ -33,6 +33,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 import it.unimib.pickapp.R;
@@ -106,7 +107,7 @@ public class calendarFragment extends Fragment {
 
         // Connecting object of required Adapter class to
         // the Adapter class itself
-        adapter = new matchesAdapter(options, itemClickListener, "");
+        adapter = new matchesAdapter(options, itemClickListener);
         // Connecting Adapter class with the Recycler view
         recyclerView.setAdapter(adapter);
 
@@ -157,7 +158,7 @@ public class calendarFragment extends Fragment {
             // Connecting object of required Adapter class to
             // the Adapter class itself
 
-            adapter = new matchesAdapter(options, itemClickListener, "");
+            adapter = new matchesAdapter(options, itemClickListener);
             // Connecting Adapter class with the Recycler view*/
             recyclerView.setAdapter(adapter);
             adapter.startListening();
