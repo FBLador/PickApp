@@ -40,7 +40,7 @@ import it.unimib.pickapp.model.Sport;
 
 public class MatchFragment extends Fragment {
 
-    private PlaceViewModel placeViewModel;
+    private FPlaceSelectionViewModel placeSelectionViewModel;
     private MatchViewModel matchViewModel;
 
     public static MatchFragment newInstance() {
@@ -66,7 +66,7 @@ public class MatchFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         matchViewModel = new ViewModelProvider(requireActivity()).get(MatchViewModel.class);
-        placeViewModel = new ViewModelProvider(requireActivity()).get(PlaceViewModel.class);
+        placeSelectionViewModel = new ViewModelProvider(requireActivity()).get(FPlaceSelectionViewModel.class);
 
         Spinner sportSpinner = (Spinner) view.findViewById(R.id.sportSpinner);
         String[] keys = Sport.names();
@@ -100,19 +100,19 @@ public class MatchFragment extends Fragment {
 
         selectLocationButton.setOnClickListener(v -> {
             NavController navController = NavHostFragment.findNavController(this);
-            navController.navigate(R.id.action_select_match_to_place);
+            navController.navigate(R.id.action_matchFragment_to_FPlaceSelectionFragment);
         });
 
         locationEditText.setOnTouchListener(((View v, MotionEvent motionEvent) -> true));
 
-        placeViewModel.getSelected().observe(getViewLifecycleOwner(), selected -> {
+        placeSelectionViewModel.getSelected().observe(getViewLifecycleOwner(), selected -> {
             if (selected != null)
-                locationEditText.setText(selected.getName());
+                matchViewModel.setSelectedPlace(selected);
         });
 
 
         saveButton.setOnClickListener(v -> {
-            if (placeViewModel.getSelected().getValue() == null) {
+            if (placeSelectionViewModel.getSelected().getValue() == null) {
                 Toast.makeText(requireContext(),
                         getResources().getString(R.string.choosePlaceMessage), Toast.LENGTH_SHORT).show();
                 return;
@@ -129,7 +129,7 @@ public class MatchFragment extends Fragment {
             // TODO Validity checks
             match.setTitolo(titleEditText.getText().toString());
             match.setSport(((addMatchActivity.SpinnerItem) sportSpinner.getSelectedItem()).getKey());
-            match.setLuogo(placeViewModel.getSelected().getValue().getId());
+            match.setLuogo(placeSelectionViewModel.getSelected().getValue().getId());
             // TODO Language support
             match.setDay(Integer.parseInt(splitDate[0]));
             match.setMonth(Integer.parseInt(splitDate[1]));
@@ -159,8 +159,6 @@ public class MatchFragment extends Fragment {
                         getResources().getString(R.string.editSuccess), Toast.LENGTH_SHORT).show();
                 NavController navController = NavHostFragment.findNavController(this);
                 navController.popBackStack();
-
-                placeViewModel.setSelected(null);
             } else if (status == AddMatchViewModel.Status.FAILED) {
                 Toast.makeText(requireContext(),
                         getResources().getString(R.string.editFailure), Toast.LENGTH_SHORT).show();
@@ -216,18 +214,15 @@ public class MatchFragment extends Fragment {
         });
 
 
+        matchViewModel.getSelectedPlace().observe(getViewLifecycleOwner(), selected -> {
+            if (selected != null)
+                locationEditText.setText(selected.getName());
+        });
+
         if (matchViewModel.getMatch().getId() != null) {
             titleEditText.setText(matchViewModel.getMatch().getTitolo());
             sportSpinner.setSelection(
                     Sport.valueOf(matchViewModel.getMatch().getSport().toUpperCase()).ordinal());
-
-            if (placeViewModel.getSelected().getValue() == null) {
-                //TODO /!\ Temporaneo
-                placeViewModel.setSelected(placeViewModel.getPlaces().getValue().stream()
-                        .filter(x -> x.getId().equals(matchViewModel.getMatch().getLuogo()))
-                        .findFirst().get());
-            }
-
 
             dateEditText.setText(matchViewModel.getMatch().getDay()
                     + "/" + (matchViewModel.getMatch().getMonth())

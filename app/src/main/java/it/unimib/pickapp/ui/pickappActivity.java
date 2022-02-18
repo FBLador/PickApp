@@ -36,7 +36,9 @@ public class pickappActivity extends AppCompatActivity {
 
             navController.addOnDestinationChangedListener((controller, destination, argument) -> {
                 if (destination.getId() == R.id.matchFragment
-                        || destination.getId() == R.id.placeFragment) {
+                        || destination.getId() == R.id.placeFragment
+                        || destination.getId() == R.id.FPlaceSelectionFragment
+                ) {
                     bottomNavigationView.setVisibility(View.GONE);
                 } else {
                     bottomNavigationView.setVisibility(View.VISIBLE);

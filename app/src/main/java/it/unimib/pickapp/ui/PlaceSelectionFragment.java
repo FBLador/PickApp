@@ -16,27 +16,24 @@ import androidx.recyclerview.widget.RecyclerView;
 import it.unimib.pickapp.R;
 import it.unimib.pickapp.utils.RecyclerItemClickListener;
 
-/**
- * A fragment representing a list of Items.
- */
-public class PlaceFragment extends Fragment {
+public class PlaceSelectionFragment extends Fragment {
 
     private static final String TAG = "PlaceFragment";
     private static final int DATASET_COUNT = 60;
 
-    private static PlaceViewModel mViewModel;
+    private static PlaceSelectionViewModel mViewModel;
     protected PlaceRecyclerViewAdapter mAdapter;
     protected RecyclerView.LayoutManager mLayoutManager;
     protected String[] mDataset;
 
-    public static PlaceFragment newInstance() {
-        return new PlaceFragment();
+    public static PlaceSelectionFragment newInstance() {
+        return new PlaceSelectionFragment();
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mViewModel = new ViewModelProvider(requireActivity()).get(PlaceViewModel.class);
+        mViewModel = new ViewModelProvider(requireActivity()).get(PlaceSelectionViewModel.class);
         mViewModel.getPlaces();
     }
 
@@ -65,7 +62,7 @@ public class PlaceFragment extends Fragment {
                     public void onItemClick(View view, int position) {
                         mViewModel.setSelected(mViewModel.getPlaces().getValue().get(position));
 
-                        NavController navController = NavHostFragment.findNavController(PlaceFragment.this);
+                        NavController navController = NavHostFragment.findNavController(PlaceSelectionFragment.this);
                         navController.popBackStack();
                     }
 

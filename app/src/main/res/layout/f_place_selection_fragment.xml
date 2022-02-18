@@ -3,10 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/placesRecycler"
-    android:name="it.unimib.pickapp.ui.PlaceFragment"
+    android:name="it.unimib.pickapp.ui.FPlaceSelectionFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
     app:layoutManager="LinearLayoutManager"
-    tools:context=".ui.PlaceSelectionFragment"
+    tools:context=".ui.FPlaceSelectionFragment"
     tools:listitem="@layout/place_fragment_item" />

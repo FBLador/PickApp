@@ -34,7 +34,7 @@ import it.unimib.pickapp.model.Sport;
 
 public class addMatchActivity extends AppCompatActivity {
 
-    private PlaceViewModel placeViewModel;
+    private PlaceSelectionViewModel placeSelectionViewModel;
     private AddMatchViewModel addMatchViewModel;
 
     @SuppressLint("ClickableViewAccessibility")
@@ -44,7 +44,7 @@ public class addMatchActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_match);
 
         addMatchViewModel = new ViewModelProvider(this).get(AddMatchViewModel.class);
-        placeViewModel = new ViewModelProvider(this).get(PlaceViewModel.class);
+        placeSelectionViewModel = new ViewModelProvider(this).get(PlaceSelectionViewModel.class);
 
         Toolbar toolbar = findViewById(R.id.toolbarHome);
         setSupportActionBar(toolbar);
@@ -76,7 +76,7 @@ public class addMatchActivity extends AppCompatActivity {
                 R.layout.sport_spinner_item, items));
 
         findViewById(R.id.selectLocationButton).setOnClickListener((view) -> {
-            Fragment placeFragment = new PlaceFragment();
+            Fragment placeFragment = new PlaceSelectionFragment();
             FragmentManager manager = getSupportFragmentManager();
             FragmentTransaction transaction = manager.beginTransaction();
             transaction.add(R.id.container, placeFragment, "PlaceFragment");
@@ -86,14 +86,14 @@ public class addMatchActivity extends AppCompatActivity {
 
         locationEditText.setOnTouchListener(((view, motionEvent) -> true));
 
-        placeViewModel.getSelected().observe(this, selected -> {
+        placeSelectionViewModel.getSelected().observe(this, selected -> {
             if (selected != null)
                 locationEditText.setText(selected.getName());
         });
 
 
         createButton.setOnClickListener((view) -> {
-            if (placeViewModel.getSelected().getValue() == null) {
+            if (placeSelectionViewModel.getSelected().getValue() == null) {
                 Toast.makeText(addMatchActivity.this,
                         getResources().getString(R.string.choosePlaceMessage), Toast.LENGTH_SHORT).show();
                 return;
@@ -110,7 +110,7 @@ public class addMatchActivity extends AppCompatActivity {
             // TODO Validity checks
             match.setTitolo(titleEditText.getText().toString());
             match.setSport(((SpinnerItem) spinner.getSelectedItem()).getKey());
-            match.setLuogo(placeViewModel.getSelected().getValue().getId());
+            match.setLuogo(placeSelectionViewModel.getSelected().getValue().getId());
             // TODO Language support
             match.setDay(Integer.parseInt(splitDate[0]));
             match.setMonth(Integer.parseInt(splitDate[1]));
