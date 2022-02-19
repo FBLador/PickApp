@@ -97,7 +97,7 @@ public class editProfileActivity extends AppCompatActivity {
     }
 
     private void openPickappActivity() {
-        Intent intent = new Intent(this, pickappActivity.class);
+        Intent intent = new Intent(this, accountFragment.class);
         startActivity(intent);
     }
 

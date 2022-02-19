@@ -36,7 +36,13 @@
         android:id="@+id/account"
         android:name="it.unimib.pickapp.ui.accountFragment"
         android:label="@string/account"
-        tools:layout="@layout/fragment_account" />
+        tools:layout="@layout/fragment_account" >
+        <action
+            android:id="@+id/action_account_to_match"
+            app:destination="@id/matchFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out" />
+    </fragment>
     <fragment
         android:id="@+id/matchFragment"
         android:name="it.unimib.pickapp.ui.MatchFragment"

@@ -20,22 +20,28 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.Objects;
 
 import it.unimib.pickapp.R;
+import it.unimib.pickapp.model.Match;
 
 /**
  * It shows the account section.
@@ -53,10 +59,11 @@ public class accountFragment extends Fragment {
 
     //get info from firebase
     private FirebaseUser user;
-    private DatabaseReference reference;
+    private DatabaseReference reference, locationReference;
     private String userID;
 
-    private RecyclerView recyclerView_matches_profile;
+    private RecyclerView recyclerView;
+    matchesAdapter adapter;
 
     private ImageButton matches_profile, posts;
 
@@ -87,17 +94,13 @@ public class accountFragment extends Fragment {
         editProfile = view.findViewById(R.id.edit_profile);
         nickname = view.findViewById(R.id.nickname);
 
-        //recyclerView_activities.setHasFixedSize(true);
-        //LinearLayoutManager mLayoutManager = new GridLayoutManager(getContext(), 3);
-        //recyclerView_activities.setLayoutManager(mLayoutManager);
+        recyclerView = view.findViewById(R.id.recycler_view_matches_profile);
 
-        recyclerView_matches_profile = view.findViewById(R.id.recycler_view_matches_profile);
-        recyclerView_matches_profile.setHasFixedSize(true);
-        LinearLayoutManager mLayoutManagers = new GridLayoutManager(getContext(), 3);
-        recyclerView_matches_profile.setLayoutManager(mLayoutManagers);
-
-        //recyclerView_activities.setVisibility(View.VISIBLE);
-        recyclerView_matches_profile.setVisibility(View.GONE);
+        //to display the recycler view
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        creaRecyclerView();
+        //View.VISIBLE;
+        //recyclerView.setVisibility(View.GONE);
 
         userInfo(view);
 
@@ -193,6 +196,36 @@ public class accountFragment extends Fragment {
     private void openEditProfileActivity() {
         Intent intent = new Intent(getActivity(), editProfileActivity.class);
         startActivity(intent);
+    }
+
+    public void creaRecyclerView() {
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        userID = user.getUid();
+        reference = FirebaseDatabase.getInstance().getReference("Matches");
+        locationReference = FirebaseDatabase.getInstance().getReference("Places");
+//        Query query = reference.orderByChild("partecipants").equalTo(userID);
+        Query query = reference.orderByChild("participants/" + userID).equalTo(true);
+        FirebaseRecyclerOptions<Match> options
+                = new FirebaseRecyclerOptions.Builder<Match>()
+                .setQuery(query, Match.class)
+                .build();
+
+
+        matchesAdapter.ItemClickListener itemClickListener = match -> {
+            MatchViewModel matchViewModel =
+                    new ViewModelProvider(requireActivity()).get(MatchViewModel.class);
+
+            matchViewModel.setMatch(match);
+            NavController navController = NavHostFragment.findNavController(this);
+            navController.navigate(R.id.action_account_to_match);
+        };
+        // Connecting object of required Adapter class to
+        // the Adapter class itself
+        adapter = new matchesAdapter(options, itemClickListener, locationReference);
+        // Connecting Adapter class with the Recycler view*/
+        recyclerView.setAdapter(adapter);
+        adapter.startListening();
+        recyclerView.invalidate();
     }
 
 
