@@ -86,5 +86,6 @@
     <string name="leave">leave</string>
     <string name="save">save</string>
     <string name="match">Match</string>
+    <string name="hideShowButton">Hide/show calendar</string>
 
 </resources>
