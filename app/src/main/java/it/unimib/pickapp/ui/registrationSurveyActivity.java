@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -24,9 +25,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 import it.unimib.pickapp.R;
+import it.unimib.pickapp.model.Sport;
 import it.unimib.pickapp.model.User;
 
 /**
@@ -57,6 +61,19 @@ public class registrationSurveyActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration_survey);
+
+        mSpinnerSport = findViewById(R.id.spinner_sport);
+        String[] keys = Sport.names();
+        String[] values = this.getApplicationContext()
+                .getResources().getStringArray(R.array.sports);
+        List<MatchFragment.SpinnerItem> items = new ArrayList<>();
+
+        for (int i = 0; i < keys.length; i++) {
+            items.add(MatchFragment.SpinnerItem.create(keys[i], values[i]));
+        }
+        mSpinnerSport.setAdapter(new ArrayAdapter<>(
+                this.getApplicationContext(),
+                R.layout.sport_spinner_item, items));
 
         mAuth = FirebaseAuth.getInstance();
 

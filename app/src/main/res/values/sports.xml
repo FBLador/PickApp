@@ -4,8 +4,7 @@
     <string-array name="sports">
         <item>@string/football</item>
         <item>@string/basketball</item>
-        <item>@string/volleyball</item>
+        <item>@string/soccer</item>
         <item>@string/tennis</item>
     </string-array>
-
 </resources>

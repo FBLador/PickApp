@@ -3,7 +3,7 @@ package it.unimib.pickapp.model;
 public enum Sport {
     FOOTBALL,
     BASKETBALL,
-    VOLLEYBALL,
+    SOCCER,
     TENNIS;
     //ritorna un array di String che contine gli sport
     public static String[] names() {
