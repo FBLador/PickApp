@@ -36,9 +36,9 @@
     <string name="matches_list_map">Mappa lista partite</string>
     <string name="addMatchTitle">Aggiungi partita</string>
     <string name="title">Titolo</string>
-    <string name="football">Calcio</string>
+    <string name="football">Football</string>
     <string name="basketball">Pallacanestro</string>
-    <string name="volleyball">Pallavolo</string>
+    <string name="soccer">Calcio</string>
     <string name="tennis">Tennis</string>
     <string name="add">Aggiungi</string>
     <string name="address">Indirizzo</string>

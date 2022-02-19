@@ -20,9 +20,10 @@
     <string name="Logo">Logo</string>
 
     <string-array name="sports_array">
-        <item>Calcio</item>
-        <item>Basket</item>
+        <item>Soccer</item>
+        <item>Basketball</item>
         <item>Tennis</item>
+        <item>Football</item>
     </string-array>
 
 
@@ -63,7 +64,7 @@
     <string name="sport">Sport</string>
     <string name="football">Football</string>
     <string name="basketball">Basketball</string>
-    <string name="volleyball">Volleyball</string>
+    <string name="soccer">Soccer</string>
     <string name="tennis">Tennis</string>
     <string name="add">Add</string>
     <string name="time">Time</string>

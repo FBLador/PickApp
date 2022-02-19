@@ -55,7 +55,7 @@ public class matchesAdapter extends FirebaseRecyclerAdapter<Match, matchesAdapte
 
         holder.dateTime.setText(model.getDate() + " " + model.getTime());
 
-        holder.sport.setText(model.getSport());
+        //holder.sport.setText(model.getSport());
 
         locationReference.child(model.getLuogo()).addListenerForSingleValueEvent(
                 new ValueEventListener() {
@@ -75,7 +75,7 @@ public class matchesAdapter extends FirebaseRecyclerAdapter<Match, matchesAdapte
 
         //holder.durata.setText(model.getDurata());
 
-        //holder.costo.setText(Double.toString(model.getCosto()));
+        holder.costo.setText(Double.toString(model.getCosto())+"€");
     }
 
     // Function to tell the class about the Card view in
@@ -109,10 +109,10 @@ public class matchesAdapter extends FirebaseRecyclerAdapter<Match, matchesAdapte
             //partecipanti = itemView.findViewById(R.id.partecipanti);
             //numeroSquadre = itemView.findViewById(R.id.numeroSquadre);
             dateTime = itemView.findViewById(R.id.data);
-            sport = itemView.findViewById(R.id.sport);
+            //sport = itemView.findViewById(R.id.sport);
             //descrizione = itemView.findViewById(R.id.descrizione);
             //durata = itemView.findViewById(R.id.durata);
-            //costo = itemView.findViewById(R.id.costo);
+            costo = itemView.findViewById(R.id.costo);
         }
     }
 }

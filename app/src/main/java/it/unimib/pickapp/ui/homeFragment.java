@@ -33,6 +33,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.Locale;
 import java.util.Objects;
 
 import it.unimib.pickapp.R;
@@ -99,7 +100,21 @@ public class homeFragment extends Fragment {
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                filtroSport = snapshot.child(userID).child("favouriteSport").getValue().toString();
+                filtroSport = snapshot.child(userID).child("favouriteSport").getValue().toString().toUpperCase(Locale.ROOT);
+                switch (filtroSport) {
+                    case "BASKETBALL":
+                        activateImgBttn(basket);
+                        break;
+                    case "SOCCER":
+                        activateImgBttn(soccer);
+                        break;
+                    case "FOOTBALL":
+                        activateImgBttn(football);
+                        break;
+                    case "TENNIS":
+                        activateImgBttn(tennis);
+                        break;
+                }
                 creaRecyclerView();
             }
             @Override
@@ -107,12 +122,11 @@ public class homeFragment extends Fragment {
             }
         });
 
-
         basket.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                    filtroSport = "BASKET";
+                    filtroSport = "BASKETBALL";
                     creaRecyclerView();
                     activateImgBttn(basket);
                     inactivateImgBttn(soccer);
