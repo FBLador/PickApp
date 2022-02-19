@@ -25,20 +25,25 @@
             android:layout_height="wrap_content"
             android:layout_margin="9dp">
 
-           <ImageView
-               android:id="@+id/imageView3"
+           <TextView
+               android:id="@+id/titleCalendar"
+               android:layout_width="wrap_content"
+               android:layout_height="match_parent"
+               android:layout_gravity="left|start"
+               android:gravity="start"
+               android:textColor="@color/mainGreen"
+               android:textSize="28sp"
+               android:textStyle="bold" />
+
+           <Button
+               android:id="@+id/HideShow"
                android:layout_width="wrap_content"
                android:layout_height="wrap_content"
-               android:layout_marginEnd="8dp"
-               android:src="@drawable/ic_icon_small" />
-
-            <TextView
-                android:id="@+id/titleCalendar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/mainGreen"
-                android:textSize="28sp"
-                android:textStyle="bold" />
+               android:layout_gravity="right|end"
+               android:text="@string/hideShowButton"
+               android:textColor="@color/mainGreen"
+               android:textSize="11sp"
+               android:textStyle="bold"/>
         </androidx.appcompat.widget.Toolbar>
 
         <LinearLayout
@@ -79,6 +84,7 @@
             android:background="@color/white"
             android:gravity="center"
             android:orientation="vertical" />
+
     </LinearLayout>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
