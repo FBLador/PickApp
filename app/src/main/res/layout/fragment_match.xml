@@ -8,7 +8,7 @@
     tools:context=".ui.MatchFragment">
 
 
-    <com.google.android.material.appbar.AppBarLayout
+<!--    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
@@ -20,24 +20,45 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/mainGreen"
+            app:titleTextColor="@color/white"
             android:minHeight="?attr/actionBarSize"
             android:theme="?attr/actionBarTheme"
             tools:layout_editor_absoluteX="0dp"
             tools:layout_editor_absoluteY="0dp" />
 
-    </com.google.android.material.appbar.AppBarLayout>
+    </com.google.android.material.appbar.AppBarLayout>-->
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbarMatch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="9dp"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <TextView
+            android:id="@+id/titleMatch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/match"
+            android:textColor="@color/mainGreen"
+            android:textSize="28sp"
+            android:textStyle="bold" />
+    </androidx.appcompat.widget.Toolbar>
 
 
     <ScrollView
         android:id="@+id/scrollView3"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:fillViewport="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbarMatch"
         app:layout_constraintVertical_bias="0.0">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -50,7 +71,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginStart="32dp"
-                android:layout_marginTop="60dp"
+                android:layout_marginTop="0dp"
                 android:layout_marginEnd="32dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.496"
@@ -79,9 +100,9 @@
                     android:id="@+id/textInputLayout"
                     android:layout_width="380dp"
                     android:layout_height="50dp"
-                    android:layout_marginTop="32dp"
+                    android:layout_marginTop="16dp"
                     android:ems="10"
-                    android:gravity="left
+                    android:gravity="start
 "
                     android:importantForAutofill="no"
                     android:inputType="text"
@@ -158,10 +179,12 @@
 
 
                     <com.google.android.material.textfield.TextInputLayout
-                        android:layout_width="265dp"
+                        android:layout_width="0dp"
+                        android:layout_weight="2.5"
                         android:layout_height="50dp"
                         android:layout_marginTop="0dp"
-                        android:gravity="left"
+                        android:gravity="start"
+
                         tools:layout_editor_absoluteX="1dp"
                         tools:layout_editor_absoluteY="217dp">
 
@@ -170,7 +193,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:enabled="true"
-                            android:hint="@string/location"
+                            android:hint="@string/place"
                             android:importantForAutofill="no"
                             android:inputType="textLongMessage"
                             android:minHeight="48dp" />
@@ -178,7 +201,7 @@
 
                     <Button
                         android:id="@+id/selectLocationButton"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="12dp"
                         android:layout_weight="1"
@@ -197,7 +220,8 @@
 
 
                     <com.google.android.material.textfield.TextInputLayout
-                        android:layout_width="265dp"
+                        android:layout_width="0dp"
+                        android:layout_weight="2.5"
                         android:layout_height="50dp"
                         android:layout_marginTop="0dp"
                         android:gravity="left"
@@ -214,7 +238,7 @@
 
                     <Button
                         android:id="@+id/selectDateButton"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="12dp"
                         android:layout_weight="1"
@@ -233,10 +257,11 @@
 
 
                     <com.google.android.material.textfield.TextInputLayout
-                        android:layout_width="265dp"
+                        android:layout_width="0dp"
+                        android:layout_weight="2.5"
                         android:layout_height="50dp"
                         android:layout_marginTop="0dp"
-                        android:gravity="left"
+                        android:gravity="start"
                         tools:layout_editor_absoluteX="1dp"
                         tools:layout_editor_absoluteY="217dp">
 
@@ -250,7 +275,7 @@
 
                     <Button
                         android:id="@+id/selectTimeButton"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="12dp"
                         android:layout_weight="1"
@@ -339,7 +364,7 @@
                     android:layout_height="50dp"
                     android:layout_marginTop="31dp"
                     android:ems="10"
-                    android:gravity="left"
+                    android:gravity="start"
                     android:importantForAutofill="no"
                     android:minHeight="48dp"
                     app:hintEnabled="true"
@@ -363,7 +388,7 @@
                     android:layout_height="50dp"
                     android:layout_marginTop="31dp"
                     android:ems="10"
-                    android:gravity="left"
+                    android:gravity="start"
                     android:importantForAutofill="no"
                     android:minHeight="48dp"
                     app:hintEnabled="true"
@@ -416,7 +441,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="32dp"
                     android:ems="10"
-                    android:gravity="left"
+                    android:gravity="start"
                     android:minHeight="48dp"
                     app:hintEnabled="true"
                     app:layout_constraintEnd_toEndOf="parent"

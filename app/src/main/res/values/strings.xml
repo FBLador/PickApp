@@ -81,12 +81,13 @@
     <string name="search_match">Search match</string>
     <string name="select">select</string>
     <string name="options">Options</string>
-    <string name="createGame">Create game</string>
+    <string name="createGame">Create a game</string>
     <string name="delete">delete</string>
     <string name="join">join</string>
     <string name="leave">leave</string>
     <string name="save">save</string>
     <string name="match">Match</string>
+    <string name="place">Place</string>
     <string name="hideShowButton">Hide/show calendar</string>
 
 </resources>

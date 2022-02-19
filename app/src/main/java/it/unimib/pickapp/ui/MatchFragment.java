@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -52,15 +53,12 @@ public class MatchFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_match, container, false);
 
-        Toolbar toolbar = view.findViewById(R.id.toolbarHome);
-        ((AppCompatActivity) requireActivity()).setSupportActionBar(toolbar);
-
         return view;
     }
 
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
     @SuppressLint("ClickableViewAccessibility")
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -68,6 +66,9 @@ public class MatchFragment extends Fragment {
         matchViewModel = new ViewModelProvider(requireActivity()).get(MatchViewModel.class);
         placeSelectionViewModel = new ViewModelProvider(requireActivity()).get(FPlaceSelectionViewModel.class);
 
+        Toolbar toolbar = view.findViewById(R.id.toolbarMatch);
+        ((AppCompatActivity) requireActivity()).setSupportActionBar(toolbar);
+        TextView toolbarTitle = view.findViewById(R.id.titleMatch);
         Spinner sportSpinner = view.findViewById(R.id.sportSpinner);
         String[] keys = Sport.names();
         String[] values = requireContext().getApplicationContext()
@@ -209,7 +210,7 @@ public class MatchFragment extends Fragment {
                     new TimePickerDialog.OnTimeSetListener() {
                         @Override
                         public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
-                            timeEditText.setText(hour + ":" + minute);
+                            timeEditText.setText(selectedHour + ":" + selectedMinute);
                         }
                     }, hour, minute, true);//Yes 24 hour time
             picker.show();
@@ -235,11 +236,10 @@ public class MatchFragment extends Fragment {
         }
 
         if (matchViewModel.isCreationModeEnabled()) {
-            requireActivity().setTitle(R.string.createGame);
+            toolbarTitle.setText(R.string.createGame);
             deleteButton.setVisibility(View.GONE);
         } else {
-            requireActivity().setTitle(R.string.match + " "
-                    + matchViewModel.getMatch().getTitolo());
+            toolbarTitle.setText(matchViewModel.getMatch().getTitolo());
         }
 
         if (matchViewModel.isCreatorUser()) {
