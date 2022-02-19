@@ -3,8 +3,12 @@ import static it.unimib.pickapp.repository.Constants.MAPVIEW_BUNDLE_KEY;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -33,21 +37,35 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.Random;
 
 import it.unimib.pickapp.R;
 
 
-public class locationFragment extends Fragment implements OnMapReadyCallback {
+public class locationFragment extends Fragment implements OnMapReadyCallback, GoogleMap.OnInfoWindowClickListener {
 
     private MapView mMapView;
     private final String TAG = "locationFragment";
+    private DatabaseReference mbase;
+    List<String> titoliPartite = new ArrayList<>();
+    List<String> sportPartite = new ArrayList<>();
+    List<String> datePartite = new ArrayList<>();
+
 
     public locationFragment() {
         // Required empty public constructor
@@ -67,6 +85,22 @@ public class locationFragment extends Fragment implements OnMapReadyCallback {
         Objects.requireNonNull(((pickappActivity) requireActivity()).getSupportActionBar()).hide();
         ((pickappActivity) getActivity()).setSupportActionBar(toolbar);
 
+        mbase = FirebaseDatabase.getInstance().getReference("Matches");
+        mbase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot partite: snapshot.getChildren()){
+                    titoliPartite.add(partite.child("titolo").getValue().toString());
+                    sportPartite.add(partite.child("sport").getValue().toString());
+                    datePartite.add(partite.child("date").getValue().toString() + ", " + partite.child("time").getValue().toString());
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+
+        Log.d(TAG, String.valueOf(titoliPartite.size()));
         mMapView = view.findViewById(R.id.matches_list_map);
         initGoogleMap(savedInstanceState);
 
@@ -92,24 +126,6 @@ public class locationFragment extends Fragment implements OnMapReadyCallback {
             outState.putBundle(MAPVIEW_BUNDLE_KEY, mapViewBundle);
         }
         mMapView.onSaveInstanceState(mapViewBundle);
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        mMapView.onResume();
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        mMapView.onStart();
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        mMapView.onStop();
     }
 
     private final ActivityResultLauncher<String> requestPermissionLauncher =
@@ -161,66 +177,59 @@ public class locationFragment extends Fragment implements OnMapReadyCallback {
                 double latitude = location.getLatitude();
                 double longitude = location.getLongitude();
                 LatLng lastPosition = new LatLng(latitude, longitude);
-                Log.d(TAG, "location != null");
                 MapsInitializer.initialize(getContext());
-                createRandomMarkers(2, map, latitude, longitude, "tennis");
-                createRandomMarkers(1, map, latitude, longitude, "basketball");
-                createRandomMarkers(1, map, latitude, longitude, "football");
+                createRandomMarkers(titoliPartite.size(), map, latitude, longitude);
+                //map.setInfoWindowAdapter();
                 map.moveCamera(CameraUpdateFactory.newLatLngZoom(lastPosition, 13));
             } else {
                 Toast.makeText(getActivity(), R.string.enable_gps, Toast.LENGTH_SHORT).show();
             }
         });
+        map.setOnInfoWindowClickListener(this);
     }
 
-    public void createRandomMarkers(int markersQuantity, GoogleMap map, double latitude, double longitude, String sport) {
+    public void createRandomMarkers(int markersQuantity, GoogleMap map, double latitude, double longitude) {
         Random rand = new Random();
-        switch(sport) {
-            case "tennis":
-                for(int i=0; i<markersQuantity; i++){
+
+        for(int i=0; i < markersQuantity; i++) {
+            switch(sportPartite.get(i)) {
+                case "TENNIS":
                     map.addMarker(new MarkerOptions()
-                            .position(new LatLng(latitude+((rand.nextDouble()/100)-(rand.nextDouble()/100)), longitude+((rand.nextDouble()/100)-(rand.nextDouble()/100))))
-                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)) // null = default icon
-                            .title("Partita di tennis"));
-                }
-                break;
-            case "basketball":
-                for(int i=0; i<markersQuantity; i++){
-                map.addMarker(new MarkerOptions()
-                        .position(new LatLng(latitude+((rand.nextDouble()/100)-(rand.nextDouble()/100)), longitude+((rand.nextDouble()/100)-(rand.nextDouble()/100))))
-                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)) // null = default icon
-                        .title("Partita di basket"));
-                }
-                break;
-            case "football":
-                for(int i=0; i<markersQuantity; i++){
+                            .position(new LatLng(latitude+((rand.nextDouble()/90)-(rand.nextDouble()/90)), longitude+((rand.nextDouble()/90)-(rand.nextDouble()/90))))
+                            .icon(bitmapDescriptorFromVector(getActivity(), R.drawable.ic_baseline_sports_tennis_24)) // null = default icon
+                            .title(titoliPartite.get(i))
+                            .alpha(1f)
+                            .snippet(datePartite.get(i)));
+                    break;
+                case "BASKETBALL":
                     map.addMarker(new MarkerOptions()
-                            .position(new LatLng(latitude+((rand.nextDouble()/100)-(rand.nextDouble()/100)), longitude+((rand.nextDouble()/100)-(rand.nextDouble()/100))))
-                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_CYAN)) // null = default icon
-                            .title("Partita di calcio"));
-                }
-                break;
+                            .position(new LatLng(latitude+((rand.nextDouble()/50)-(rand.nextDouble()/50)), longitude+((rand.nextDouble()/50)-(rand.nextDouble()/50))))
+                            .icon(bitmapDescriptorFromVector(getActivity(), R.drawable.ic_baseline_sports_basketball_24)) // null = default icon
+                            .title(titoliPartite.get(i))
+                            .alpha(1f)
+                            .snippet(datePartite.get(i)));
+                    break;
+                case "SOCCER":
+                    map.addMarker(new MarkerOptions()
+                            .position(new LatLng(latitude+((rand.nextDouble()/50)-(rand.nextDouble()/50)), longitude+((rand.nextDouble()/50)-(rand.nextDouble()/50))))
+                            .icon(bitmapDescriptorFromVector(getActivity(), R.drawable.ic_baseline_sports_soccer_24)) // null = default icon
+                            .title(titoliPartite.get(i))
+                            .alpha(1f)
+                            .snippet(datePartite.get(i)));
+                    break;
+                case "FOOTBALL":
+                    map.addMarker(new MarkerOptions()
+                            .position(new LatLng(latitude+((rand.nextDouble()/50)-(rand.nextDouble()/50)), longitude+((rand.nextDouble()/50)-(rand.nextDouble()/50))))
+                            .icon(bitmapDescriptorFromVector(getActivity(), R.drawable.ic_baseline_sports_football_24)) // null = default icon
+                            .title(titoliPartite.get(i))
+                            .alpha(1f)
+                            .snippet(datePartite.get(i)));
+                    break;
+            }
         }
     }
 
-    @Override
-    public void onPause() {
-        mMapView.onPause();
-        super.onPause();
-    }
-
-    @Override
-    public void onDestroy() {
-        mMapView.onDestroy();
-        super.onDestroy();
-    }
-
-    @Override
-    public void onLowMemory() {
-        super.onLowMemory();
-        mMapView.onLowMemory();
-    }
-
+    // Toolbar
     public void setTitle(View view, String title){
         TextView titleToolbar = view.findViewById(R.id.titleLocation);
         titleToolbar.setText(title);
@@ -240,5 +249,58 @@ public class locationFragment extends Fragment implements OnMapReadyCallback {
             requireActivity().finish();
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    // This converts a Vector image to bitmapDescriptor (so it can be used as an icon for the markers on the map)
+    private BitmapDescriptor bitmapDescriptorFromVector(Context context, int vectorResId) {
+        Drawable vectorDrawable = ContextCompat.getDrawable(context, vectorResId);
+        vectorDrawable.setBounds(0, 0, vectorDrawable.getIntrinsicWidth(), vectorDrawable.getIntrinsicHeight());
+        Bitmap bitmap = Bitmap.createBitmap(vectorDrawable.getIntrinsicWidth(), vectorDrawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+        vectorDrawable.draw(canvas);
+        return BitmapDescriptorFactory.fromBitmap(bitmap);
+    }
+
+    @Override
+    public void onInfoWindowClick(@NonNull Marker marker) {
+        marker.setSnippet("Adesso dovrebbe aprirsi la pagina della partita selezionata");
+        marker.showInfoWindow();
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mMapView.onResume();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        mMapView.onStart();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        mMapView.onStop();
+    }
+
+    @Override
+    public void onPause() {
+        mMapView.onPause();
+        super.onPause();
+    }
+
+    @Override
+    public void onDestroy() {
+        mMapView.onDestroy();
+        super.onDestroy();
+    }
+
+    @Override
+    public void onLowMemory() {
+        super.onLowMemory();
+        mMapView.onLowMemory();
     }
 }

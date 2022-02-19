@@ -26,4 +26,9 @@
     <color name="colorRecoverPassword">#0D7700</color>
     <color name="gray">#A9A9A9</color>
 
+    <color name="orange_basketball">#DD5D09</color>
+    <color name="blue_soccer">#3F51B5</color>
+    <color name="green_tennis">#8BC34A</color>
+    <color name="brown_football">#714400</color>
+
 </resources>
