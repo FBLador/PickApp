@@ -1,20 +1,15 @@
 package it.unimib.pickapp.ui;
 
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import it.unimib.pickapp.R;
 import it.unimib.pickapp.model.Match;
@@ -38,9 +33,6 @@ public class matchesAdapter extends FirebaseRecyclerAdapter<Match, matchesAdapte
     protected void
     onBindViewHolder(@NonNull matchesViewHolder holder,
                      int position, @NonNull Match model) {
-        int day = model.getDay();
-        int month = model.getMonth();
-        int year = model.getYear();
 
 
         holder.itemView.setOnClickListener(view -> itemClickListener.onItemClick(model));
@@ -53,7 +45,7 @@ public class matchesAdapter extends FirebaseRecyclerAdapter<Match, matchesAdapte
 
         //holder.numeroSquadre.setText(Integer.toString(model.getNumeroSquadre()));
 
-        holder.dateTime.setText(day + "/" + month + "/" + year);
+        holder.dateTime.setText(model.getDate() + " " + model.getTime());
 
         holder.sport.setText(model.getSport());
 

@@ -68,7 +68,7 @@ public class MatchFragment extends Fragment {
         matchViewModel = new ViewModelProvider(requireActivity()).get(MatchViewModel.class);
         placeSelectionViewModel = new ViewModelProvider(requireActivity()).get(FPlaceSelectionViewModel.class);
 
-        Spinner sportSpinner = (Spinner) view.findViewById(R.id.sportSpinner);
+        Spinner sportSpinner = view.findViewById(R.id.sportSpinner);
         String[] keys = Sport.names();
         String[] values = requireContext().getApplicationContext()
                 .getResources().getStringArray(R.array.sports);
@@ -88,13 +88,13 @@ public class MatchFragment extends Fragment {
         Button selectDateButton = view.findViewById(R.id.selectDateButton);
         Button selectTimeButton = view.findViewById(R.id.selectTimeButton);
 
-        List<addMatchActivity.SpinnerItem> items = new ArrayList<addMatchActivity.SpinnerItem>();
+        List<SpinnerItem> items = new ArrayList<>();
 
         for (int i = 0; i < keys.length; i++) {
-            items.add(addMatchActivity.SpinnerItem.create(keys[i], values[i]));
+            items.add(SpinnerItem.create(keys[i], values[i]));
         }
 
-        sportSpinner.setAdapter(new ArrayAdapter<addMatchActivity.SpinnerItem>(
+        sportSpinner.setAdapter(new ArrayAdapter<>(
                 requireContext().getApplicationContext(),
                 R.layout.sport_spinner_item, items));
 
@@ -128,14 +128,16 @@ public class MatchFragment extends Fragment {
             Match match = matchViewModel.getMatch();
             // TODO Validity checks
             match.setTitolo(titleEditText.getText().toString());
-            match.setSport(((addMatchActivity.SpinnerItem) sportSpinner.getSelectedItem()).getKey());
+            match.setSport(((SpinnerItem) sportSpinner.getSelectedItem()).getKey());
             match.setLuogo(placeSelectionViewModel.getSelected().getValue().getId());
             // TODO Language support
-            match.setDay(Integer.parseInt(splitDate[0]));
+            /*match.setDay(Integer.parseInt(splitDate[0]));
             match.setMonth(Integer.parseInt(splitDate[1]));
-            match.setYear(Integer.parseInt(splitDate[2]));
-            match.setHour(Integer.parseInt(splitTime[0]));
-            match.setMinutes(Integer.parseInt(splitTime[1]));
+            match.setYear(Integer.parseInt(splitDate[2]));*/
+            match.setDate(dateEditText.getText().toString());
+            match.setTime(timeEditText.getText().toString());
+            /*match.setHour(Integer.parseInt(splitTime[0]));
+            match.setMinutes(Integer.parseInt(splitTime[1]));*/
             match.setDescrizione(descriptionEditText.getText().toString());
             match.setCosto(Double.parseDouble(costEditText.getText().toString()));
             match.setNumeroSquadre(Integer.parseInt(numberOfTeamsEditText.getText().toString()));
@@ -154,12 +156,12 @@ public class MatchFragment extends Fragment {
         });
 
         matchViewModel.getStatus().observe(getViewLifecycleOwner(), status -> {
-            if (status == AddMatchViewModel.Status.SUCCESSFUL) {
+            if (status == MatchViewModel.Status.SUCCESSFUL) {
                 Toast.makeText(requireContext(),
                         getResources().getString(R.string.editSuccess), Toast.LENGTH_SHORT).show();
                 NavController navController = NavHostFragment.findNavController(this);
                 navController.popBackStack();
-            } else if (status == AddMatchViewModel.Status.FAILED) {
+            } else if (status == MatchViewModel.Status.FAILED) {
                 Toast.makeText(requireContext(),
                         getResources().getString(R.string.editFailure), Toast.LENGTH_SHORT).show();
             }
@@ -224,11 +226,8 @@ public class MatchFragment extends Fragment {
             sportSpinner.setSelection(
                     Sport.valueOf(matchViewModel.getMatch().getSport().toUpperCase()).ordinal());
 
-            dateEditText.setText(matchViewModel.getMatch().getDay()
-                    + "/" + (matchViewModel.getMatch().getMonth())
-                    + "/" + matchViewModel.getMatch().getYear());
-            timeEditText.setText(matchViewModel.getMatch().getHour()
-                    + ":" + matchViewModel.getMatch().getMinutes());
+            dateEditText.setText(matchViewModel.getMatch().getDate());
+            timeEditText.setText(matchViewModel.getMatch().getTime());
             numberOfTeamsEditText.setText(Integer.toString(matchViewModel.getMatch().getNumeroSquadre()));
             costEditText.setText(Double.toString(matchViewModel.getMatch().getCosto()));
             isPrivateSwitch.setChecked(matchViewModel.getMatch().isPrivate());
@@ -236,10 +235,10 @@ public class MatchFragment extends Fragment {
         }
 
         if (matchViewModel.isCreationModeEnabled()) {
-            ((AppCompatActivity) requireActivity()).setTitle(R.string.createGame);
+            requireActivity().setTitle(R.string.createGame);
             deleteButton.setVisibility(View.GONE);
         } else {
-            ((AppCompatActivity) requireActivity()).setTitle(R.string.match + " "
+            requireActivity().setTitle(R.string.match + " "
                     + matchViewModel.getMatch().getTitolo());
         }
 

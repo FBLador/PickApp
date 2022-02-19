@@ -28,7 +28,7 @@ public class MatchViewModel extends ViewModel {
     private final DatabaseReference matchDatabaseReference;
     private final DatabaseReference locationDatabaseReference;
     private final String collectionName = "Matches";
-    private final MutableLiveData<AddMatchViewModel.Status> status;
+    private final MutableLiveData<MatchViewModel.Status> status;
     private final String currentUserId;
     private Match match;
     private boolean creationModeEnabled;
@@ -41,7 +41,7 @@ public class MatchViewModel extends ViewModel {
 
 
     public MatchViewModel() {
-        status = new MutableLiveData<AddMatchViewModel.Status>(null);
+        status = new MutableLiveData<>(null);
 
         this.match = new Match();
 
@@ -98,7 +98,8 @@ public class MatchViewModel extends ViewModel {
             databaseReferencetoUser.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
-                    participants.add(dataSnapshot.child(userID).getValue(User.class));
+                    //TODO Participants
+                    //participants.add(dataSnapshot.child(userID).getValue(User.class));
                     System.out.println(participants);
                     Log.d(TAG, "user" + participants);
                 }
@@ -111,7 +112,7 @@ public class MatchViewModel extends ViewModel {
         }
     }
 
-    public MutableLiveData<AddMatchViewModel.Status> getStatus() {
+    public MutableLiveData<MatchViewModel.Status> getStatus() {
         return status;
     }
 
@@ -127,7 +128,7 @@ public class MatchViewModel extends ViewModel {
 
     public void saveMatch() {
         final String id;
-        match.setMonth(match.getMonth());
+
         if (match.getId() == null) {
             id = matchDatabaseReference.push().getKey();
             match.setId(id);
@@ -142,8 +143,8 @@ public class MatchViewModel extends ViewModel {
         reference.setValue(match).addOnFailureListener(e ->
                 Log.d(TAG, "There was an error saving '"
                         + id + "' in '" + collectionName + "'!", e))
-                .addOnSuccessListener(t -> status.setValue(AddMatchViewModel.Status.SUCCESSFUL))
-                .addOnFailureListener(t -> status.setValue(AddMatchViewModel.Status.FAILED));
+                .addOnSuccessListener(t -> status.setValue(MatchViewModel.Status.SUCCESSFUL))
+                .addOnFailureListener(t -> status.setValue(MatchViewModel.Status.FAILED));
     }
 
     public boolean isCreationModeEnabled() {

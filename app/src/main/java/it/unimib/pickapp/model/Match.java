@@ -24,6 +24,8 @@ public class Match {
     private int minutes;
     private String id;
     private String creatorId;
+    private String date;
+    private String time;
 
     public Match() {
         participants = new HashMap<>();
@@ -104,11 +106,11 @@ public class Match {
         return numeroSquadre;
     }
 
-    public int getDay() { return day;}
+    /*public int getDay() { return day;}
 
     public int getMonth() { return month;}
 
-    public int getYear() { return year;}
+    public int getYear() { return year;}*/
 
     public CharSequence getDurata() {
         return (CharSequence) durata;
@@ -145,11 +147,11 @@ public class Match {
         this.numeroSquadre = numeroSquadre;
     }
 
-    public void setDay(int day) { this.day = day; }
+    /*public void setDay(int day) { this.day = day; }
 
     public void setMonth(int month) { this.month = month; }
 
-    public void setYear(int year) { this.year = year; }
+    public void setYear(int year) { this.year = year; }*/
 
     public void setDurata(Time durata) {
         this.durata = durata;
@@ -167,17 +169,17 @@ public class Match {
         return hour;
     }
 
-    public void setHour(int hour) {
+    /*public void setHour(int hour) {
         this.hour = hour;
-    }
+    }*/
 
     public int getMinutes() {
         return minutes;
     }
 
-    public void setMinutes(int minutes) {
+    /*public void setMinutes(int minutes) {
         this.minutes = minutes;
-    }
+    }*/
 
     public String getCreatorId() {
         return creatorId;
@@ -185,5 +187,21 @@ public class Match {
 
     public void setCreatorId(String creatorId) {
         this.creatorId = creatorId;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
     }
 }
