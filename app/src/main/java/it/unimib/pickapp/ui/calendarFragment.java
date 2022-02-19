@@ -26,6 +26,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
@@ -52,6 +53,9 @@ public class calendarFragment extends Fragment {
     private static final String TAG = "calendarFragment";
     private matchesAdapter adapter; // Create Object of the Adapter class
     private matchesAdapter.ItemClickListener itemClickListener;
+    private FirebaseUser user;
+    private String userID;
+    private String participant;
 
     public calendarFragment() {
         // Required empty public constructor
@@ -111,12 +115,17 @@ public class calendarFragment extends Fragment {
         int month = cal.get(Calendar.MONTH);
         int year = cal.get(Calendar.YEAR);
 
-        selectedDate = day + "/"
-                + (month+1) + "/"
-                + year;
+        selectedDate = day + "-"
+                        + (month+1) + "-"
+                        + year;
 
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        userID = user.getUid();
+
+        participant = userID + "-" +selectedDate;
         mbase = FirebaseDatabase.getInstance().getReference("Matches");
-        query = mbase.orderByChild("date").equalTo(selectedDate);
+        query = mbase.orderByChild("participants/" + participant).equalTo(true);
+
         locationReference = FirebaseDatabase.getInstance().getReference("Places");
 
         FirebaseRecyclerOptions<Match> options
@@ -150,9 +159,10 @@ public class calendarFragment extends Fragment {
             //Toast.makeText(getActivity(), "Date changed to " + dayOfMonth + "/" + month + "/" + year, Toast.LENGTH_SHORT).show();
             Log.i(TAG, "Date changed to " + dayOfMonth + "/" + month + "/" + year);
 
-            selectedDate = dayOfMonth + "/" + (month+1) + "/" + year;
+            selectedDate = dayOfMonth + "-" + (month+1) + "-" + year;
+            participant = userID + "-" +selectedDate;
             mbase = FirebaseDatabase.getInstance().getReference("Matches");
-            query = mbase.orderByChild("date").equalTo(selectedDate);
+            query = mbase.orderByChild("participants/" + participant).equalTo(true);
             locationReference = FirebaseDatabase.getInstance().getReference("Places");
 
             FirebaseRecyclerOptions<Match> options
