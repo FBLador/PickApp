@@ -33,7 +33,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.ArrayList;
 import java.util.Objects;
 
 import it.unimib.pickapp.R;
@@ -45,6 +44,7 @@ public class calendarFragment extends Fragment {
     private RecyclerView recyclerView;
     private FloatingActionButton addButton;
     private DatabaseReference mbase;
+    private DatabaseReference locationReference;
 
     private static final String TAG = "calendarFragment";
     private TextView titolo, luogo, numeroSquadre, data, durata, costo, sport, descrizione;
@@ -87,6 +87,7 @@ public class calendarFragment extends Fragment {
         // Create a instance of the database and get
         // its reference
         mbase = FirebaseDatabase.getInstance().getReference("Matches");
+        locationReference = FirebaseDatabase.getInstance().getReference("Places");
 
 
         // It is a class provide by the FirebaseUI to make a
@@ -107,7 +108,7 @@ public class calendarFragment extends Fragment {
 
         // Connecting object of required Adapter class to
         // the Adapter class itself
-        adapter = new matchesAdapter(options, itemClickListener);
+        adapter = new matchesAdapter(options, itemClickListener, locationReference);
         // Connecting Adapter class with the Recycler view
         recyclerView.setAdapter(adapter);
 
@@ -158,7 +159,7 @@ public class calendarFragment extends Fragment {
             // Connecting object of required Adapter class to
             // the Adapter class itself
 
-            adapter = new matchesAdapter(options, itemClickListener);
+            adapter = new matchesAdapter(options, itemClickListener, locationReference);
             // Connecting Adapter class with the Recycler view*/
             recyclerView.setAdapter(adapter);
             adapter.startListening();

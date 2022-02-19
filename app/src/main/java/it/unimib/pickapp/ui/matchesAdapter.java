@@ -10,21 +10,29 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import it.unimib.pickapp.R;
 import it.unimib.pickapp.model.Match;
+import it.unimib.pickapp.model.Place;
 
 // FirebaseRecyclerAdapter is a class provided by
 // FirebaseUI. it provides functions to bind, adapt and show
 // database contents in a Recycler View
 public class matchesAdapter extends FirebaseRecyclerAdapter<Match, matchesAdapter.matchesViewHolder> {
     private final ItemClickListener itemClickListener;
+    DatabaseReference locationReference = FirebaseDatabase.getInstance().getReference("Matches");
 
     public matchesAdapter(
             @NonNull FirebaseRecyclerOptions<Match> options,
-            ItemClickListener itemClickListener) {
-                super(options);
-                this.itemClickListener = itemClickListener;
+            ItemClickListener itemClickListener, DatabaseReference locationReference) {
+        super(options);
+        this.itemClickListener = itemClickListener;
+        this.locationReference = locationReference;
     }
 
     // Function to bind the view in Card view with data in
@@ -48,6 +56,20 @@ public class matchesAdapter extends FirebaseRecyclerAdapter<Match, matchesAdapte
         holder.dateTime.setText(model.getDate() + " " + model.getTime());
 
         holder.sport.setText(model.getSport());
+
+        locationReference.child(model.getLuogo()).addListenerForSingleValueEvent(
+                new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        Place place = dataSnapshot.getValue(Place.class);
+                        assert place != null;
+                        holder.luogo.setText(place.getName());
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                    }
+                });
 
         //holder.descrizione.setText(model.getDescrizione());
 
