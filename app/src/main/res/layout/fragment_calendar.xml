@@ -35,15 +35,16 @@
                android:textSize="28sp"
                android:textStyle="bold" />
 
-           <Button
+           <ImageButton
                android:id="@+id/HideShow"
                android:layout_width="wrap_content"
                android:layout_height="wrap_content"
                android:layout_gravity="end"
-               android:text="@string/hideShowButton"
-               android:textColor="@color/mainGreen"
-               android:textSize="11sp"
-               android:textStyle="bold"/>
+               android:src="@drawable/ic_baseline_calendar_today_24"
+               android:contentDescription="@string/hideShowButton"
+               android:backgroundTint="@color/transparent"
+               android:layout_marginEnd="16dp"/>
+
         </androidx.appcompat.widget.Toolbar>
 
         <LinearLayout

@@ -24,7 +24,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
-                android:src="@drawable/ic_icon_small" />
+                android:src="@drawable/ic_icon_small"
+                android:contentDescription="@string/Logo" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -38,21 +39,8 @@
                     android:textColor="@color/mainGreen"
                     android:textSize="28sp"
                     android:textStyle="bold" />
-
-               <!-- <ImageView
-                    android:id="@+id/options"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginEnd="10dp"
-                    android:layout_marginRight="10dp"
-                    app:srcCompat="@drawable/ic_outline_person_24" /> -->
-
             </RelativeLayout>
-
         </androidx.appcompat.widget.Toolbar>
-
     </com.google.android.material.appbar.AppBarLayout>
 
     <ScrollView
@@ -111,9 +99,7 @@
                                 android:layout_height="wrap_content"
                                 android:textSize="12sp"
                                 android:text="@string/matches"/>
-
                         </LinearLayout>
-
                     </LinearLayout>
 
                     <Button
@@ -129,9 +115,7 @@
                         android:textSize="13sp"
                         android:textColor="@color/black"
                         android:layout_gravity="center"/>
-
                 </LinearLayout>
-
             </LinearLayout>
 
             <LinearLayout
@@ -157,7 +141,6 @@
                     android:layout_marginTop="5dp"
                     android:maxLines="5"
                     android:textColor="@color/black"/>
-
             </LinearLayout>
 
             <LinearLayout
@@ -178,16 +161,6 @@
                     app:srcCompat="@drawable/ic_baseline_videogame_asset_24"
                     tools:ignore="SpeakableTextPresentCheck"
                     android:contentDescription="matches recycler view" />
-<!--
-                <ImageButton
-                    android:id="@+id/activities"
-                    style="?android:attr/buttonBarButtonStyle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    app:srcCompat="@drawable/ic_baseline_trending_up_24"
-                    tools:ignore="SpeakableTextPresentCheck" /> -->
-
             </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
@@ -198,15 +171,6 @@
                 android:background="@color/transparent"
                 android:gravity="center"
                 android:orientation="vertical" />
-<!--
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recycler_view_posts"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:visibility="gone"/>-->
-
-    </LinearLayout>
-
-</ScrollView>
-
+        </LinearLayout>
+    </ScrollView>
 </RelativeLayout>
