@@ -17,6 +17,10 @@ public class FPlaceSelectionViewModel extends ViewModel {
         return selected;
     }
 
+    public void clearSelection() {
+        selected.setValue(null);
+    }
+
     public void setSelected(Place selected) {
         this.selected.setValue(selected);
     }

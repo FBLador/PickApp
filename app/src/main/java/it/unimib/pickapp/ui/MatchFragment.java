@@ -128,7 +128,13 @@ public class MatchFragment extends Fragment {
             }
             Match match = matchViewModel.getMatch();
             // TODO Validity checks
-            match.setTitolo(titleEditText.getText().toString());
+            String title = titleEditText.getText().toString();
+            if (title.isEmpty()) {
+                Toast.makeText(requireContext(),
+                        getResources().getString(R.string.invalidTitle), Toast.LENGTH_SHORT).show();
+                return;
+            }
+            match.setTitolo(title);
             match.setSport(((SpinnerItem) sportSpinner.getSelectedItem()).getKey());
             match.setLuogo(placeSelectionViewModel.getSelected().getValue().getId());
             // TODO Language support
@@ -139,12 +145,25 @@ public class MatchFragment extends Fragment {
             match.setTime(timeEditText.getText().toString());
             /*match.setHour(Integer.parseInt(splitTime[0]));
             match.setMinutes(Integer.parseInt(splitTime[1]));*/
+            String costString = costEditText.getText().toString();
+            double cost;
+            if (costString.isEmpty() || (cost = Double.parseDouble(costString)) < 0) {
+                Toast.makeText(requireContext(),
+                        getResources().getString(R.string.invalidCost), Toast.LENGTH_SHORT).show();
+                return;
+            }
+            match.setCosto(cost);
+            String numOfTeamsString = numberOfTeamsEditText.getText().toString();
+            int numOfTeams;
+            if (numOfTeamsString.isEmpty()
+                    || (numOfTeams = Integer.parseInt(numOfTeamsString)) <= 0) {
+                Toast.makeText(requireContext(),
+                        getResources().getString(R.string.invalidNumOfTeams), Toast.LENGTH_SHORT).show();
+                return;
+            }
+            match.setNumeroSquadre(numOfTeams);
             match.setDescrizione(descriptionEditText.getText().toString());
-            match.setCosto(Double.parseDouble(costEditText.getText().toString()));
-            match.setNumeroSquadre(Integer.parseInt(numberOfTeamsEditText.getText().toString()));
             match.setPrivate(isPrivateSwitch.isChecked());
-
-
             matchViewModel.saveMatch();
         });
 
@@ -278,6 +297,12 @@ public class MatchFragment extends Fragment {
         // TODO: Use the ViewModel
     }
 
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        matchViewModel.clearPlaceSelection();
+        placeSelectionViewModel.clearSelection();
+    }
 
     static class SpinnerItem {
 
