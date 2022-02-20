@@ -1,10 +1,8 @@
 package it.unimib.pickapp.ui;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CalendarView;
@@ -13,6 +11,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
@@ -70,17 +69,16 @@ public class calendarFragment extends Fragment {
         addButton = rootView.findViewById(R.id.create_game);
         hideShowButton = rootView.findViewById(R.id.HideShow);
 
-        hideShowButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (v.getId() == R.id.HideShow) {
-                    if (flag) {
-                        HideShowView.setVisibility(View.GONE);
-                        flag = false;
-                    } else {
-                        HideShowView.setVisibility(View.VISIBLE);
-                        flag = true;
-                    }
+        hideShowButton.setOnClickListener(v -> {
+            if (v.getId() == R.id.HideShow) {
+                if (flag) {
+                    HideShowView.setVisibility(View.GONE);
+                    inactivateImgButton(hideShowButton);
+                    flag = false;
+                } else {
+                    HideShowView.setVisibility(View.VISIBLE);
+                    activateImgButton(hideShowButton);
+                    flag = true;
                 }
             }
         });
@@ -207,5 +205,19 @@ public class calendarFragment extends Fragment {
     public void setTitle(View view, String titleCal){
         TextView titleToolbar = view.findViewById(R.id.titleCalendar);
         titleToolbar.setText(titleCal);
+    }
+
+
+    public void activateImgButton(ImageButton button) {
+        button.setScaleX(1.2F);
+        button.setScaleY(1.2F);
+        button.setColorFilter(ContextCompat.getColor(getContext(), R.color.mainGreen));
+    }
+
+
+    public void inactivateImgButton(ImageButton button) {
+        button.setScaleY(1);
+        button.setScaleX(1);
+        button.setColorFilter(ContextCompat.getColor(getContext(), R.color.item_color_inactive));
     }
 }
