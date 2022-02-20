@@ -68,4 +68,6 @@
     <string name="invalidCost">Costo non valido</string>
     <string name="invalidNumOfTeams">Numero squadre non valido</string>
     <string name="invalidTitle">Titolo vuoto</string>
+    <string name="experience">Esperienza</string>
+    <string name="reliability">Affidabilità</string>
 </resources>

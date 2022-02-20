@@ -1,10 +1,8 @@
 package it.unimib.pickapp.ui;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CalendarView;
@@ -168,7 +166,7 @@ public class calendarFragment extends Fragment {
 
                 matchViewModel.setMatch(match);
                 NavController navController = NavHostFragment.findNavController(this);
-                navController.navigate(R.id.action_home_to_match);
+                navController.navigate(R.id.action_calendar_to_match);
             };
             // Connecting object of required Adapter class to
             // the Adapter class itself
