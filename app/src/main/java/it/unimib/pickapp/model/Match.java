@@ -6,7 +6,6 @@ import java.util.Map;
 
 public class Match {
 
-    //attributi della partita
     private boolean isPrivate;
     private int hour;
     private String titolo;
@@ -16,9 +15,6 @@ public class Match {
     private Map<String, User> partecipanti; //TODO Rimuovere
     private Map<String, String> participants;
     private int numeroSquadre;
-    private int day;
-    private int month;
-    private int year;
     private Time durata;
     private double costo;
     private int minutes;
@@ -56,13 +52,6 @@ public class Match {
     public void setPrivate(boolean aPrivate) {
         isPrivate = aPrivate;
     }
-
-
-    /* TODO : eventualmente pensare se usare ad esempio
-    Duration duration = Duration.between(Instant.now(), ZonedDateTime.parse("2016-07-27T07:00:00+01:00[Europe/Stockholm]"))
-
-    fonte: https://learntutorials.net/it/java/topic/4813/date-e-ora--java-time----
-     */
 
     //verifica se c'è un partecipante
     public boolean contains(String profileid) {
@@ -106,12 +95,6 @@ public class Match {
         return numeroSquadre;
     }
 
-    /*public int getDay() { return day;}
-
-    public int getMonth() { return month;}
-
-    public int getYear() { return year;}*/
-
     public CharSequence getDurata() {
         return (CharSequence) durata;
     }
@@ -147,12 +130,6 @@ public class Match {
         this.numeroSquadre = numeroSquadre;
     }
 
-    /*public void setDay(int day) { this.day = day; }
-
-    public void setMonth(int month) { this.month = month; }
-
-    public void setYear(int year) { this.year = year; }*/
-
     public void setDurata(Time durata) {
         this.durata = durata;
     }
@@ -169,17 +146,9 @@ public class Match {
         return hour;
     }
 
-    /*public void setHour(int hour) {
-        this.hour = hour;
-    }*/
-
     public int getMinutes() {
         return minutes;
     }
-
-    /*public void setMinutes(int minutes) {
-        this.minutes = minutes;
-    }*/
 
     public String getCreatorId() {
         return creatorId;

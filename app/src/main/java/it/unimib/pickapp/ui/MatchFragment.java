@@ -111,23 +111,40 @@ public class MatchFragment extends Fragment {
 
         saveButton.setOnClickListener(v -> {
             if (placeSelectionViewModel.getSelected().getValue() == null) {
+                String error = getResources().getString(R.string.choosePlaceMessage);
                 Toast.makeText(requireContext(),
-                        getResources().getString(R.string.choosePlaceMessage), Toast.LENGTH_SHORT).show();
+                        error, Toast.LENGTH_SHORT).show();
+                locationEditText.setError(error);
+                locationEditText.requestFocus();
                 return;
             }
 
             String[] splitDate = dateEditText.getText().toString().split(Pattern.quote("/"));
             String[] splitTime = timeEditText.getText().toString().split(Pattern.quote(":"));
-            if (splitTime.length != 2 || splitDate.length != 3) {
+            if (splitTime.length != 2) {
+                String error = getResources().getString(R.string.invalidTimeDate);
                 Toast.makeText(requireContext(),
-                        getResources().getString(R.string.invalidTimeDate), Toast.LENGTH_SHORT).show();
+                        error, Toast.LENGTH_SHORT).show();
+                timeEditText.setError(error);
+                timeEditText.requestFocus();
+                return;
+            }
+            if (splitDate.length != 3) {
+                String error = getResources().getString(R.string.invalidTimeDate);
+                Toast.makeText(requireContext(),
+                        error, Toast.LENGTH_SHORT).show();
+                dateEditText.setError(error);
+                dateEditText.requestFocus();
                 return;
             }
             Match match = matchViewModel.getMatch();
             String title = titleEditText.getText().toString();
             if (title.isEmpty()) {
+                String error = getResources().getString(R.string.invalidTitle);
                 Toast.makeText(requireContext(),
-                        getResources().getString(R.string.invalidTitle), Toast.LENGTH_SHORT).show();
+                        error, Toast.LENGTH_SHORT).show();
+                titleEditText.setError(error);
+                titleEditText.requestFocus();
                 return;
             }
             match.setTitolo(title);
@@ -138,8 +155,11 @@ public class MatchFragment extends Fragment {
             String costString = costEditText.getText().toString();
             double cost;
             if (costString.isEmpty() || (cost = Double.parseDouble(costString)) < 0) {
+                String error = getResources().getString(R.string.invalidCost);
                 Toast.makeText(requireContext(),
-                        getResources().getString(R.string.invalidCost), Toast.LENGTH_SHORT).show();
+                        error, Toast.LENGTH_SHORT).show();
+                costEditText.setError(error);
+                costEditText.requestFocus();
                 return;
             }
             match.setCosto(cost);
@@ -147,8 +167,11 @@ public class MatchFragment extends Fragment {
             int numOfTeams;
             if (numOfTeamsString.isEmpty()
                     || (numOfTeams = Integer.parseInt(numOfTeamsString)) <= 0) {
+                String error = getResources().getString(R.string.invalidNumOfTeams);
                 Toast.makeText(requireContext(),
-                        getResources().getString(R.string.invalidNumOfTeams), Toast.LENGTH_SHORT).show();
+                        error, Toast.LENGTH_SHORT).show();
+                numberOfTeamsEditText.setError(error);
+                numberOfTeamsEditText.requestFocus();
                 return;
             }
             match.setNumeroSquadre(numOfTeams);
@@ -185,7 +208,7 @@ public class MatchFragment extends Fragment {
             // date picker dialog
             DatePickerDialog picker = new DatePickerDialog(requireContext(), R.style.DateDialogTheme,
                     (view1, year1, monthOfYear, dayOfMonth) ->
-                            dateEditText.setText(dayOfMonth + "/" + monthOfYear + 1 + "/" + year1),
+                            dateEditText.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year1),
                     year, month, day);
             picker.show();
         });
