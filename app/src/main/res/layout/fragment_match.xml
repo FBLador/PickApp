@@ -60,6 +60,7 @@
                     android:layout_height="wrap_content"
                     android:background="@color/transparent"
                     android:hint="@string/title"
+                    android:textSize="15sp"
                     android:textColorHint="@color/gray" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -74,6 +75,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="15dp"
+                    android:textSize="15sp"
                     android:text="@string/sport" />
 
                 <Spinner
@@ -106,7 +108,8 @@
                         android:importantForAutofill="no"
                         android:inputType="textLongMessage"
                         android:background="@color/transparent"
-                        android:minHeight="48dp" />
+                        android:minHeight="48dp"
+                        android:textSize="15sp"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <Button
@@ -117,6 +120,7 @@
                     android:text="@string/select"
                     app:backgroundTint="@color/buttonColor"
                     android:layout_gravity="center_vertical"
+                    android:textSize="13sp"
                     app:cornerRadius="30dp" />
             </LinearLayout>
 
@@ -140,6 +144,7 @@
                         android:hint="@string/date"
                         android:textColorHint="@color/gray"
                         android:background="@color/transparent"
+                        android:textSize="15sp"
                         android:inputType="date" />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -151,7 +156,8 @@
                     android:layout_marginStart="12dp"
                     app:backgroundTint="@color/buttonColor"
                     android:layout_gravity="center_vertical"
-                    app:cornerRadius="30dp" />
+                    app:cornerRadius="30dp"
+                    android:textSize="13sp"/>
             </LinearLayout>
 
             <LinearLayout
@@ -173,7 +179,8 @@
                         android:hint="@string/time"
                         android:textColorHint="@color/gray"
                         android:background="@color/transparent"
-                        android:inputType="time" />
+                        android:inputType="time"
+                        android:textSize="15sp"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <Button
@@ -184,7 +191,8 @@
                     android:text="@string/select"
                     android:layout_gravity="center_vertical"
                     app:backgroundTint="@color/buttonColor"
-                    app:cornerRadius="30dp" />
+                    app:cornerRadius="30dp"
+                    android:textSize="13sp"/>
             </LinearLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -204,7 +212,8 @@
                     android:hint="@string/teamNumber"
                     android:inputType="number"
                     android:textColorHint="@color/gray"
-                    android:background="@color/transparent"/>
+                    android:background="@color/transparent"
+                    android:textSize="15sp"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -224,7 +233,8 @@
                     android:hint="@string/cost"
                     android:textColorHint="@color/gray"
                     android:background="@color/transparent"
-                    android:inputType="number" />
+                    android:inputType="number"
+                    android:textSize="15sp"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.switchmaterial.SwitchMaterial
@@ -235,7 +245,7 @@
                 android:padding="12dp"
                 android:text="@string/privateMatch"
                 android:textColor="@color/semiBlack"
-                android:textSize="18sp" />
+                android:textSize="15sp" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textInputLayout7"
@@ -253,6 +263,7 @@
                     android:hint="@string/description"
                     android:inputType="textLongMessage"
                     android:background="@color/transparent"
+                    android:textSize="15sp"
                     android:textColorHint="@color/gray"/>
             </com.google.android.material.textfield.TextInputLayout>
 
