@@ -249,7 +249,7 @@ public class homeFragment extends Fragment {
         };
         // Connecting object of required Adapter class to
         // the Adapter class itself
-        adapter = new matchesAdapter(options, itemClickListener, locationReference);
+        adapter = new matchesAdapter(options, itemClickListener, locationReference, true);
         // Connecting Adapter class with the Recycler view*/
         recyclerView.setAdapter(adapter);
         adapter.startListening();
