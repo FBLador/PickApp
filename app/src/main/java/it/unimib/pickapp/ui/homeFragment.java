@@ -62,21 +62,12 @@ public class homeFragment extends Fragment {
         // Required empty public constructor
     }
 
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // It is necessary to specify that the toolbar has a custom menu
-        setHasOptionsMenu(true);
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_home, container, false);
-        Toolbar toolbar = view.findViewById(R.id.toolbarHome);
-        Objects.requireNonNull(((pickappActivity) requireActivity()).getSupportActionBar()).hide();
-        ((pickappActivity) getActivity()).setSupportActionBar(toolbar);
 
         setTitle(view, getString(R.string.home));
         basket = view.findViewById(R.id.basketFilter);
@@ -91,6 +82,8 @@ public class homeFragment extends Fragment {
 
         return view;
     }
+
+
     @Override
     public void onViewCreated(@NonNull final View view, @Nullable final Bundle savedInstanceState) {
 
@@ -180,36 +173,26 @@ public class homeFragment extends Fragment {
         });
     }
 
+
     public void setTitle(View view, String title){
         TextView titleToolbar = view.findViewById(R.id.titleHome);
         titleToolbar.setText(title);
     }
-    @Override
-    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
-        // The custom menu that we want to add to the toolbar
-        inflater.inflate(R.menu.logout_menu, menu);
-    }
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
-        // Listener for the items in the custom menu
-        if (item.getItemId() == R.id.logout) {
-            FirebaseAuth.getInstance().signOut();
-            startActivity(new Intent(requireActivity(), loginActivity.class));
-            requireActivity().finish();
-        }
-        return super.onOptionsItemSelected(item);
-    }
+
     public void activateImgBttn(ImageButton bttn) {
         bttn.setScaleX(1.2F);
         bttn.setScaleY(1.2F);
         bttn.setColorFilter(ContextCompat.getColor(getContext(), R.color.mainGreen));
     }
+
+
     public void inactivateImgBttn(ImageButton bttn) {
         bttn.setScaleY(1);
         bttn.setScaleX(1);
         bttn.setColorFilter(ContextCompat.getColor(getContext(), R.color.item_color_inactive));
     }
+
 
     @Override
     public void onStart() {
@@ -224,6 +207,7 @@ public class homeFragment extends Fragment {
             adapter.stopListening();
         }
     }
+
 
     public void creaRecyclerView() {
         mbase = FirebaseDatabase.getInstance().getReference("Matches");

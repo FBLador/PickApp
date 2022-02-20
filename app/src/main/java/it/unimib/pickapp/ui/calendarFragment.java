@@ -4,18 +4,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.CalendarView;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
@@ -32,7 +29,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 
 import java.util.Calendar;
-import java.util.Objects;
 import java.util.TimeZone;
 
 import it.unimib.pickapp.R;
@@ -44,12 +40,12 @@ public class calendarFragment extends Fragment {
     private RecyclerView recyclerView;
     private View HideShowView;
     private FloatingActionButton addButton;
-    private Button hideShowButton;
+    private ImageButton hideShowButton;
     private DatabaseReference mbase;
     private DatabaseReference locationReference;
     private String selectedDate;
     private Query query;
-    boolean flag=true;
+    boolean flag = true;
     private static final String TAG = "calendarFragment";
     private matchesAdapter adapter; // Create Object of the Adapter class
     private matchesAdapter.ItemClickListener itemClickListener;
@@ -61,22 +57,13 @@ public class calendarFragment extends Fragment {
         // Required empty public constructor
     }
 
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // It is necessary to specify that the toolbar has a custom menu
-        setHasOptionsMenu(true);
-    }
+
     @Override
     public View onCreateView(
             @NonNull LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_calendar, container, false);
-
         setTitle(rootView, getString(R.string.calendar));
-        Toolbar toolbar = rootView.findViewById(R.id.toolbarCalendar);
-        Objects.requireNonNull(((pickappActivity) requireActivity()).getSupportActionBar()).hide();
-        ((pickappActivity) getActivity()).setSupportActionBar(toolbar);
 
         calendarView = rootView.findViewById(R.id.calendarView);
         HideShowView = rootView.findViewById(R.id.linearLayout2);
@@ -86,18 +73,14 @@ public class calendarFragment extends Fragment {
         hideShowButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                switch (v.getId())
-                {
-                    case R.id.HideShow:
-                        if(flag)
-                        {
-                            HideShowView.setVisibility(View.GONE);
-                            flag=false;
-                        }
-                        else {
-                            HideShowView.setVisibility(View.VISIBLE);
-                            flag=true;
-                        }
+                if (v.getId() == R.id.HideShow) {
+                    if (flag) {
+                        HideShowView.setVisibility(View.GONE);
+                        flag = false;
+                    } else {
+                        HideShowView.setVisibility(View.VISIBLE);
+                        flag = true;
+                    }
                 }
             }
         });
@@ -158,9 +141,9 @@ public class calendarFragment extends Fragment {
         return rootView;
     }
 
+
     @Override
     public void onViewCreated(@NonNull final View view, @Nullable final Bundle savedInstanceState) {
-
         calendarView.setOnDateChangeListener((view1, year, month, dayOfMonth) -> {
             //Toast.makeText(getActivity(), "Date changed to " + dayOfMonth + "/" + month + "/" + year, Toast.LENGTH_SHORT).show();
             Log.i(TAG, "Date changed to " + dayOfMonth + "/" + month + "/" + year);
@@ -206,11 +189,13 @@ public class calendarFragment extends Fragment {
         });
     }
 
+
     @Override
     public void onStart() {
         super.onStart();
         adapter.startListening();
     }
+
 
     @Override
     public void onStop() {
@@ -218,26 +203,9 @@ public class calendarFragment extends Fragment {
         adapter.stopListening();
     }
 
+
     public void setTitle(View view, String titleCal){
         TextView titleToolbar = view.findViewById(R.id.titleCalendar);
         titleToolbar.setText(titleCal);
-    }
-
-    @Override
-    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
-        // The custom menu that we want to add to the toolbar
-        inflater.inflate(R.menu.logout_menu, menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-
-        // Listener for the items in the custom menu
-        if (item.getItemId() == R.id.logout) {
-            FirebaseAuth.getInstance().signOut();
-            startActivity(new Intent(requireActivity(), loginActivity.class));
-            requireActivity().finish();
-        }
-        return super.onOptionsItemSelected(item);
     }
 }

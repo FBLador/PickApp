@@ -29,21 +29,22 @@
                android:id="@+id/titleCalendar"
                android:layout_width="wrap_content"
                android:layout_height="match_parent"
-               android:layout_gravity="left|start"
+               android:layout_gravity="start"
                android:gravity="start"
                android:textColor="@color/mainGreen"
                android:textSize="28sp"
                android:textStyle="bold" />
 
-           <Button
+           <ImageButton
                android:id="@+id/HideShow"
                android:layout_width="wrap_content"
                android:layout_height="wrap_content"
-               android:layout_gravity="right|end"
-               android:text="@string/hideShowButton"
-               android:textColor="@color/mainGreen"
-               android:textSize="11sp"
-               android:textStyle="bold"/>
+               android:layout_gravity="end"
+               android:src="@drawable/ic_baseline_calendar_today_24"
+               android:contentDescription="@string/hideShowButton"
+               android:backgroundTint="@color/transparent"
+               android:layout_marginEnd="16dp"/>
+
         </androidx.appcompat.widget.Toolbar>
 
         <LinearLayout
@@ -99,6 +100,7 @@
             android:layout_gravity="bottom|end"
             android:layout_marginEnd="20dp"
             android:layout_marginBottom="20dp"
+            app:tint="@android:color/white"
             android:clickable="true"
             android:contentDescription="@string/createGame"
             android:focusable="true"

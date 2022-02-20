@@ -27,7 +27,6 @@ public class pickappActivity extends AppCompatActivity {
         toolbar.setTitle(" ");
         setSupportActionBar(toolbar);
 
-
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.pickapp_fragment_container_view);
         if(navHostFragment.getNavController() != null) {
             NavController navController = navHostFragment.getNavController();
@@ -36,8 +35,7 @@ public class pickappActivity extends AppCompatActivity {
 
             navController.addOnDestinationChangedListener((controller, destination, argument) -> {
                 if (destination.getId() == R.id.matchFragment
-                        || destination.getId() == R.id.FPlaceSelectionFragment
-                ) {
+                        || destination.getId() == R.id.FPlaceSelectionFragment) {
                     bottomNavigationView.setVisibility(View.GONE);
                 } else {
                     bottomNavigationView.setVisibility(View.VISIBLE);
@@ -45,6 +43,4 @@ public class pickappActivity extends AppCompatActivity {
             });
         }
     }
-
-
 }

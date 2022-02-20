@@ -74,19 +74,11 @@ public class locationFragment extends Fragment implements OnMapReadyCallback, Go
         // Required empty public constructor
     }
 
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // It is necessary to specify that the toolbar has a custom menu
-        setHasOptionsMenu(true);
-    }
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_location, container, false);
         setTitle(view, getString(R.string.location));
-        Toolbar toolbar = view.findViewById(R.id.toolbarLocation);
-        Objects.requireNonNull(((pickappActivity) requireActivity()).getSupportActionBar()).hide();
-        ((pickappActivity) getActivity()).setSupportActionBar(toolbar);
 
         if(!markersDrawn) {
             mbase = FirebaseDatabase.getInstance().getReference("Matches");
@@ -122,6 +114,7 @@ public class locationFragment extends Fragment implements OnMapReadyCallback, Go
         return view;
     }
 
+
     private void initGoogleMap(Bundle savedInstanceState){
         Bundle mapViewBundle = null;
         if (savedInstanceState != null) {
@@ -130,6 +123,7 @@ public class locationFragment extends Fragment implements OnMapReadyCallback, Go
         mMapView.onCreate(mapViewBundle);
         mMapView.getMapAsync(this);
     }
+
 
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
@@ -142,6 +136,7 @@ public class locationFragment extends Fragment implements OnMapReadyCallback, Go
         }
         mMapView.onSaveInstanceState(mapViewBundle);
     }
+
 
     private final ActivityResultLauncher<String> requestPermissionLauncher =
             registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {
@@ -160,11 +155,11 @@ public class locationFragment extends Fragment implements OnMapReadyCallback, Go
                 }
             });
 
+
     @SuppressLint("MissingPermission")
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public void onMapReady(@NonNull GoogleMap map) {
-
         FusedLocationProviderClient client = LocationServices.getFusedLocationProviderClient(requireContext());
 
         // Controllo se l'utente ha già accettato i permessi
@@ -184,6 +179,7 @@ public class locationFragment extends Fragment implements OnMapReadyCallback, Go
 
     }
 
+
     @SuppressLint("MissingPermission")
     public void setupMap(GoogleMap map, FusedLocationProviderClient client) {
         map.setMyLocationEnabled(true);
@@ -202,6 +198,7 @@ public class locationFragment extends Fragment implements OnMapReadyCallback, Go
         });
         map.setOnInfoWindowClickListener(this);
     }
+
 
     public void createRandomMarkers(int markersQuantity, GoogleMap map, double latitude, double longitude) {
         Random rand = new Random();
@@ -245,27 +242,13 @@ public class locationFragment extends Fragment implements OnMapReadyCallback, Go
         markersDrawn = true;
     }
 
+
     // Toolbar
     public void setTitle(View view, String title){
         TextView titleToolbar = view.findViewById(R.id.titleLocation);
         titleToolbar.setText(title);
     }
-    @Override
-    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
-        // The custom menu that we want to add to the toolbar
-        inflater.inflate(R.menu.logout_menu, menu);
-    }
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
-        // Listener for the items in the custom menu
-        if (item.getItemId() == R.id.logout) {
-            FirebaseAuth.getInstance().signOut();
-            startActivity(new Intent(requireActivity(), loginActivity.class));
-            requireActivity().finish();
-        }
-        return super.onOptionsItemSelected(item);
-    }
 
     // This converts a Vector image to bitmapDescriptor (so it can be used as an icon for the markers on the map)
     private BitmapDescriptor bitmapDescriptorFromVector(Context context, int vectorResId) {
@@ -293,11 +276,13 @@ public class locationFragment extends Fragment implements OnMapReadyCallback, Go
         navController.navigate(R.id.action_location_to_matchFragment);
     }
 
+
     @Override
     public void onResume() {
         super.onResume();
         mMapView.onResume();
     }
+
 
     @Override
     public void onStart() {
@@ -305,11 +290,13 @@ public class locationFragment extends Fragment implements OnMapReadyCallback, Go
         mMapView.onStart();
     }
 
+
     @Override
     public void onStop() {
         super.onStop();
         mMapView.onStop();
     }
+
 
     @Override
     public void onPause() {
@@ -317,11 +304,13 @@ public class locationFragment extends Fragment implements OnMapReadyCallback, Go
         super.onPause();
     }
 
+
     @Override
     public void onDestroy() {
         mMapView.onDestroy();
         super.onDestroy();
     }
+
 
     @Override
     public void onLowMemory() {
