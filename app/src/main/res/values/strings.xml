@@ -92,5 +92,7 @@
     <string name="invalidCost">Invalid cost</string>
     <string name="invalidNumOfTeams">Number of teams is not valid</string>
     <string name="invalidTitle">Title can\'t be empty</string>
+    <string name="experience">Experience</string>
+    <string name="reliability">Reliability</string>
 
 </resources>

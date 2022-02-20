@@ -26,11 +26,14 @@ import it.unimib.pickapp.model.Place;
 public class matchesAdapter extends FirebaseRecyclerAdapter<Match, matchesAdapter.matchesViewHolder> {
     private final ItemClickListener itemClickListener;
     DatabaseReference locationReference = FirebaseDatabase.getInstance().getReference("Matches");
+    boolean hidePrivate;
 
     public matchesAdapter(
             @NonNull FirebaseRecyclerOptions<Match> options,
-            ItemClickListener itemClickListener, DatabaseReference locationReference) {
+            ItemClickListener itemClickListener,
+            DatabaseReference locationReference, boolean hidePrivate) {
         super(options);
+        this.hidePrivate = hidePrivate;
         this.itemClickListener = itemClickListener;
         this.locationReference = locationReference;
     }
@@ -75,7 +78,12 @@ public class matchesAdapter extends FirebaseRecyclerAdapter<Match, matchesAdapte
 
         //holder.durata.setText(model.getDurata());
 
-        holder.costo.setText(Double.toString(model.getCosto())+"€");
+        holder.costo.setText(model.getCosto() + "€");
+
+        if (model.isPrivate() && hidePrivate) {
+            holder.itemView.setVisibility(View.GONE);
+            holder.itemView.setLayoutParams(new RecyclerView.LayoutParams(0, 0));
+        }
     }
 
     // Function to tell the class about the Card view in
