@@ -117,7 +117,7 @@ public class MatchViewModel extends ViewModel {
     }
 
     public void joinMatch() {
-        match.getParticipants().put(currentUserId, true);
+        match.getParticipants().put(currentUserId, match.getDate());
         saveMatch();
     }
 
@@ -133,7 +133,7 @@ public class MatchViewModel extends ViewModel {
             id = matchDatabaseReference.push().getKey();
             match.setId(id);
             match.setCreatorId(currentUserId);
-            match.getParticipants().put(match.getCreatorId(), true);
+            match.getParticipants().put(match.getCreatorId(), match.getDate());
         } else {
             id = match.getId();
         }

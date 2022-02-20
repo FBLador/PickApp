@@ -115,16 +115,22 @@ public class calendarFragment extends Fragment {
         int month = cal.get(Calendar.MONTH);
         int year = cal.get(Calendar.YEAR);
 
-        selectedDate = day + "-"
+        /*selectedDate = day + "-"
                         + (month+1) + "-"
-                        + year;
+                        + year;*/
+
+        selectedDate = day + "/"
+                + (month + 1) + "/"
+                + year;
 
         user = FirebaseAuth.getInstance().getCurrentUser();
         userID = user.getUid();
 
-        participant = userID + "-" +selectedDate;
+        participant = userID + "-" + selectedDate;
         mbase = FirebaseDatabase.getInstance().getReference("Matches");
-        query = mbase.orderByChild("participants/" + participant).equalTo(true);
+        //query = mbase.orderByChild("participants/" + participant).equalTo(true);
+        query = mbase.orderByChild("participants/" + userID).equalTo(selectedDate);
+        //query = mbase.orderByChild("participants/" + "OMyc2NKRLlTyTQs7PGJxP2qErvf1").equalTo("20/2/2022");
 
         locationReference = FirebaseDatabase.getInstance().getReference("Places");
 
@@ -159,10 +165,13 @@ public class calendarFragment extends Fragment {
             //Toast.makeText(getActivity(), "Date changed to " + dayOfMonth + "/" + month + "/" + year, Toast.LENGTH_SHORT).show();
             Log.i(TAG, "Date changed to " + dayOfMonth + "/" + month + "/" + year);
 
-            selectedDate = dayOfMonth + "-" + (month+1) + "-" + year;
-            participant = userID + "-" +selectedDate;
+            //selectedDate = dayOfMonth + "-" + (month+1) + "-" + year;
+            selectedDate = dayOfMonth + "/" + (month + 1) + "/" + year;
+            participant = userID + "-" + selectedDate;
             mbase = FirebaseDatabase.getInstance().getReference("Matches");
-            query = mbase.orderByChild("participants/" + participant).equalTo(true);
+            //query = mbase.orderByChild("participants/" + participant).equalTo(true);
+            query = mbase.orderByChild("participants/" + userID).equalTo(selectedDate);
+            Log.i(TAG, selectedDate);
             locationReference = FirebaseDatabase.getInstance().getReference("Places");
 
             FirebaseRecyclerOptions<Match> options

@@ -14,7 +14,7 @@ public class Match {
     private String sport;
     private String descrizione;
     private Map<String, User> partecipanti; //TODO Rimuovere
-    private Map<String, Boolean> participants;
+    private Map<String, String> participants;
     private int numeroSquadre;
     private int day;
     private int month;
@@ -31,11 +31,11 @@ public class Match {
         participants = new HashMap<>();
     }
 
-    public Map<String, Boolean> getParticipants() {
+    public Map<String, String> getParticipants() {
         return participants;
     }
 
-    public void setParticipants(Map<String, Boolean> participants) {
+    public void setParticipants(Map<String, String> participants) {
         this.participants = participants;
     }
 
