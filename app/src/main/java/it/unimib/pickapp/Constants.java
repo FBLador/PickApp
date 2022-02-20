@@ -1,4 +1,4 @@
-package it.unimib.pickapp.repository;
+package it.unimib.pickapp;
 
 public class Constants {
     public static final String FIREBASE_DATABASE_URL = "https://pickapp-e0996-default-rtdb.firebaseio.com/";

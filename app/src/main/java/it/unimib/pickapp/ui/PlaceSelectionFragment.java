@@ -21,27 +21,26 @@ import com.google.firebase.database.FirebaseDatabase;
 import it.unimib.pickapp.R;
 import it.unimib.pickapp.model.Place;
 
-public class FPlaceSelectionFragment extends Fragment {
+public class PlaceSelectionFragment extends Fragment {
 
     PlaceAdapter adapter; // Create Object of the Adapter class
-    DatabaseReference mbase;
-    private FPlaceSelectionViewModel mViewModel;
-    private RecyclerView recyclerView;
+    DatabaseReference placeReference;
+    private PlaceSelectionViewModel viewModel;
 
-    public static FPlaceSelectionFragment newInstance() {
-        return new FPlaceSelectionFragment();
+    public static PlaceSelectionFragment newInstance() {
+        return new PlaceSelectionFragment();
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.f_place_selection_fragment, container, false);
+        View rootView = inflater.inflate(R.layout.place_selection_fragment, container, false);
 
-        mViewModel = new ViewModelProvider(requireActivity()).get(FPlaceSelectionViewModel.class);
+        viewModel = new ViewModelProvider(requireActivity()).get(PlaceSelectionViewModel.class);
 
-        mbase = FirebaseDatabase.getInstance().getReference("Places");
+        placeReference = FirebaseDatabase.getInstance().getReference("Places");
 
-        recyclerView = rootView.findViewById(R.id.placesRecycler);
+        RecyclerView recyclerView = rootView.findViewById(R.id.placesRecycler);
 
         // To display the Recycler view linearly
         recyclerView.setLayoutManager(
@@ -51,35 +50,19 @@ public class FPlaceSelectionFragment extends Fragment {
         // query in the database to fetch appropriate data
         FirebaseRecyclerOptions<Place> options
                 = new FirebaseRecyclerOptions.Builder<Place>()
-                .setQuery(mbase, Place.class)
+                .setQuery(placeReference, Place.class)
                 .build();
         // Connecting object of required Adapter class to
         // the Adapter class itself
         PlaceAdapter.ItemClickListener itemClickListener = place -> {
-            mViewModel.setSelected(place);
+            viewModel.setSelected(place);
 
-            NavController navController = NavHostFragment.findNavController(FPlaceSelectionFragment.this);
+            NavController navController = NavHostFragment.findNavController(PlaceSelectionFragment.this);
             navController.popBackStack();
         };
         adapter = new PlaceAdapter(options, itemClickListener);
         // Connecting Adapter class with the Recycler view*/
         recyclerView.setAdapter(adapter);
-
-        /*.addOnItemTouchListener(
-                new RecyclerItemClickListener(requireContext(), recyclerView, new RecyclerItemClickListener.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(View view, int position) {
-                        mViewModel.setSelected(mViewModel.getPlaces().getValue().get(position));
-
-                        NavController navController = NavHostFragment.findNavController(FPlaceSelectionFragment.this);
-                        navController.popBackStack();
-                    }
-
-                    @Override
-                    public void onLongItemClick(View view, int position) {
-                    }
-                })
-        );*/
 
         return rootView;
     }

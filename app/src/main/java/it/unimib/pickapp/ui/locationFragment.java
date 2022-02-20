@@ -1,5 +1,5 @@
 package it.unimib.pickapp.ui;
-import static it.unimib.pickapp.repository.Constants.MAPVIEW_BUNDLE_KEY;
+import static it.unimib.pickapp.Constants.MAPVIEW_BUNDLE_KEY;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -56,7 +56,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Random;
-import java.lang.Number;
 
 import it.unimib.pickapp.R;
 import it.unimib.pickapp.model.Match;

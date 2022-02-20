@@ -7,27 +7,6 @@
     android:layout_height="match_parent"
     tools:context=".ui.MatchFragment">
 
-
-<!--    <com.google.android.material.appbar.AppBarLayout
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbarHome"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/mainGreen"
-            app:titleTextColor="@color/white"
-            android:minHeight="?attr/actionBarSize"
-            android:theme="?attr/actionBarTheme"
-            tools:layout_editor_absoluteX="0dp"
-            tools:layout_editor_absoluteY="0dp" />
-
-    </com.google.android.material.appbar.AppBarLayout>-->
-
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbarMatch"
         android:layout_width="match_parent"
@@ -78,23 +57,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <!--<EditText
-                    android:id="@+id/editTextLocation"
-                    android:layout_width="380dp"
-                    android:layout_height="50dp"
-                    android:layout_marginTop="32dp"
-                    android:ems="10"
-                    android:gravity="left"
-                    android:enabled="false"
-                    android:hint="@string/location"
-                    android:importantForAutofill="no"
-                    android:inputType="text"
-                    android:minHeight="48dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/sportConstraintLayout"
-                    tools:ignore="LabelFor" />-->
-
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/textInputLayout"
@@ -119,24 +81,6 @@
                         android:layout_height="wrap_content"
                         android:hint="@string/title" />
                 </com.google.android.material.textfield.TextInputLayout>
-
-
-                <!--                <com.google.android.material.textfield.TextInputEditText-->
-                <!--                    android:id="@+id/editTextTitle"-->
-                <!--                    android:layout_width="380dp"-->
-                <!--                    android:layout_height="50dp"-->
-                <!--                    android:layout_marginTop="32dp"-->
-                <!--                    android:ems="10"-->
-                <!--                    android:gravity="left-->
-                <!--"-->
-                <!--                    android:hint="@string/title"-->
-                <!--                    android:importantForAutofill="no"-->
-                <!--                    android:inputType="text"-->
-                <!--                    android:minHeight="48dp"-->
-                <!--                    app:layout_constraintEnd_toEndOf="parent"-->
-                <!--                    app:layout_constraintStart_toStartOf="parent"-->
-                <!--                    app:layout_constraintTop_toBottomOf="@+id/textViewNewMatch"-->
-                <!--                    tools:ignore="LabelFor" />-->
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/sportConstraintLayout"
@@ -284,80 +228,6 @@
                 </LinearLayout>
 
 
-                <!-- <LinearLayout
-                    android:layout_width="378dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="1dp"
-                    android:orientation="horizontal"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/locationLinearLayout">
-
-                    <EditText
-                        android:id="@+id/editTextParticipants"
-                        android:layout_width="265dp"
-                        android:layout_height="50dp"
-                        android:layout_marginTop="16dp"
-                        android:ems="10"
-                        android:gravity="left"
-                        android:hint="@string/participants"
-                        android:importantForAutofill="no"
-                        android:inputType="textPassword"
-                        android:minHeight="48dp"
-                        app:layout_constraintBaseline_toTopOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        tools:ignore="LabelFor" />
-
-                    <Button
-                        android:id="@+id/selectParticipantsButton"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="12dp"
-                        android:layout_marginTop="12dp"
-                        android:layout_weight="1"
-                        android:text="@string/add"
-                        app:backgroundTint="@color/buttonColor" />
-                </LinearLayout> -->
-
-
-                <!--                <EditText-->
-                <!--                    android:id="@+id/editTextDate"-->
-                <!--                    android:layout_width="380dp"-->
-                <!--                    android:layout_height="50dp"-->
-                <!--                    android:layout_marginTop="32dp"-->
-                <!--                    android:ems="10"-->
-                <!--                    android:gravity="left-->
-                <!--"-->
-                <!--                    android:hint="@string/date"-->
-                <!--                    android:importantForAutofill="no"-->
-                <!--                    android:inputType="date"-->
-                <!--                    android:minHeight="48dp"-->
-                <!--                    app:layout_constraintEnd_toEndOf="parent"-->
-                <!--                    app:layout_constraintStart_toStartOf="parent"-->
-                <!--                    app:layout_constraintTop_toBottomOf="@+id/locationLinearLayout"-->
-                <!--                    tools:ignore="LabelFor" />-->
-
-
-                <!--
-                <EditText
-                    android:id="@+id/editTextTime"
-                    android:layout_width="380dp"
-                    android:layout_height="50dp"
-                    android:layout_marginTop="31dp"
-                    android:ems="10"
-                    android:gravity="left
-"
-                    android:hint="@string/time"
-                    android:importantForAutofill="no"
-                    android:inputType="time"
-                    android:minHeight="48dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textInputLayout2"
-                    tools:ignore="LabelFor" />
--->
-
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/textInputLayout5"
                     android:layout_width="380dp"
@@ -404,23 +274,6 @@
                         android:inputType="number" />
 
                 </com.google.android.material.textfield.TextInputLayout>
-
-                <!--                <EditText-->
-                <!--                    android:id="@+id/editTextCost"-->
-                <!--                    android:layout_width="380dp"-->
-                <!--                    android:layout_height="50dp"-->
-                <!--                    android:layout_marginTop="32dp"-->
-                <!--                    android:ems="10"-->
-                <!--                    android:gravity="left-->
-                <!--"-->
-                <!--                    android:hint="@string/cost"-->
-                <!--                    android:importantForAutofill="no"-->
-                <!--                    android:inputType="time"-->
-                <!--                    android:minHeight="48dp"-->
-                <!--                    app:layout_constraintEnd_toEndOf="parent"-->
-                <!--                    app:layout_constraintStart_toStartOf="parent"-->
-                <!--                    app:layout_constraintTop_toBottomOf="@+id/editTextNumberOfTeams"-->
-                <!--                    tools:ignore="LabelFor" />-->
 
                 <com.google.android.material.switchmaterial.SwitchMaterial
                     android:id="@+id/privateSwitch"

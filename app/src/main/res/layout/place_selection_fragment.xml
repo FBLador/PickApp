@@ -8,5 +8,5 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     app:layoutManager="LinearLayoutManager"
-    tools:context=".ui.FPlaceSelectionFragment"
+    tools:context=".ui.PlaceSelectionFragment"
     tools:listitem="@layout/place_fragment_item" />

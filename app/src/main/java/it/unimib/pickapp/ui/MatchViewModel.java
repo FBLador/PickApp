@@ -1,6 +1,6 @@
 package it.unimib.pickapp.ui;
 
-import static it.unimib.pickapp.repository.Constants.FIREBASE_DATABASE_URL;
+import static it.unimib.pickapp.Constants.FIREBASE_DATABASE_URL;
 
 import android.util.Log;
 

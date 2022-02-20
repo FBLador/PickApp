@@ -62,7 +62,7 @@
     </fragment>
     <fragment
         android:id="@+id/FPlaceSelectionFragment"
-        android:name="it.unimib.pickapp.ui.FPlaceSelectionFragment"
+        android:name="it.unimib.pickapp.ui.PlaceSelectionFragment"
         android:label="f_place_selection_fragment"
-        tools:layout="@layout/f_place_selection_fragment" />
+        tools:layout="@layout/place_selection_fragment" />
 </navigation>
