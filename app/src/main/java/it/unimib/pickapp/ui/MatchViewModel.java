@@ -167,6 +167,10 @@ public class MatchViewModel extends ViewModel {
         selectedPlace.setValue(place);
     }
 
+    public void clearPlaceSelection() {
+        selectedPlace.setValue(null);
+    }
+
     public enum Status {
         FAILED,
         SUCCESSFUL

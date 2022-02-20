@@ -89,5 +89,8 @@
     <string name="match">Match</string>
     <string name="place">Place</string>
     <string name="hideShowButton">Hide/show calendar</string>
+    <string name="invalidCost">Invalid cost</string>
+    <string name="invalidNumOfTeams">Number of teams is not valid</string>
+    <string name="invalidTitle">Title can\'t be empty</string>
 
 </resources>

@@ -65,4 +65,7 @@
     <string name="search_match">Cerca partita</string>
     <string name="hideShowButton">Mostra/Nascondi</string>
     <string name="place">Luogo</string>
+    <string name="invalidCost">Costo non valido</string>
+    <string name="invalidNumOfTeams">Numero squadre non valido</string>
+    <string name="invalidTitle">Titolo vuoto</string>
 </resources>
