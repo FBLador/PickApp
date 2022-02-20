@@ -46,7 +46,8 @@
             android:id="@+id/horizontalScrollView"
             android:layout_width="390dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp" >
+            android:layout_marginTop="10dp"
+            app:cardBackgroundColor="#fdfdfd">
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -63,8 +64,8 @@
                     android:layout_weight="1"
                     android:background="@color/transparent"
                     android:contentDescription="basketFilter"
-                    app:tint="@color/item_color_inactive"
                     app:srcCompat="@drawable/ic_baseline_sports_basketball_24"
+                    app:tint="@color/item_color_inactive"
                     tools:ignore="SpeakableTextPresentCheck" />
 
                 <ImageButton
