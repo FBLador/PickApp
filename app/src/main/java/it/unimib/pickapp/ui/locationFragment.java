@@ -29,6 +29,9 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.fragment.NavHostFragment;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -53,8 +56,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Random;
+import java.lang.Number;
 
 import it.unimib.pickapp.R;
+import it.unimib.pickapp.model.Match;
 
 
 public class locationFragment extends Fragment implements OnMapReadyCallback, GoogleMap.OnInfoWindowClickListener {
@@ -62,9 +67,8 @@ public class locationFragment extends Fragment implements OnMapReadyCallback, Go
     private MapView mMapView;
     private final String TAG = "locationFragment";
     private DatabaseReference mbase;
-    List<String> titoliPartite = new ArrayList<>();
-    List<String> sportPartite = new ArrayList<>();
-    List<String> datePartite = new ArrayList<>();
+    List<Match> listaPartite = new ArrayList<>();
+    private boolean markersDrawn = false;
 
 
     public locationFragment() {
@@ -85,22 +89,34 @@ public class locationFragment extends Fragment implements OnMapReadyCallback, Go
         Objects.requireNonNull(((pickappActivity) requireActivity()).getSupportActionBar()).hide();
         ((pickappActivity) getActivity()).setSupportActionBar(toolbar);
 
-        mbase = FirebaseDatabase.getInstance().getReference("Matches");
-        mbase.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot partite: snapshot.getChildren()){
-                    titoliPartite.add(partite.child("titolo").getValue().toString());
-                    sportPartite.add(partite.child("sport").getValue().toString());
-                    datePartite.add(partite.child("date").getValue().toString() + ", " + partite.child("time").getValue().toString());
+        if(!markersDrawn) {
+            mbase = FirebaseDatabase.getInstance().getReference("Matches");
+            mbase.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    for (DataSnapshot partite : snapshot.getChildren()) {
+                        Match partita = new Match();
+                        partita.setId(partite.child("id").getValue().toString());
+                        partita.setTitolo(partite.child("titolo").getValue().toString());
+                        partita.setSport(partite.child("sport").getValue().toString());
+                        partita.setDate(partite.child("date").getValue().toString());
+                        partita.setTime(partite.child("time").getValue().toString());
+                        partita.setLuogo(partite.child("luogo").getValue().toString());
+                        partita.setNumeroSquadre(Integer.parseInt(partite.child("numeroSquadre").getValue().toString()));
+                        partita.setCosto(Double.parseDouble(partite.child("costo").getValue().toString()));
+                        partita.setPrivate(Boolean.parseBoolean(partite.child("private").getValue().toString()));
+                        partita.setDescrizione(partite.child("descrizione").getValue().toString());
+                        partita.setCreatorId(partite.child("creatorId").getValue().toString());
+                        listaPartite.add(partita);
+                        Log.d(TAG, "listaPartite.size() = " + listaPartite.size());
+                    }
                 }
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-            }
-        });
 
-        Log.d(TAG, String.valueOf(titoliPartite.size()));
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                }
+            });
+        }
         mMapView = view.findViewById(R.id.matches_list_map);
         initGoogleMap(savedInstanceState);
 
@@ -178,7 +194,7 @@ public class locationFragment extends Fragment implements OnMapReadyCallback, Go
                 double longitude = location.getLongitude();
                 LatLng lastPosition = new LatLng(latitude, longitude);
                 MapsInitializer.initialize(getContext());
-                createRandomMarkers(titoliPartite.size(), map, latitude, longitude);
+                createRandomMarkers(listaPartite.size(), map, latitude, longitude);
                 //map.setInfoWindowAdapter();
                 map.moveCamera(CameraUpdateFactory.newLatLngZoom(lastPosition, 13));
             } else {
@@ -192,41 +208,42 @@ public class locationFragment extends Fragment implements OnMapReadyCallback, Go
         Random rand = new Random();
 
         for(int i=0; i < markersQuantity; i++) {
-            switch(sportPartite.get(i)) {
+            switch(listaPartite.get(i).getSport()) {
                 case "TENNIS":
                     map.addMarker(new MarkerOptions()
                             .position(new LatLng(latitude+((rand.nextDouble()/90)-(rand.nextDouble()/90)), longitude+((rand.nextDouble()/90)-(rand.nextDouble()/90))))
                             .icon(bitmapDescriptorFromVector(getActivity(), R.drawable.ic_baseline_sports_tennis_24)) // null = default icon
-                            .title(titoliPartite.get(i))
+                            .title(listaPartite.get(i).getTitolo())
                             .alpha(1f)
-                            .snippet(datePartite.get(i)));
+                            .snippet(listaPartite.get(i).getDate() + ", " + listaPartite.get(i).getTime()));
                     break;
                 case "BASKETBALL":
                     map.addMarker(new MarkerOptions()
                             .position(new LatLng(latitude+((rand.nextDouble()/50)-(rand.nextDouble()/50)), longitude+((rand.nextDouble()/50)-(rand.nextDouble()/50))))
                             .icon(bitmapDescriptorFromVector(getActivity(), R.drawable.ic_baseline_sports_basketball_24)) // null = default icon
-                            .title(titoliPartite.get(i))
+                            .title(listaPartite.get(i).getTitolo())
                             .alpha(1f)
-                            .snippet(datePartite.get(i)));
+                            .snippet(listaPartite.get(i).getDate() + ", " + listaPartite.get(i).getTime()));
                     break;
                 case "SOCCER":
                     map.addMarker(new MarkerOptions()
                             .position(new LatLng(latitude+((rand.nextDouble()/50)-(rand.nextDouble()/50)), longitude+((rand.nextDouble()/50)-(rand.nextDouble()/50))))
                             .icon(bitmapDescriptorFromVector(getActivity(), R.drawable.ic_baseline_sports_soccer_24)) // null = default icon
-                            .title(titoliPartite.get(i))
+                            .title(listaPartite.get(i).getTitolo())
                             .alpha(1f)
-                            .snippet(datePartite.get(i)));
+                            .snippet(listaPartite.get(i).getDate() + ", " + listaPartite.get(i).getTime()));
                     break;
                 case "FOOTBALL":
                     map.addMarker(new MarkerOptions()
                             .position(new LatLng(latitude+((rand.nextDouble()/50)-(rand.nextDouble()/50)), longitude+((rand.nextDouble()/50)-(rand.nextDouble()/50))))
                             .icon(bitmapDescriptorFromVector(getActivity(), R.drawable.ic_baseline_sports_football_24)) // null = default icon
-                            .title(titoliPartite.get(i))
+                            .title(listaPartite.get(i).getTitolo())
                             .alpha(1f)
-                            .snippet(datePartite.get(i)));
+                            .snippet(listaPartite.get(i).getDate() + ", " + listaPartite.get(i).getTime()));
                     break;
             }
         }
+        markersDrawn = true;
     }
 
     // Toolbar
@@ -261,11 +278,20 @@ public class locationFragment extends Fragment implements OnMapReadyCallback, Go
         return BitmapDescriptorFactory.fromBitmap(bitmap);
     }
 
+
     @Override
     public void onInfoWindowClick(@NonNull Marker marker) {
-        marker.setSnippet("Adesso dovrebbe aprirsi la pagina della partita selezionata");
-        marker.showInfoWindow();
-
+        Match match = new Match();
+        for(int i=0; i < listaPartite.size(); i++) {
+            if(listaPartite.get(i).getTitolo().equals(marker.getTitle())) {
+                match = listaPartite.get(i);
+            }
+        }
+        MatchViewModel matchViewModel =
+                new ViewModelProvider(requireActivity()).get(MatchViewModel.class);
+        matchViewModel.setMatch(match);
+        NavController navController = NavHostFragment.findNavController(this);
+        navController.navigate(R.id.action_location_to_matchFragment);
     }
 
     @Override

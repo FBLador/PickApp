@@ -20,7 +20,13 @@
         android:id="@+id/location"
         android:name="it.unimib.pickapp.ui.locationFragment"
         android:label="@string/location"
-        tools:layout="@layout/fragment_location" />
+        tools:layout="@layout/fragment_location" >
+        <action
+            android:id="@+id/action_location_to_matchFragment"
+            app:destination="@id/matchFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"/>
+    </fragment>
     <fragment
         android:id="@+id/calendar"
         android:name="it.unimib.pickapp.ui.calendarFragment"

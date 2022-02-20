@@ -2,12 +2,6 @@ package it.unimib.pickapp.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.Fragment;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -20,10 +14,13 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -49,13 +46,11 @@ import it.unimib.pickapp.model.Match;
 public class accountFragment extends Fragment {
 
     private Toolbar toolbar;
-
     private static final String TAG = "AccountFragment";
     private static final String SHARED_PREF_EMAIL = "email";
     private ImageView imageProfile;
     private TextView matches, fullname, bio, nickname;
     private Button editProfile;
-
 
     //get info from firebase
     private FirebaseUser user;
@@ -99,8 +94,8 @@ public class accountFragment extends Fragment {
         //to display the recycler view
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         creaRecyclerView();
-        //View.VISIBLE;
-        //recyclerView.setVisibility(View.GONE);
+
+        getNrMatches();
 
         userInfo(view);
 
@@ -114,13 +109,11 @@ public class accountFragment extends Fragment {
         return view;
     }
 
-
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         // The custom menu that we want to add to the toolbar
         inflater.inflate(R.menu.logout_menu, menu);
     }
-
 
     private void userInfo(View view) {
         user = FirebaseAuth.getInstance().getCurrentUser();
@@ -143,8 +136,6 @@ public class accountFragment extends Fragment {
                         .circleCrop()
                         .placeholder(R.drawable.ic_baseline_person_24)
                         .into(imageProfile);
-
-               // Log.d(TAG, nick_name);
             }
 
             @Override
@@ -153,25 +144,22 @@ public class accountFragment extends Fragment {
             }
         });
     }
-/*
+
     private void getNrMatches(){
         user = FirebaseAuth.getInstance().getCurrentUser();
-        reference = FirebaseDatabase.getInstance().getReference("Users");
         userID = user.getUid();
-        Log.d(TAG, userID);
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Matches");
-        reference.addValueEventListener(new ValueEventListener() {
+        reference = FirebaseDatabase.getInstance().getReference("Matches");
+        locationReference = FirebaseDatabase.getInstance().getReference("Places");
+        Query query = reference.orderByChild("participants/" + userID).startAt("\u0000").endAt("\uf8ff");
+
+        query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 int i = 0;
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()){
-                    Match match = snapshot.getValue(Match.class);
-                    if (match.contains(userID)){
-                        Log.d(TAG, userID);
                         i++;
-                    }
                 }
-                match.setText(""+i);
+                matches.setText(String.valueOf(i));
             }
 
             @Override
@@ -179,7 +167,7 @@ public class accountFragment extends Fragment {
 
             }
         });
-    }*/
+    }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
@@ -203,8 +191,7 @@ public class accountFragment extends Fragment {
         userID = user.getUid();
         reference = FirebaseDatabase.getInstance().getReference("Matches");
         locationReference = FirebaseDatabase.getInstance().getReference("Places");
-//        Query query = reference.orderByChild("partecipants").equalTo(userID);
-        Query query = reference.orderByChild("participants/" + userID).equalTo(true);
+        Query query = reference.orderByChild("participants/" + userID).startAt("\u0000").endAt("\uf8ff");
         FirebaseRecyclerOptions<Match> options
                 = new FirebaseRecyclerOptions.Builder<Match>()
                 .setQuery(query, Match.class)
