@@ -6,6 +6,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
@@ -43,6 +44,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.auth.FirebaseAuth;
@@ -156,10 +158,24 @@ public class locationFragment extends Fragment implements OnMapReadyCallback, Go
             });
 
 
-    @SuppressLint("MissingPermission")
+
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public void onMapReady(@NonNull GoogleMap map) {
+        try {
+            // Customise the styling of the base map using a JSON object defined
+            // in a raw resource file.
+            boolean success = map.setMapStyle(
+                    MapStyleOptions.loadRawResourceStyle(
+                            getContext(), R.raw.map_style_json));
+
+            if (!success) {
+                Log.e(TAG, "Style parsing failed.");
+            }
+        } catch (Resources.NotFoundException e) {
+            Log.e(TAG, "Can't find style. Error: ", e);
+        }
+
         FusedLocationProviderClient client = LocationServices.getFusedLocationProviderClient(requireContext());
 
         // Controllo se l'utente ha già accettato i permessi
@@ -179,7 +195,6 @@ public class locationFragment extends Fragment implements OnMapReadyCallback, Go
 
     }
 
-
     @SuppressLint("MissingPermission")
     public void setupMap(GoogleMap map, FusedLocationProviderClient client) {
         map.setMyLocationEnabled(true);
@@ -190,24 +205,23 @@ public class locationFragment extends Fragment implements OnMapReadyCallback, Go
                 LatLng lastPosition = new LatLng(latitude, longitude);
                 MapsInitializer.initialize(getContext());
                 createRandomMarkers(listaPartite.size(), map, latitude, longitude);
-                //map.setInfoWindowAdapter();
-                map.moveCamera(CameraUpdateFactory.newLatLngZoom(lastPosition, 13));
+                map.setOnInfoWindowClickListener(this);
+                map.moveCamera(CameraUpdateFactory.newLatLngZoom(lastPosition, 14));
             } else {
                 Toast.makeText(getActivity(), R.string.enable_gps, Toast.LENGTH_SHORT).show();
             }
         });
-        map.setOnInfoWindowClickListener(this);
     }
 
 
     public void createRandomMarkers(int markersQuantity, GoogleMap map, double latitude, double longitude) {
-        Random rand = new Random();
-
+        // Randomizziamo la posizione delle partite per test, altrimenti basta prendere le coordinate dal db
+        Random rand = new Random(3);
         for(int i=0; i < markersQuantity; i++) {
             switch(listaPartite.get(i).getSport()) {
                 case "TENNIS":
                     map.addMarker(new MarkerOptions()
-                            .position(new LatLng(latitude+((rand.nextDouble()/90)-(rand.nextDouble()/90)), longitude+((rand.nextDouble()/90)-(rand.nextDouble()/90))))
+                            .position(new LatLng(latitude+((rand.nextDouble()/50)-(rand.nextDouble()/50)), longitude+((rand.nextDouble()/90)-(rand.nextDouble()/90))))
                             .icon(bitmapDescriptorFromVector(getActivity(), R.drawable.ic_baseline_sports_tennis_24)) // null = default icon
                             .title(listaPartite.get(i).getTitolo())
                             .alpha(1f)

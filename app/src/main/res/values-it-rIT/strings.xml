@@ -17,7 +17,7 @@
     <string name="Logo">Logo</string>
     <string name="intermediate">Intermedio</string>
     <string name="Field">Campo</string>
-    <string name="myGames">Le mie partite</string>
+    <string name="myGames">Calendario</string>
     <string name="send">Invia</string>
     <string name="forgotPasswordLogin">Recupera la tua password</string>
     <string name="welcomeText">Benvenuto</string>
@@ -68,4 +68,6 @@
     <string name="invalidCost">Costo non valido</string>
     <string name="invalidNumOfTeams">Numero squadre non valido</string>
     <string name="invalidTitle">Titolo vuoto</string>
+    <string name="experience">Esperienza</string>
+    <string name="reliability">Affidabilità</string>
 </resources>
