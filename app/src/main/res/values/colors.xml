@@ -25,6 +25,8 @@
     <color name="black_overlay">#66000000</color>
     <color name="colorRecoverPassword">#0D7700</color>
     <color name="gray">#A9A9A9</color>
+    <color name="semiBlack">#323232</color>
+
 
     <color name="orange_basketball">#DD5D09</color>
     <color name="blue_soccer">#3F51B5</color>
