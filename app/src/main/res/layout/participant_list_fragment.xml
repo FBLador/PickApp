@@ -8,5 +8,5 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     app:layoutManager="LinearLayoutManager"
-    tools:context=".ui.PlaceSelectionFragment"
+    tools:context=".ui.ParticipantListFragment"
     tools:listitem="@layout/user_item_layout" />
