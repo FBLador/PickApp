@@ -13,7 +13,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="#5BBC75">
 
         <TextView
             android:id="@+id/titolo"
@@ -22,7 +23,7 @@
             android:layout_marginTop="16dp"
             android:text="TextView"
             android:textAlignment="center"
-            android:textColor="@color/mainGreen"
+            android:textColor="@color/white"
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
@@ -47,7 +48,7 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:text="TextView"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/imageView"
             app:layout_constraintTop_toBottomOf="@+id/titolo" />
@@ -60,7 +61,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginBottom="16dp"
             android:text="TextView"
-            android:textColor="@color/item_color_inactive"
+            android:textColor="#EDECEC"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/imageView"
             app:layout_constraintTop_toBottomOf="@+id/luogo" />
@@ -74,7 +75,7 @@
             android:layout_marginEnd="16dp"
             android:text="TextView"
             android:textAlignment="textEnd"
-            android:textColor="@color/mainGreen"
+            android:textColor="#EDECEC"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/data"
