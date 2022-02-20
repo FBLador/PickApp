@@ -11,11 +11,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.TimePicker;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -41,7 +39,7 @@ import it.unimib.pickapp.model.Sport;
 
 public class MatchFragment extends Fragment {
 
-    private FPlaceSelectionViewModel placeSelectionViewModel;
+    private PlaceSelectionViewModel placeSelectionViewModel;
     private MatchViewModel matchViewModel;
 
     public static MatchFragment newInstance() {
@@ -51,26 +49,25 @@ public class MatchFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_match, container, false);
 
-        return view;
+        return inflater.inflate(R.layout.fragment_match, container, false);
     }
 
 
-    @SuppressLint("ClickableViewAccessibility")
+    @SuppressLint({"ClickableViewAccessibility", "SetTextI18n"})
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         matchViewModel = new ViewModelProvider(requireActivity()).get(MatchViewModel.class);
-        placeSelectionViewModel = new ViewModelProvider(requireActivity()).get(FPlaceSelectionViewModel.class);
+        placeSelectionViewModel = new ViewModelProvider(requireActivity()).get(PlaceSelectionViewModel.class);
 
         Toolbar toolbar = view.findViewById(R.id.toolbarMatch);
         ((AppCompatActivity) requireActivity()).setSupportActionBar(toolbar);
         TextView toolbarTitle = view.findViewById(R.id.titleMatch);
         Spinner sportSpinner = view.findViewById(R.id.sportSpinner);
-        String[] keys = Sport.names();
+        String[] sportKeys = Sport.names();
         String[] values = requireContext().getApplicationContext()
                 .getResources().getStringArray(R.array.sports);
         EditText titleEditText = view.findViewById(R.id.titleInput);
@@ -91,8 +88,8 @@ public class MatchFragment extends Fragment {
 
         List<SpinnerItem> items = new ArrayList<>();
 
-        for (int i = 0; i < keys.length; i++) {
-            items.add(SpinnerItem.create(keys[i], values[i]));
+        for (int i = 0; i < sportKeys.length; i++) {
+            items.add(SpinnerItem.create(sportKeys[i], values[i]));
         }
 
         sportSpinner.setAdapter(new ArrayAdapter<>(
@@ -127,7 +124,6 @@ public class MatchFragment extends Fragment {
                 return;
             }
             Match match = matchViewModel.getMatch();
-            // TODO Validity checks
             String title = titleEditText.getText().toString();
             if (title.isEmpty()) {
                 Toast.makeText(requireContext(),
@@ -137,14 +133,8 @@ public class MatchFragment extends Fragment {
             match.setTitolo(title);
             match.setSport(((SpinnerItem) sportSpinner.getSelectedItem()).getKey());
             match.setLuogo(placeSelectionViewModel.getSelected().getValue().getId());
-            // TODO Language support
-            /*match.setDay(Integer.parseInt(splitDate[0]));
-            match.setMonth(Integer.parseInt(splitDate[1]));
-            match.setYear(Integer.parseInt(splitDate[2]));*/
             match.setDate(dateEditText.getText().toString());
             match.setTime(timeEditText.getText().toString());
-            /*match.setHour(Integer.parseInt(splitTime[0]));
-            match.setMinutes(Integer.parseInt(splitTime[1]));*/
             String costString = costEditText.getText().toString();
             double cost;
             if (costString.isEmpty() || (cost = Double.parseDouble(costString)) < 0) {
@@ -167,13 +157,9 @@ public class MatchFragment extends Fragment {
             matchViewModel.saveMatch();
         });
 
-        joinButton.setOnClickListener(v -> {
-            matchViewModel.joinMatch();
-        });
+        joinButton.setOnClickListener(v -> matchViewModel.joinMatch());
 
-        leaveButton.setOnClickListener(v -> {
-            matchViewModel.leaveMatch();
-        });
+        leaveButton.setOnClickListener(v -> matchViewModel.leaveMatch());
 
         matchViewModel.getStatus().observe(getViewLifecycleOwner(), status -> {
             if (status == MatchViewModel.Status.SUCCESSFUL) {
@@ -189,16 +175,6 @@ public class MatchFragment extends Fragment {
                 matchViewModel.getStatus().setValue(null);
         });
 
-/*        MaterialDatePicker.Builder dpBuilder = MaterialDatePicker.Builder.datePicker();
-        dpBuilder.setTitleText("SELECT A DATE");
-        final MaterialDatePicker materialDatePicker = dpBuilder.build();
-
-
-        dateEditText.setOnClickListener(v -> {
-            materialDatePicker.show(getSupportFragmentManager(), "DATE_PICKER");
-        });*/
-
-
         dateEditText.setOnTouchListener(((v, motionEvent) -> true));
 
         selectDateButton.setOnClickListener((v) -> {
@@ -208,12 +184,9 @@ public class MatchFragment extends Fragment {
             int year = cldr.get(Calendar.YEAR);
             // date picker dialog
             DatePickerDialog picker = new DatePickerDialog(requireContext(), R.style.DateDialogTheme,
-                    new DatePickerDialog.OnDateSetListener() {
-                        @Override
-                        public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                            dateEditText.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
-                        }
-                    }, year, month, day);
+                    (view1, year1, monthOfYear, dayOfMonth) ->
+                            dateEditText.setText(dayOfMonth + "/" + monthOfYear + 1 + "/" + year1),
+                    year, month, day);
             picker.show();
         });
 
@@ -226,12 +199,9 @@ public class MatchFragment extends Fragment {
             int minute = cldr.get(Calendar.MINUTE);
             TimePickerDialog picker;
             picker = new TimePickerDialog(requireContext(), R.style.TimePickerDialogTheme,
-                    new TimePickerDialog.OnTimeSetListener() {
-                        @Override
-                        public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
-                            timeEditText.setText(selectedHour + ":" + selectedMinute);
-                        }
-                    }, hour, minute, true);//Yes 24 hour time
+                    (timePicker, selectedHour, selectedMinute) ->
+                            timeEditText.setText(selectedHour + ":" + selectedMinute),
+                    hour, minute, true);
             picker.show();
         });
 
@@ -288,13 +258,11 @@ public class MatchFragment extends Fragment {
             }
         }
 
-
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        // TODO: Use the ViewModel
     }
 
     @Override
@@ -322,6 +290,7 @@ public class MatchFragment extends Fragment {
             return key;
         }
 
+        @NonNull
         @Override
         public String toString() {
             return value;

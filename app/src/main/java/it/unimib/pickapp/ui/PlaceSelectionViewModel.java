@@ -6,10 +6,10 @@ import androidx.lifecycle.ViewModel;
 
 import it.unimib.pickapp.model.Place;
 
-public class FPlaceSelectionViewModel extends ViewModel {
+public class PlaceSelectionViewModel extends ViewModel {
     private final MutableLiveData<Place> selected;
 
-    public FPlaceSelectionViewModel() {
+    public PlaceSelectionViewModel() {
         selected = new MutableLiveData<Place>(null);
     }
 
