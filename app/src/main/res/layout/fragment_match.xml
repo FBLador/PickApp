@@ -61,7 +61,8 @@
                     android:background="@color/transparent"
                     android:hint="@string/title"
                     android:textSize="15sp"
-                    android:textColorHint="@color/gray" />
+                    android:textColorHint="@color/gray"
+                    android:textColor="@drawable/color_text_view"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <LinearLayout
@@ -109,7 +110,8 @@
                         android:inputType="textLongMessage"
                         android:background="@color/transparent"
                         android:minHeight="48dp"
-                        android:textSize="15sp"/>
+                        android:textSize="15sp"
+                        android:textColor="@drawable/color_text_view"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <Button
@@ -145,7 +147,8 @@
                         android:textColorHint="@color/gray"
                         android:background="@color/transparent"
                         android:textSize="15sp"
-                        android:inputType="date" />
+                        android:inputType="date"
+                        android:textColor="@drawable/color_text_view"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <Button
@@ -180,7 +183,8 @@
                         android:textColorHint="@color/gray"
                         android:background="@color/transparent"
                         android:inputType="time"
-                        android:textSize="15sp"/>
+                        android:textSize="15sp"
+                        android:textColor="@drawable/color_text_view"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <Button
@@ -213,7 +217,8 @@
                     android:inputType="number"
                     android:textColorHint="@color/gray"
                     android:background="@color/transparent"
-                    android:textSize="15sp"/>
+                    android:textSize="15sp"
+                    android:textColor="@drawable/color_text_view"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -234,7 +239,8 @@
                     android:textColorHint="@color/gray"
                     android:background="@color/transparent"
                     android:inputType="number"
-                    android:textSize="15sp"/>
+                    android:textSize="15sp"
+                    android:textColor="@drawable/color_text_view"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.switchmaterial.SwitchMaterial
@@ -264,7 +270,8 @@
                     android:inputType="textLongMessage"
                     android:background="@color/transparent"
                     android:textSize="15sp"
-                    android:textColorHint="@color/gray"/>
+                    android:textColorHint="@color/gray"
+                    android:textColor="@drawable/color_text_view"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <LinearLayout

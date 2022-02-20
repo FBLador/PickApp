@@ -4,6 +4,7 @@
     android:layout_height="wrap_content"
     android:gravity="start"
     android:padding="10dip"
-    android:textSize="15sp">
+    android:textSize="15sp"
+    android:textColor="@drawable/color_spinner">
 
 </TextView>
