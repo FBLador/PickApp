@@ -147,6 +147,24 @@ public class MatchViewModel extends ViewModel {
                 .addOnFailureListener(t -> status.setValue(MatchViewModel.Status.FAILED));
     }
 
+    public void deleteMatch() {
+        final String id = match.getId();
+
+        Log.i(TAG, "Deleting '" + id + "' in '" + collectionName + "'.");
+        matchDatabaseReference.child(match.getId()).removeValue((error, ref) -> {
+            if (error != null) {
+                Log.d(TAG, "There was an error deleting '"
+                        + id + "' in '" + collectionName + "'!");
+                Log.d(TAG, error.getMessage());
+                Log.d(TAG, error.getDetails());
+                Log.d(TAG, "" + error.getCode());
+                status.setValue(MatchViewModel.Status.FAILED);
+            } else {
+                status.setValue(MatchViewModel.Status.SUCCESSFUL);
+            }
+        });
+    }
+
     public boolean isCreationModeEnabled() {
         return creationModeEnabled;
     }

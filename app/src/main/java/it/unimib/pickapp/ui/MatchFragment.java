@@ -184,6 +184,8 @@ public class MatchFragment extends Fragment {
 
         leaveButton.setOnClickListener(v -> matchViewModel.leaveMatch());
 
+        deleteButton.setOnClickListener(v -> matchViewModel.deleteMatch());
+
         matchViewModel.getStatus().observe(getViewLifecycleOwner(), status -> {
             if (status == MatchViewModel.Status.SUCCESSFUL) {
                 Toast.makeText(requireContext(),
