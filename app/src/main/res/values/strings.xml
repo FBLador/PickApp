@@ -94,5 +94,6 @@
     <string name="invalidTitle">Title can\'t be empty</string>
     <string name="experience">Experience</string>
     <string name="reliability">Reliability</string>
+    <string name="mymatches">My Matches</string>
 
 </resources>

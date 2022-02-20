@@ -63,42 +63,45 @@
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/image_profile"
                     android:layout_width="100dp"
-                    android:layout_height="100dp"/>
+                    android:layout_height="100dp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="100dp"
+                    android:orientation="vertical"
                     android:paddingLeft="20dp"
-                    android:paddingRight="4dp"
-                    android:orientation="vertical">
+                    android:paddingRight="4dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
                         android:gravity="center"
                         android:orientation="horizontal">
 
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical"
+                            android:orientation="horizontal"
                             tools:ignore="UselessParent">
 
                             <TextView
                                 android:id="@+id/matches"
+                                style="bold"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textColor="@color/black"
                                 android:layout_gravity="center"
                                 android:text="0"
-                                android:textSize="18sp"
-                                style="bold"/>
+                                android:textColor="@color/black"
+                                android:textSize="18sp" />
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textSize="12sp"
-                                android:text="@string/matches"/>
+                                android:layout_gravity="center"
+                                android:layout_marginStart="16dp"
+                                android:text="@string/matches"
+                                android:textSize="12sp" />
                         </LinearLayout>
                     </LinearLayout>
 
@@ -106,15 +109,16 @@
                         android:id="@+id/edit_profile"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center"
                         android:layout_marginTop="10dp"
+                        android:minHeight="48dp"
                         android:paddingStart="30dp"
                         android:paddingEnd="30dp"
-                        android:background="@color/gray"
-                        android:minHeight="48dp"
                         android:text="@string/editProfile"
-                        android:textSize="13sp"
                         android:textColor="@color/black"
-                        android:layout_gravity="center"/>
+                        android:textSize="13sp"
+                        app:backgroundTint="@color/white"
+                        app:cornerRadius="30dp" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -122,17 +126,17 @@
                 android:id="@+id/mid_bar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="12dp"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:padding="12dp">
 
                 <TextView
                     android:id="@+id/fullname"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:maxLines="1"
-                    android:textStyle="bold"
+                    android:textColor="@color/black"
                     android:textSize="16sp"
-                    android:textColor="@color/black"/>
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/bio"
@@ -140,7 +144,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:maxLines="5"
-                    android:textColor="@color/black"/>
+                    android:textColor="@color/black" />
             </LinearLayout>
 
             <LinearLayout
@@ -148,19 +152,28 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:layout_marginLeft="-5dp"
-                android:layout_marginRight="-5dp"
-                android:orientation="horizontal">
+                android:orientation="vertical"
+                android:layout_gravity="center">
 
                 <ImageButton
                     android:id="@+id/posts"
-                    style="?android:attr/buttonBarButtonStyle"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    app:srcCompat="@drawable/ic_baseline_videogame_asset_24"
-                    tools:ignore="SpeakableTextPresentCheck"
-                    android:contentDescription="matches recycler view" />
+                    android:layout_gravity="center"
+                    android:contentDescription="matches recycler view"
+                    android:tint="@color/buttonColor"
+                    android:backgroundTint="@color/transparent"
+                    app:srcCompat="@drawable/ic_baseline_videogame_asset_24" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/mymatches"
+                    android:layout_gravity="center"
+                    android:textSize="12sp"
+                    android:layout_marginTop="-10dp"
+                    android:textColor="@color/buttonColor"/>
+
             </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView

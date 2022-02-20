@@ -70,4 +70,5 @@
     <string name="invalidTitle">Titolo vuoto</string>
     <string name="experience">Esperienza</string>
     <string name="reliability">Affidabilità</string>
+    <string name="mymatches">Le mie partite</string>
 </resources>
