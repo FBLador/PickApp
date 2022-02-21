@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/container"
@@ -16,7 +17,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-
         <TextView
             android:id="@+id/titleMatch"
             android:layout_width="match_parent"
@@ -26,7 +26,6 @@
             android:textSize="28sp"
             android:textStyle="bold" />
     </androidx.appcompat.widget.Toolbar>
-
 
     <ScrollView
         android:id="@+id/scrollView3"
@@ -61,14 +60,15 @@
                     android:background="@color/transparent"
                     android:hint="@string/title"
                     android:textSize="15sp"
-                    android:textColorHint="@color/gray" />
+                    android:textColorHint="@color/gray"
+                    android:textColor="@drawable/color_text_view"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginTop="16dp">
+                android:layout_marginTop="20dp">
 
                 <TextView
                     android:id="@+id/sportLabel"
@@ -109,7 +109,8 @@
                         android:inputType="textLongMessage"
                         android:background="@color/transparent"
                         android:minHeight="48dp"
-                        android:textSize="15sp"/>
+                        android:textSize="15sp"
+                        android:textColor="@drawable/color_text_view"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <Button
@@ -145,7 +146,8 @@
                         android:textColorHint="@color/gray"
                         android:background="@color/transparent"
                         android:textSize="15sp"
-                        android:inputType="date" />
+                        android:inputType="date"
+                        android:textColor="@drawable/color_text_view"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <Button
@@ -180,7 +182,8 @@
                         android:textColorHint="@color/gray"
                         android:background="@color/transparent"
                         android:inputType="time"
-                        android:textSize="15sp"/>
+                        android:textSize="15sp"
+                        android:textColor="@drawable/color_text_view"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <Button
@@ -213,7 +216,8 @@
                     android:inputType="number"
                     android:textColorHint="@color/gray"
                     android:background="@color/transparent"
-                    android:textSize="15sp"/>
+                    android:textSize="15sp"
+                    android:textColor="@drawable/color_text_view"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -234,7 +238,8 @@
                     android:textColorHint="@color/gray"
                     android:background="@color/transparent"
                     android:inputType="number"
-                    android:textSize="15sp"/>
+                    android:textSize="15sp"
+                    android:textColor="@drawable/color_text_view"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.switchmaterial.SwitchMaterial
@@ -264,13 +269,44 @@
                     android:inputType="textLongMessage"
                     android:background="@color/transparent"
                     android:textSize="15sp"
-                    android:textColorHint="@color/gray"/>
+                    android:textColorHint="@color/gray"
+                    android:textColor="@drawable/color_text_view"/>
             </com.google.android.material.textfield.TextInputLayout>
+
+            <LinearLayout
+                android:id="@+id/participantLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="center"
+                android:layout_marginStart="9dp"
+                android:layout_marginTop="14dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="8dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/participants"
+                    android:textSize="15sp"
+                    android:fontFamily="sans-serif-black"
+                    android:textColor="@color/buttonColor"
+                    android:layout_gravity="center"
+                    android:layout_weight="1" />
+
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/participantButton"
+                    app:backgroundTint="@color/transparent"
+                    app:tint="@color/buttonColor"
+                    android:contentDescription="@string/participants"
+                    android:src="@drawable/ic_baseline_chevron_right_24" />
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
                 android:layout_marginTop="32dp"
                 android:layout_gravity="center"
                 android:orientation="vertical">

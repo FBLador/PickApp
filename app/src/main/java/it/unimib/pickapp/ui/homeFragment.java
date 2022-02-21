@@ -1,11 +1,7 @@
 package it.unimib.pickapp.ui;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +10,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
@@ -34,7 +29,6 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.Locale;
-import java.util.Objects;
 
 import it.unimib.pickapp.R;
 import it.unimib.pickapp.model.Match;
@@ -90,25 +84,30 @@ public class homeFragment extends Fragment {
         user = FirebaseAuth.getInstance().getCurrentUser();
         reference = FirebaseDatabase.getInstance().getReference("Users");
         userID = user.getUid();
+
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                filtroSport = snapshot.child(userID).child("favouriteSport").getValue().toString().toUpperCase(Locale.ROOT);
-                switch (filtroSport) {
-                    case "BASKETBALL":
-                        activateImgBttn(basket);
-                        break;
-                    case "SOCCER":
-                        activateImgBttn(soccer);
-                        break;
-                    case "FOOTBALL":
-                        activateImgBttn(football);
-                        break;
-                    case "TENNIS":
-                        activateImgBttn(tennis);
-                        break;
+                Object favouriteSportObject = snapshot.child(userID).child("favouriteSport").getValue();
+                if (favouriteSportObject != null && getContext() != null) {
+                    filtroSport = favouriteSportObject.toString().toUpperCase(Locale.ROOT);
+                    switch (filtroSport) {
+                        case "BASKETBALL":
+                            activateImgBttn(basket);
+                            break;
+                        case "SOCCER":
+                            activateImgBttn(soccer);
+                            break;
+                        case "FOOTBALL":
+                            activateImgBttn(football);
+                            break;
+                        case "TENNIS":
+                            activateImgBttn(tennis);
+                            break;
+                    }
+                    creaRecyclerView();
                 }
-                creaRecyclerView();
+
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
@@ -183,14 +182,14 @@ public class homeFragment extends Fragment {
     public void activateImgBttn(ImageButton bttn) {
         bttn.setScaleX(1.2F);
         bttn.setScaleY(1.2F);
-        bttn.setColorFilter(ContextCompat.getColor(getContext(), R.color.mainGreen));
+        bttn.setColorFilter(ContextCompat.getColor(requireContext(), R.color.mainGreen));
     }
 
 
     public void inactivateImgBttn(ImageButton bttn) {
         bttn.setScaleY(1);
         bttn.setScaleX(1);
-        bttn.setColorFilter(ContextCompat.getColor(getContext(), R.color.item_color_inactive));
+        bttn.setColorFilter(ContextCompat.getColor(requireContext(), R.color.item_color_inactive));
     }
 
 
