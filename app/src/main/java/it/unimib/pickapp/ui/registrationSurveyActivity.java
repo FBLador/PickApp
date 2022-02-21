@@ -97,7 +97,7 @@ public class registrationSurveyActivity extends AppCompatActivity {
                 Log.d(TAG, "onClick Finish");
                 //se non è stato selezionato un livello di esperienza
                 if(!isExperienceSelected()) {
-                    Toast.makeText(registrationSurveyActivity.this, "select your experiance level", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(registrationSurveyActivity.this, R.string.selectExpLevel, Toast.LENGTH_SHORT).show();
                     Log.d(TAG, "if esterno");
                 }
                 //livello di esperienza selezionato, tutto ok
@@ -122,7 +122,7 @@ public class registrationSurveyActivity extends AppCompatActivity {
                                        if (experienceLevel.equals("Advanced"))
                                            experienceLevelDouble = 5;
                                        user = new User(name, surname, nickname, email, password, favouriteSport, experienceLevelDouble, 2.5);
-                                       Toast.makeText(registrationSurveyActivity.this, "Registration successful ", Toast.LENGTH_SHORT).show();
+                                       Toast.makeText(registrationSurveyActivity.this, R.string.registrationSuccess, Toast.LENGTH_SHORT).show();
                                        Log.d(TAG, "FINO A QUI TUTTO BENE");
                                        //aggiungo l'utente a firebase db
                                        addDataToFirebase();
@@ -130,7 +130,7 @@ public class registrationSurveyActivity extends AppCompatActivity {
                                        openPickappActivity();
                                    }else{
                                        //registrazione fallita
-                                       Toast.makeText(registrationSurveyActivity.this, "Registration failed ", Toast.LENGTH_SHORT).show();
+                                       Toast.makeText(registrationSurveyActivity.this, R.string.registrationFailed, Toast.LENGTH_SHORT).show();
                                        Log.d(TAG, "else esterno");
                                    }
                                 }
@@ -181,12 +181,12 @@ public class registrationSurveyActivity extends AppCompatActivity {
                 Log.d(TAG, "QUA VA COSì COSì");
                 //aggiungo l'utente al path "Users" con chiave Uid dell'autenticazione
                 myRef.child(currentFirebaseUser.getUid()).setValue(user);
-                Toast.makeText(registrationSurveyActivity.this, "data added", Toast.LENGTH_SHORT).show();
+                Toast.makeText(registrationSurveyActivity.this, R.string.dataAdded, Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(registrationSurveyActivity.this, "Fail to add data " + error, Toast.LENGTH_SHORT).show();
+                Toast.makeText(registrationSurveyActivity.this, R.string.dataAddFail, Toast.LENGTH_SHORT).show();
             }
         });
     }

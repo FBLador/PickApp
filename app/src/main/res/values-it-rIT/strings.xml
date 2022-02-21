@@ -73,4 +73,18 @@
     <string name="myMatches">Le mie partite</string>
     <string name="participants">Partecipanti</string>
     <string name="background">sfondo</string>
+    <string name="loginSuccess">Login Effettuato</string>
+    <string name="authenticationFailed">Login Fallito</string>
+    <string name="registrationFailed">Registrazione Fallita</string>
+    <string name="registrationSuccess">Registrazione Effettuata</string>
+    <string name="errorName">nome richiesto!</string>
+    <string name="errorSurname">cognome richiesto!</string>
+    <string name="errorNickname">nickname richiesto!</string>
+    <string name="errorEmail">email richiesta!</string>
+    <string name="errorEmailValid">inserisci una mail valida!</string>
+    <string name="errorPassword">password richiesta!</string>
+    <string name="errorPasswordLenght">la password deve contenere almeno 6 caratteri!</string>
+    <string name="dataAdded">Dati aggiunti</string>
+    <string name="dataAddFail">Aggiuinta dati fallita</string>
+    <string name="selectExpLevel">Seleziona il tuo livello di esperienza</string>
 </resources>

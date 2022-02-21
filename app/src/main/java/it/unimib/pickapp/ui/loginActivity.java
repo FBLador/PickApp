@@ -67,7 +67,7 @@ public class loginActivity extends AppCompatActivity {
                             if (task.isSuccessful()) {
                                 // Sign in success, update UI with the signed-in user's information
                                 Log.d(TAG, "signInWithEmail:success");
-                                Toast.makeText(loginActivity.this, "login successful", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(loginActivity.this, R.string.loginSuccess, Toast.LENGTH_SHORT).show();
 
                                 //FirebaseUser user = mAuth.getCurrentUser();
                                 //updateUI(user);
@@ -77,7 +77,7 @@ public class loginActivity extends AppCompatActivity {
                                 //stampo errore
                                 // If sign in fails, display a message to the user.
                                 Log.w(TAG, "signInWithEmail:failure", task.getException());
-                                Toast.makeText(loginActivity.this, "authentication failed",
+                                Toast.makeText(loginActivity.this, R.string.authenticationFailed,
                                         Toast.LENGTH_SHORT).show();
                                 //updateUI(null);
                             }
