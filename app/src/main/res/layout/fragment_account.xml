@@ -168,12 +168,11 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/mymatches"
+                    android:text="@string/myMatches"
                     android:layout_gravity="center"
                     android:textSize="12sp"
                     android:layout_marginTop="-10dp"
                     android:textColor="@color/buttonColor"/>
-
             </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
