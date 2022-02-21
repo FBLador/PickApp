@@ -110,7 +110,7 @@ public class MatchFragment extends Fragment {
 
 
         saveButton.setOnClickListener(v -> {
-            if (placeSelectionViewModel.getSelected().getValue() == null) {
+            if (matchViewModel.getSelectedPlace().getValue() == null) {
                 String error = getResources().getString(R.string.choosePlaceMessage);
                 Toast.makeText(requireContext(),
                         error, Toast.LENGTH_SHORT).show();
@@ -149,7 +149,7 @@ public class MatchFragment extends Fragment {
             }
             match.setTitolo(title);
             match.setSport(((SpinnerItem) sportSpinner.getSelectedItem()).getKey());
-            match.setLuogo(placeSelectionViewModel.getSelected().getValue().getId());
+            match.setLuogo(matchViewModel.getSelectedPlace().getValue().getId());
             match.setDate(dateEditText.getText().toString());
             match.setTime(timeEditText.getText().toString());
             String costString = costEditText.getText().toString();
