@@ -24,7 +24,7 @@ public class User {
     }
 
     //costruttore per inserimento su db
-    public User(String name, String surname, String nickname, String email, String password, String favouriteSport, String experienceLevel, double reliabilityLevel) {
+    public User(String name, String surname, String nickname, String email, String favouriteSport, String experienceLevel, double reliabilityLevel) {
         this.name = name;
         this.surname = surname;
         this.nickname = nickname;

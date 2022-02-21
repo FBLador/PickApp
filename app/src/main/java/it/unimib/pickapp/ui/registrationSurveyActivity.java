@@ -114,7 +114,7 @@ public class registrationSurveyActivity extends AppCompatActivity {
                                    if (task.isSuccessful()) {
                                        Log.d(TAG, "if interno");
                                        //creo l'utente
-                                       user = new User(name, surname, nickname, email, password, favouriteSport, experienceLevel, 2.5);
+                                       user = new User(name, surname, nickname, email, favouriteSport, experienceLevel, 2.5);
                                        Toast.makeText(registrationSurveyActivity.this, "Registration successful ", Toast.LENGTH_SHORT).show();
                                        Log.d(TAG, "FINO A QUI TUTTO BENE");
                                        //aggiungo l'utente a firebase db
