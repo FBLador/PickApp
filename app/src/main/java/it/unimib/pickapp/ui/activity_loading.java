@@ -1,10 +1,12 @@
 package it.unimib.pickapp.ui;
 
+import android.content.Intent;
+import android.os.Bundle;
+
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
-import android.os.Bundle;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -23,6 +25,8 @@ public class activity_loading extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceStace) {
         super.onCreate(savedInstanceStace);
         setContentView(R.layout.activity_loading);
+
+        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
 
         Timer timer = new Timer();
         timer.schedule(new TimerTask() {
