@@ -17,8 +17,8 @@ altri giocatori, luogo e data dell'evento.
 <!-- BUILT WITH -->
 ## Built With
 Project is created with:
-* Java version:
-* Android Studio version:
+* Java
+* Android Studio
 
 
 <!-- ACKNOWLEDGMENTS -->
