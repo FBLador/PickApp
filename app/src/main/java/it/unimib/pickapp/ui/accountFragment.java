@@ -131,11 +131,15 @@ public class accountFragment extends Fragment {
                 nickname.setText(nick_name);
                 fullname.setText(full_name);
                 bio.setText(b_io);
-                Glide.with(view)
-                        .load(image_profile)
-                        .circleCrop()
-                        .placeholder(R.drawable.ic_baseline_person_24)
-                        .into(imageProfile);
+
+                if (getContext() != null) {
+                    Glide.with(view)
+                            .load(image_profile)
+                            .circleCrop()
+                            .placeholder(R.drawable.ic_baseline_person_24)
+                            .into(imageProfile);
+                }
+
             }
 
             @Override

@@ -1,11 +1,7 @@
 package it.unimib.pickapp.ui;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +10,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
@@ -33,11 +28,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.Locale;
-import java.util.Objects;
-
 import it.unimib.pickapp.R;
 import it.unimib.pickapp.model.Match;
+import it.unimib.pickapp.model.User;
 
 /**
  * It shows the homepage of the app.
@@ -90,7 +83,7 @@ public class homeFragment extends Fragment {
         user = FirebaseAuth.getInstance().getCurrentUser();
         reference = FirebaseDatabase.getInstance().getReference("Users");
         userID = user.getUid();
-        reference.addValueEventListener(new ValueEventListener() {
+/*        reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 filtroSport = snapshot.child(userID).child("favouriteSport").getValue().toString().toUpperCase(Locale.ROOT);
@@ -112,6 +105,36 @@ public class homeFragment extends Fragment {
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });*/
+
+        reference.child(userID).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                User user = snapshot.getValue(User.class);
+                if (user != null) {
+                    switch (user.getFavouriteSport()) {
+                        case "BASKETBALL":
+                            activateImgBttn(basket);
+                            break;
+                        case "SOCCER":
+                            activateImgBttn(soccer);
+                            break;
+                        case "FOOTBALL":
+                            activateImgBttn(football);
+                            break;
+                        case "TENNIS":
+                            activateImgBttn(tennis);
+                            break;
+                    }
+                    creaRecyclerView();
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
             }
         });
 
