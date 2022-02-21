@@ -55,7 +55,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Random;
 
@@ -75,7 +77,6 @@ public class locationFragment extends Fragment implements OnMapReadyCallback, Go
     public locationFragment() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -100,6 +101,11 @@ public class locationFragment extends Fragment implements OnMapReadyCallback, Go
                         partita.setPrivate(Boolean.parseBoolean(partite.child("private").getValue().toString()));
                         partita.setDescrizione(partite.child("descrizione").getValue().toString());
                         partita.setCreatorId(partite.child("creatorId").getValue().toString());
+                        Map<String, String> idsPartecipanti = new HashMap<>();
+                        for (DataSnapshot partecipante : partite.child("participants").getChildren()) {
+                            idsPartecipanti.put(partecipante.getKey(), partecipante.getValue().toString());
+                        }
+                        partita.setParticipants(idsPartecipanti);
                         listaPartite.add(partita);
                         Log.d(TAG, "listaPartite.size() = " + listaPartite.size());
                     }
