@@ -69,7 +69,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginTop="16dp">
+                android:layout_marginTop="20dp">
 
                 <TextView
                     android:id="@+id/sportLabel"
@@ -275,36 +275,39 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <LinearLayout
+                android:id="@+id/participantLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_gravity="center"
-                android:layout_margin="12dp"
-                android:layout_marginTop="4dp">
+                android:layout_marginStart="9dp"
+                android:layout_marginTop="14dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="8dp">
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="@string/partecipants"
+                    android:text="@string/participants"
                     android:textSize="15sp"
                     android:fontFamily="sans-serif-black"
                     android:textColor="@color/buttonColor"
                     android:layout_gravity="center"
-                    android:layout_weight="1"/>
+                    android:layout_weight="1" />
 
                 <ImageButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_baseline_arrow_back_24"
+                    android:id="@+id/participantButton"
                     android:backgroundTint="@color/transparent"
                     app:tint="@color/buttonColor"
-                    android:contentDescription="@string/partecipants" />
+                    android:contentDescription="@string/participants"
+                    android:src="@drawable/ic_baseline_chevron_right_24" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
                 android:layout_marginTop="32dp"
                 android:layout_gravity="center"
                 android:orientation="vertical">

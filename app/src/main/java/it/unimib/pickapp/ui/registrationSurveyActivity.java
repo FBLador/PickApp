@@ -113,8 +113,15 @@ public class registrationSurveyActivity extends AppCompatActivity {
                                public void onComplete(@NonNull Task<AuthResult> task) {
                                    if (task.isSuccessful()) {
                                        Log.d(TAG, "if interno");
+                                       double experienceLevelDouble = 0;
                                        //creo l'utente
-                                       user = new User(name, surname, nickname, email, favouriteSport, experienceLevel, 2.5);
+                                       if (experienceLevel.equals("Beginner"))
+                                           experienceLevelDouble = 0;
+                                       if (experienceLevel.equals("Intermediate"))
+                                           experienceLevelDouble = 2.5;
+                                       if (experienceLevel.equals("Advanced"))
+                                           experienceLevelDouble = 5;
+                                       user = new User(name, surname, nickname, email, password, favouriteSport, experienceLevelDouble, 2.5);
                                        Toast.makeText(registrationSurveyActivity.this, "Registration successful ", Toast.LENGTH_SHORT).show();
                                        Log.d(TAG, "FINO A QUI TUTTO BENE");
                                        //aggiungo l'utente a firebase db
@@ -151,9 +158,7 @@ public class registrationSurveyActivity extends AppCompatActivity {
     //ritona true sse è stato selezionato un livello di esperienza
     private boolean isExperienceSelected(){
         mRadioGroupExperience = findViewById(R.id.radioGroup_experience);
-        if(mRadioGroupExperience.getCheckedRadioButtonId() == -1)
-            return false;
-        return true;
+        return mRadioGroupExperience.getCheckedRadioButtonId() != -1;
     }
 
     //ritorna il livello di esperienza

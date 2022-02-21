@@ -40,7 +40,6 @@ public class ParticipantListFragment extends Fragment {
         viewModel.setAdapter(adapter);
         // Connecting Adapter class with the Recycler view*/
         recyclerView.setAdapter(adapter);
-        viewModel.loadParticipants();
 
         return rootView;
     }
@@ -54,10 +53,17 @@ public class ParticipantListFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
+        viewModel.loadParticipants();
     }
 
     @Override
     public void onStop() {
         super.onStop();
+        viewModel.clearParticipants();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
     }
 }

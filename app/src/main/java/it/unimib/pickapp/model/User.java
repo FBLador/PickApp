@@ -24,7 +24,7 @@ public class User {
     }
 
     //costruttore per inserimento su db
-    public User(String name, String surname, String nickname, String email, String favouriteSport, String experienceLevel, double reliabilityLevel) {
+    public User(String name, String surname, String nickname, String email, String password, String favouriteSport, double experienceLevel, double reliabilityLevel) {
         this.name = name;
         this.surname = surname;
         this.nickname = nickname;
@@ -32,12 +32,7 @@ public class User {
         this.email = email;
         this.password = password;
         this.favouriteSport = favouriteSport;
-        if(experienceLevel.equals("Beginner"))
-            this.experienceLevel = 0;
-        if (experienceLevel.equals("Intermediate"))
-            this.experienceLevel = 2.5;
-        if (experienceLevel.equals("Advanced"))
-            this.experienceLevel = 5;
+        this.experienceLevel = experienceLevel;
         this.reliabilityLevel = reliabilityLevel;
         //immagine profile di default
         this.imageurl = "https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png";
@@ -114,13 +109,8 @@ public class User {
         this.favouriteSport = favouriteSport;
     }
 
-    public void setExperienceLevel(String experienceLevel) {
-        if(experienceLevel.equals("Beginner"))
-            this.experienceLevel = 0;
-        if (experienceLevel.equals("Intermediate"))
-            this.experienceLevel = 2.5;
-        if (experienceLevel.equals("Advanced"))
-            this.experienceLevel = 5;
+    public void setExperienceLevel(double experienceLevel) {
+        this.experienceLevel = experienceLevel;
     }
 
     public void setReliabilityLevel(double reliabilityLevel) {

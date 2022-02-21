@@ -26,11 +26,17 @@ public class ParticipantListViewModel extends ViewModel {
         users = new ArrayList<>();
     }
 
+    public void clearParticipants() {
+        users.clear();
+        adapter.notifyItemRangeRemoved(0, users.size() - 1);
+    }
+
     public void loadParticipants() {
         for (String userId : match.getParticipants().keySet()) {
             userReference.child(userId).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    Object o = snapshot.getValue();
                     users.add(snapshot.getValue(User.class));
                     adapter.notifyItemChanged(users.size() - 1);
                 }
