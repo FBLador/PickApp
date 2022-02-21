@@ -2,7 +2,6 @@
 <androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="10dp"
@@ -21,7 +20,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="TextView"
+            android:text="@string/hello_blank_fragment"
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="18sp"
@@ -38,7 +37,8 @@
             android:layout_marginTop="16dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/titolo"
-            app:srcCompat="@drawable/ic_outline_location_on_24" />
+            app:srcCompat="@drawable/ic_outline_location_on_24"
+            android:contentDescription="@string/Logo" />
 
         <TextView
             android:id="@+id/luogo"
@@ -47,7 +47,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
-            android:text="TextView"
+            android:text="@string/hello_blank_fragment"
             android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/imageView"
@@ -60,8 +60,8 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="16dp"
-            android:text="TextView"
-            android:textColor="#EAE8E8"
+            android:text="@string/hello_blank_fragment"
+            android:textColor="@color/lightGray"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/imageView"
             app:layout_constraintTop_toBottomOf="@+id/luogo" />
@@ -73,15 +73,13 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="6dp"
             android:layout_marginEnd="16dp"
-            android:text="TextView"
+            android:text="@string/hello_blank_fragment"
             android:textAlignment="textEnd"
-            android:textColor="#E3E1E1"
+            android:textColor="@color/lightGray"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/data"
             app:layout_constraintTop_toBottomOf="@+id/luogo" />
-
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>
