@@ -1,5 +1,5 @@
 # PickApp
-
+===This is a university project===
 
 ## Table of contents
 * [About The Project](#about-the-project)
@@ -17,8 +17,8 @@ altri giocatori, luogo e data dell'evento.
 <!-- BUILT WITH -->
 ## Built With
 Project is created with:
-* Java version:
-* Android Studio version:
+* Java
+* Android Studio
 
 
 <!-- ACKNOWLEDGMENTS -->
