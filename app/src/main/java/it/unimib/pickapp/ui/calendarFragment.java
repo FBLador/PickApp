@@ -166,7 +166,7 @@ public class calendarFragment extends Fragment {
 
                 matchViewModel.setMatch(match);
                 NavController navController = NavHostFragment.findNavController(this);
-                navController.navigate(R.id.action_home_to_match);
+                navController.navigate(R.id.action_calendar_to_match);
             };
             // Connecting object of required Adapter class to
             // the Adapter class itself

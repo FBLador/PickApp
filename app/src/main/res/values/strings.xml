@@ -94,5 +94,24 @@
     <string name="invalidTitle">Title can\'t be empty</string>
     <string name="experience">Experience</string>
     <string name="reliability">Reliability</string>
+    <string name="myMatches">My Matches</string>
+    <string name="participants">Participants</string>
+    <string name="background">background</string>
+
+    <string name="loginSuccess">Login Successful</string>
+    <string name="authenticationFailed">Authentication Failed</string>
+    <string name="registrationFailed">Registration Failed</string>
+    <string name="registrationSuccess">Registration Successful</string>
+    <string name="errorName">name required!</string>
+    <string name="errorSurname">surename required!</string>
+    <string name="errorNickname">nickname required!</string>
+    <string name="errorEmail">email required!</string>
+    <string name="errorEmailValid">enter a valid email!"</string>
+    <string name="errorPassword">password required!</string>
+    <string name="errorPasswordLenght">a password of at least 6 characters is required!</string>
+    <string name="dataAdded">Data Added</string>
+    <string name="dataAddFail">Fail to add data</string>
+    <string name="selectExpLevel">Select your experience level</string>
+
 
 </resources>

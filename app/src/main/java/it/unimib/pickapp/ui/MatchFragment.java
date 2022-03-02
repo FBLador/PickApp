@@ -12,6 +12,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -40,6 +42,7 @@ import it.unimib.pickapp.model.Sport;
 public class MatchFragment extends Fragment {
 
     private PlaceSelectionViewModel placeSelectionViewModel;
+    private ParticipantListViewModel participantListViewModel;
     private MatchViewModel matchViewModel;
 
     public static MatchFragment newInstance() {
@@ -55,7 +58,6 @@ public class MatchFragment extends Fragment {
 
 
     @SuppressLint({"ClickableViewAccessibility", "SetTextI18n"})
-    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -85,6 +87,8 @@ public class MatchFragment extends Fragment {
         Button selectLocationButton = view.findViewById(R.id.selectLocationButton);
         Button selectDateButton = view.findViewById(R.id.selectDateButton);
         Button selectTimeButton = view.findViewById(R.id.selectTimeButton);
+        LinearLayout participantLayout = view.findViewById(R.id.participantLayout);
+        ImageButton participantButton = view.findViewById(R.id.participantButton);
 
         List<SpinnerItem> items = new ArrayList<>();
 
@@ -110,7 +114,7 @@ public class MatchFragment extends Fragment {
 
 
         saveButton.setOnClickListener(v -> {
-            if (placeSelectionViewModel.getSelected().getValue() == null) {
+            if (matchViewModel.getSelectedPlace().getValue() == null) {
                 String error = getResources().getString(R.string.choosePlaceMessage);
                 Toast.makeText(requireContext(),
                         error, Toast.LENGTH_SHORT).show();
@@ -149,7 +153,7 @@ public class MatchFragment extends Fragment {
             }
             match.setTitolo(title);
             match.setSport(((SpinnerItem) sportSpinner.getSelectedItem()).getKey());
-            match.setLuogo(placeSelectionViewModel.getSelected().getValue().getId());
+            match.setLuogo(matchViewModel.getSelectedPlace().getValue().getId());
             match.setDate(dateEditText.getText().toString());
             match.setTime(timeEditText.getText().toString());
             String costString = costEditText.getText().toString();
@@ -252,9 +256,19 @@ public class MatchFragment extends Fragment {
         if (matchViewModel.isCreationModeEnabled()) {
             toolbarTitle.setText(R.string.createGame);
             deleteButton.setVisibility(View.GONE);
+            participantLayout.setVisibility(View.GONE);
         } else {
             toolbarTitle.setText(matchViewModel.getMatch().getTitolo());
+
+            participantListViewModel =
+                    new ViewModelProvider(requireActivity()).get(ParticipantListViewModel.class);
+            participantListViewModel.setMatch(matchViewModel.getMatch());
         }
+
+        participantButton.setOnClickListener(v -> {
+            NavController navController = NavHostFragment.findNavController(this);
+            navController.navigate(R.id.match_to_participantList);
+        });
 
         if (matchViewModel.isCreatorUser()) {
             joinButton.setVisibility(View.GONE);

@@ -59,10 +59,20 @@
             app:destination="@id/FPlaceSelectionFragment"
             app:enterAnim="@anim/fade_in"
             app:exitAnim="@anim/fade_out" />
+        <action
+            android:id="@+id/match_to_participantList"
+            app:destination="@id/participantListFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out" />
     </fragment>
     <fragment
         android:id="@+id/FPlaceSelectionFragment"
         android:name="it.unimib.pickapp.ui.PlaceSelectionFragment"
         android:label="f_place_selection_fragment"
         tools:layout="@layout/place_selection_fragment" />
+    <fragment
+        android:id="@+id/participantListFragment"
+        android:name="it.unimib.pickapp.ui.ParticipantListFragment"
+        android:label="participant_list_fragment"
+        tools:layout="@layout/participant_list_fragment" />
 </navigation>
