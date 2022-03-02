@@ -214,8 +214,6 @@ public class homeFragment extends Fragment {
 
         Query query = mbase.orderByChild("sport").equalTo(filtroSport);
 
-        // TODO
-        //.orderByChild("dateTime").equalTo(dayOfMonth + "/" + month + "/" + year)
         FirebaseRecyclerOptions<Match> options
                 = new FirebaseRecyclerOptions.Builder<Match>()
                 .setQuery(query, Match.class)
