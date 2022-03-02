@@ -1,5 +1,5 @@
 # PickApp
-
+===This is a university project===
 
 ## Table of contents
 * [About The Project](#about-the-project)
